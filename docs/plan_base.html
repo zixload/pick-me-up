@@ -1,0 +1,293 @@
+<title>Plan directeur de la base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Plan d'architecte : carte vue de dessus à gauche, légende et changements à droite, tableau des lots en pleine largeur. */
+:root {
+  --bg: #f2f1f5;
+  --panel: #ffffff;
+  --ink: #1f2230;
+  --muted: #5d6172;
+  --line: #cfccd8;
+  --platform: #e6e3ec;
+  --path: #f7f6fa;
+  --exist: #d6cfe0;
+  --exist-stroke: #6d6480;
+  --reserve: #7b5ea7;
+  --gold: #a87414;
+  --warn: #b3432c;
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15161c; --panel: #1d1f27; --ink: #e9e7ef; --muted: #a0a3b2; --line: #3a3c49;
+    --platform: #23252f; --path: #2c2f3a; --exist: #3d3749; --exist-stroke: #a99cc0;
+    --reserve: #b69ce2; --gold: #e0b04f; --warn: #e47a62; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15161c; --panel: #1d1f27; --ink: #e9e7ef; --muted: #a0a3b2; --line: #3a3c49;
+  --platform: #23252f; --path: #2c2f3a; --exist: #3d3749; --exist-stroke: #a99cc0;
+  --reserve: #b69ce2; --gold: #e0b04f; --warn: #e47a62; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 15px/1.55 var(--body); }
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 56px; display: grid; gap: 32px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font: 600 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+h1 { font: 700 clamp(30px, 5vw, 44px)/1.05 var(--display); margin: 0; text-wrap: balance; }
+h2 { font: 600 22px/1.15 var(--display); margin: 0 0 10px; letter-spacing: .01em; }
+.lede { margin: 4px 0 0; max-width: 68ch; color: var(--muted); }
+.top { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 860px) { .top { grid-template-columns: minmax(0, 1fr); } }
+.map { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; }
+.map svg { width: 100%; height: auto; display: block; }
+.side { display: grid; gap: 24px; min-width: 0; }
+.legend { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.legend li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; align-items: center; }
+.sw { width: 28px; height: 18px; border-radius: 2px; }
+.sw.exist { background: var(--exist); border: 1.5px solid var(--exist-stroke); }
+.sw.adjust { background: var(--exist); border: 1.5px dashed var(--gold); }
+.sw.reserve { border: 1.5px solid var(--reserve); background: repeating-linear-gradient(45deg, transparent 0 4px, var(--reserve) 4px 5px); }
+.sw.fusion { border: 2px dashed var(--gold); }
+.sw.warn { border: 2px solid var(--warn); }
+ol.changes { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+ol.changes li { max-width: 62ch; }
+.coord { font: 500 13px/1.4 var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tablebox { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 12px/1.2 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--bg); }
+tbody tr:last-child td { border-bottom: none; }
+tr.group td { font: 600 14px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--bg); padding-block: 7px; }
+.pill { display: inline-block; font: 600 11px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; padding: 4px 7px; border-radius: 3px; border: 1px solid currentColor; white-space: nowrap; }
+.pill.exist { color: var(--exist-stroke); }
+.pill.adjust { color: var(--gold); }
+.pill.reserve { color: var(--reserve); }
+.pill.out { color: var(--warn); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+@media (max-width: 760px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.cols ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.note { color: var(--muted); font-size: 13px; }
+svg text { font-family: var(--display); }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Pick me up · Roblox · plan v1 du 01/10/2026</span>
+    <h1>Plan directeur de la base</h1>
+    <p class="lede">Où chaque bâtiment se pose, ce qu'on garde de la base actuelle de Codex et les emplacements à réserver pour les extensions de l'œuvre : salle de magie, synthèse, transfert, dirigeable et fusion des ateliers. Les cotes sont en studs, dans le repère de Studio vu de dessus.</p>
+  </header>
+
+  <section class="top">
+    <div class="map" aria-label="Plan de la base vu de dessus">
+      <svg viewBox="-162 -158 324 362" role="img" aria-labelledby="mapTitle">
+        <title id="mapTitle">Plan de la base circulaire, rayon 140 studs, avec les lots existants, ajustés et réservés</title>
+        <defs>
+          <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="5" height="5" fill="var(--panel)"/>
+            <line x1="0" y1="0" x2="0" y2="5" stroke="var(--reserve)" stroke-width="1.1"/>
+          </pattern>
+        </defs>
+
+        <!-- plateforme et rempart -->
+        <circle cx="0" cy="0" r="145" fill="var(--platform)"/>
+        <circle cx="0" cy="0" r="140" fill="none" stroke="var(--exist-stroke)" stroke-width="5"/>
+        <circle cx="0" cy="0" r="128" fill="none" stroke="var(--muted)" stroke-width=".7" stroke-dasharray="3 3"/>
+        <text x="124" y="-10" font-size="4.6" text-anchor="middle" fill="var(--muted)" transform="rotate(90 124 -10)">limite constructible r = 128</text>
+        <text x="96" y="-112" font-size="5.5" font-weight="600" fill="var(--exist-stroke)" transform="rotate(40 96 -112)">REMPART r = 140</text>
+
+        <!-- grand portail -->
+        <rect x="-20" y="135" width="40" height="11" fill="var(--platform)"/>
+        <rect x="-23" y="135.5" width="5" height="9" fill="var(--exist-stroke)"/>
+        <rect x="18" y="135.5" width="5" height="9" fill="var(--exist-stroke)"/>
+        <rect x="-8" y="116.5" width="16" height="22" fill="var(--path)" stroke="var(--gold)" stroke-width=".8" stroke-dasharray="2 2"/>
+
+        <!-- allées de Codex -->
+        <g fill="var(--path)" stroke="var(--line)" stroke-width=".6">
+          <rect x="-8" y="25.5" width="16" height="91"/>
+          <rect x="-8" y="-70" width="16" height="66"/>
+          <rect x="-75.5" y="2" width="55" height="12"/>
+          <rect x="24" y="2" width="40" height="12"/>
+          <rect x="-64" y="-62" width="12" height="64"/>
+          <rect x="-64" y="20" width="12" height="52"/>
+          <rect x="12" y="-63" width="74" height="12"/>
+          <rect x="61" y="18" width="12" height="74"/>
+        </g>
+
+        <!-- jardins qui débordent sous le rempart -->
+        <g fill="none" stroke="var(--warn)" stroke-width="1.2">
+          <rect x="-119" y="70.5" width="26" height="21"/>
+          <rect x="91" y="67.5" width="22" height="25"/>
+        </g>
+        <text x="-106" y="83" font-size="4.2" text-anchor="middle" fill="var(--warn)">jardin à reculer</text>
+        <text x="102" y="82" font-size="4.2" text-anchor="middle" fill="var(--warn)">jardin à reculer</text>
+
+        <!-- lieux existants -->
+        <g fill="var(--exist)" stroke="var(--exist-stroke)" stroke-width="1">
+          <circle cx="0" cy="8" r="25"/>
+          <circle cx="78" cy="29" r="24"/>
+          <circle cx="12" cy="-82" r="22"/>
+          <rect x="-100" y="-66" width="26" height="28"/>
+          <rect x="-101" y="-25" width="26" height="28"/>
+          <rect x="-107" y="21" width="28" height="28"/>
+          <rect x="21" y="78" width="26" height="28"/>
+          <rect x="81" y="-58" width="30" height="26"/>
+        </g>
+
+        <!-- entraînement : ancienne position et nouvelle -->
+        <rect x="-88.5" y="-106.5" width="45" height="31" fill="none" stroke="var(--warn)" stroke-width=".8" stroke-dasharray="2 2"/>
+        <rect x="-78.5" y="-99.5" width="45" height="31" fill="var(--exist)" stroke="var(--gold)" stroke-width="1.2" stroke-dasharray="3 2"/>
+
+        <!-- quartier artisanal -->
+        <rect x="-70" y="40" width="50" height="66" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-dasharray="4 2.5"/>
+        <g fill="var(--exist)" stroke="var(--gold)" stroke-width="1">
+          <rect x="-49" y="41" width="28" height="28"/>
+          <rect x="-49" y="80" width="26" height="24"/>
+        </g>
+        <rect x="-70" y="74" width="18" height="28" fill="url(#hatch)" stroke="var(--reserve)" stroke-width="1"/>
+
+        <!-- emplacements réservés -->
+        <g fill="url(#hatch)" stroke="var(--reserve)" stroke-width="1">
+          <rect x="40" y="-41" width="30" height="28"/>
+          <rect x="-33" y="-112" width="22" height="22"/>
+          <rect x="-40" y="-65" width="20" height="18"/>
+          <rect x="36" y="-104" width="28" height="28"/>
+          <rect x="-40" y="150" width="80" height="48"/>
+        </g>
+
+        <!-- étiquettes -->
+        <g font-size="5.4" font-weight="600" fill="var(--ink)" text-anchor="middle">
+          <text x="0" y="10">PLACE</text>
+          <text x="78" y="27">FAILLE</text>
+          <text x="78" y="33" font-size="4" font-weight="500" fill="var(--muted)">départ des missions</text>
+          <text x="12" y="-80">INVOCATION</text>
+          <text x="-87" y="-51">LOGEMENTS</text>
+          <text x="-88" y="-10">LOGEMENTS</text>
+          <text x="-88" y="-5" font-size="4" font-weight="500" fill="var(--muted)">annexe</text>
+          <text x="-93" y="37">CANTINE</text>
+          <text x="34" y="93">INFIRMERIE</text>
+          <text x="96" y="-44" font-size="4.2">ADMINISTRATION</text>
+          <text x="-56" y="-83">ENTRAÎNEMENT</text>
+          <text x="-35" y="56">FORGE</text>
+          <text x="-36" y="91" font-size="4.6">TRAITEMENT</text>
+          <text x="-36" y="96" font-size="4.6">DES MÉTAUX</text>
+          <text x="-61" y="87" font-size="4.3" fill="var(--reserve)">MENUI-</text>
+          <text x="-61" y="92" font-size="4.3" fill="var(--reserve)">SERIE</text>
+          <text x="-45" y="113" font-size="4.6" fill="var(--gold)">QUARTIER ARTISANAL</text>
+          <text x="-45" y="118.5" font-size="3.8" font-weight="500" fill="var(--gold)">devient l'atelier d'équipement</text>
+          <text x="55" y="-28" fill="var(--reserve)">SALLE</text>
+          <text x="55" y="-22" fill="var(--reserve)">DE MAGIE</text>
+          <text x="-22" y="-102" font-size="4.3" fill="var(--reserve)">TERRAIN</text>
+          <text x="-22" y="-97" font-size="4.3" fill="var(--reserve)">MAGIQUE</text>
+          <text x="-30" y="-56" font-size="4.3" fill="var(--reserve)">TRANSFERT</text>
+          <text x="50" y="-91" font-size="4.6" fill="var(--reserve)">SYNTHÈSE</text>
+          <text x="0" y="172" fill="var(--reserve)">QUAI DU DIRIGEABLE</text>
+          <text x="0" y="178" font-size="4" font-weight="500" fill="var(--muted)">hors enceinte, plateforme à étendre</text>
+          <text x="0" y="131" font-size="4.6" fill="var(--gold)">GRAND PORTAIL</text>
+        </g>
+        <circle cx="0" cy="90" r="2.2" fill="var(--gold)"/>
+        <text x="-4" y="91.6" font-size="4" text-anchor="end" fill="var(--muted)">apparition</text>
+
+        <!-- repère et échelle -->
+        <g stroke="var(--ink)" stroke-width=".8" fill="none">
+          <path d="M-152 -148 h16 m-3 -2.5 l3 2.5 l-3 2.5"/>
+          <path d="M-152 -148 v16 m-2.5 -3 l2.5 3 l2.5 -3"/>
+        </g>
+        <text x="-133" y="-146.5" font-size="4.6" fill="var(--ink)">+X</text>
+        <text x="-150" y="-127" font-size="4.6" fill="var(--ink)">+Z</text>
+        <g>
+          <rect x="100" y="190" width="50" height="2.4" fill="var(--ink)"/>
+          <rect x="100" y="190" width="25" height="2.4" fill="var(--panel)" stroke="var(--ink)" stroke-width=".5"/>
+          <text x="100" y="186.5" font-size="4.2" fill="var(--muted)">0</text>
+          <text x="150" y="186.5" font-size="4.2" fill="var(--muted)" text-anchor="end">50 studs</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="side">
+      <section>
+        <h2>Légende</h2>
+        <ul class="legend">
+          <li><span class="sw exist"></span><span>Lieu gardé tel que Codex l'a placé</span></li>
+          <li><span class="sw adjust"></span><span>Lieu gardé mais déplacé ou renommé</span></li>
+          <li><span class="sw reserve"></span><span>Emplacement réservé, vide au début, construit quand il est débloqué</span></li>
+          <li><span class="sw fusion"></span><span>Quartier artisanal : ses trois ateliers fusionnent plus tard en un seul bâtiment</span></li>
+          <li><span class="sw warn"></span><span>Conflit dans la base actuelle, à corriger</span></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Ce qui change par rapport à la base actuelle</h2>
+        <ol class="changes">
+          <li>La forge, l'atelier et une nouvelle menuiserie sont regroupés dans un quartier artisanal de 50 × 66. Dans l'œuvre, ces trois ateliers fusionnent en <em>atelier d'équipement</em>, qui prendra tout ce quartier.</li>
+          <li>L'« Atelier » de Codex devient l'atelier de <em>traitement des métaux</em>. L'allée ouest s'arrête à <span class="coord">z = 72</span> et sert de rue intérieure au quartier.</li>
+          <li>L'entraînement se décale de 10 studs vers le centre, en <span class="coord">(−56, −84)</span> : son coin sud-ouest touchait le rempart.</li>
+          <li>Deux jardins, en <span class="coord">(−106, 81)</span> et <span class="coord">(102, 80)</span>, passent en partie sous le rempart. Il faut les rapprocher du centre.</li>
+          <li>Le jardin en <span class="coord">(44, −91)</span> laisse sa place à la chambre de synthèse, à côté de l'invocation.</li>
+          <li>L'allée principale se prolonge jusqu'à un grand portail percé dans le rempart, avec deux travées en moins. Le quai du dirigeable se trouve derrière, hors de l'enceinte.</li>
+        </ol>
+      </section>
+    </div>
+  </section>
+
+  <section>
+    <h2>Les lots</h2>
+    <div class="tablebox">
+      <table>
+        <thead>
+          <tr><th>Lot</th><th>Statut</th><th>Centre (x, z)</th><th>Emprise</th><th>Hauteur max</th><th>Débloqué au niveau global*</th><th>Rôle</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group"><td colspan="7">Dès le départ</td></tr>
+          <tr><td>Place centrale</td><td><span class="pill exist">gardé</span></td><td class="coord">(0, 8)</td><td class="coord">r 25</td><td class="coord">10</td><td>1</td><td>Rassemblement, monument</td></tr>
+          <tr><td>Faille spatio-temporelle</td><td><span class="pill exist">gardé</span></td><td class="coord">(78, 29)</td><td class="coord">r 24</td><td class="coord">30</td><td>1</td><td>Départ des missions, choix de l'équipe</td></tr>
+          <tr><td>Salle d'invocation</td><td><span class="pill exist">gardé</span></td><td class="coord">(12, −82)</td><td class="coord">r 22</td><td class="coord">40</td><td>1</td><td>Invocation des compagnons</td></tr>
+          <tr><td>Logements</td><td><span class="pill exist">gardé</span></td><td class="coord">(−87, −52)</td><td class="coord">26 × 28</td><td class="coord">45</td><td>1</td><td>Gagnent des étages aux paliers suivants</td></tr>
+          <tr><td>Logements annexe</td><td><span class="pill exist">gardé</span></td><td class="coord">(−88, −11)</td><td class="coord">26 × 28</td><td class="coord">45</td><td>1</td><td>Idem</td></tr>
+          <tr><td>Cantine</td><td><span class="pill exist">gardé</span></td><td class="coord">(−93, 35)</td><td class="coord">28 × 28</td><td class="coord">30</td><td>1</td><td>Repas, bonus temporaires</td></tr>
+          <tr><td>Entraînement</td><td><span class="pill adjust">déplacé</span></td><td class="coord">(−56, −84)</td><td class="coord">45 × 31</td><td class="coord">20</td><td>1</td><td>Mannequins, parades, combats d'entraînement</td></tr>
+          <tr><td>Infirmerie</td><td><span class="pill exist">gardé</span></td><td class="coord">(34, 92)</td><td class="coord">26 × 28</td><td class="coord">30</td><td>1</td><td>Soin des blessures après une mission</td></tr>
+          <tr><td>Administration</td><td><span class="pill exist">gardé</span></td><td class="coord">(96, −45)</td><td class="coord">30 × 26</td><td class="coord">30</td><td>1</td><td>Bureau de la fée, vitrine des trophées</td></tr>
+          <tr class="group"><td colspan="7">Quartier artisanal · 50 × 66, centre (−45, 73)</td></tr>
+          <tr><td>Forge</td><td><span class="pill exist">gardé</span></td><td class="coord">(−35, 55)</td><td class="coord">28 × 28</td><td class="coord">30</td><td>1</td><td>Armes et armures</td></tr>
+          <tr><td>Traitement des métaux</td><td><span class="pill adjust">renommé</span></td><td class="coord">(−36, 92)</td><td class="coord">26 × 24</td><td class="coord">30</td><td>1</td><td>Lingots, alliages (ancien « Atelier »)</td></tr>
+          <tr><td>Menuiserie</td><td><span class="pill reserve">réservé</span></td><td class="coord">(−61, 88)</td><td class="coord">18 × 28</td><td class="coord">30</td><td>5</td><td>Manches, arcs, boucliers</td></tr>
+          <tr><td>Atelier d'équipement</td><td><span class="pill reserve">fusion</span></td><td class="coord">(−45, 73)</td><td class="coord">50 × 66</td><td class="coord">40</td><td>30</td><td>Remplace les trois ateliers, débloque le meilleur équipement</td></tr>
+          <tr class="group"><td colspan="7">Extensions de l'œuvre</td></tr>
+          <tr><td>Chambre de synthèse</td><td><span class="pill reserve">réservé</span></td><td class="coord">(50, −90)</td><td class="coord">28 × 28</td><td class="coord">35</td><td>8</td><td>Fusion de compagnons ou de matériaux</td></tr>
+          <tr><td>Salle de magie</td><td><span class="pill reserve">réservé</span></td><td class="coord">(55, −27)</td><td class="coord">30 × 28</td><td class="coord">40</td><td>15</td><td>Recherche, avec ses propres niveaux</td></tr>
+          <tr><td>Terrain d'entraînement magique</td><td><span class="pill reserve">réservé</span></td><td class="coord">(−22, −101)</td><td class="coord">22 × 22</td><td class="coord">15</td><td>20</td><td>Pratique des sorts, à côté de l'entraînement</td></tr>
+          <tr><td>Station de transfert</td><td><span class="pill reserve">réservé</span></td><td class="coord">(−30, −56)</td><td class="coord">20 × 18</td><td class="coord">25</td><td>25</td><td>Transfert de compétences</td></tr>
+          <tr><td>Grand portail</td><td><span class="pill adjust">nouveau</span></td><td class="coord">(0, 140)</td><td class="coord">40 de large</td><td class="coord">45</td><td>35</td><td>Remplace deux travées du rempart</td></tr>
+          <tr><td>Quai du dirigeable</td><td><span class="pill out">hors enceinte</span></td><td class="coord">(0, 174)</td><td class="coord">80 × 48</td><td class="coord">60</td><td>35</td><td>Hangar et entretien du dirigeable</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">* Les niveaux de déblocage sont une première proposition, à équilibrer ensemble. L'œuvre ne fixe que l'ordre d'apparition : salle de magie et pierres de rediffusion vers l'étage 25, dirigeable à l'étage 33. À Niflheim, la base la plus avancée, les bâtiments sont entre les niveaux 18 et 22 en fin de partie.</p>
+  </section>
+
+  <section class="cols">
+    <div>
+      <h2>Règles pour produire un bâtiment</h2>
+      <ul>
+        <li>Chaque version d'un bâtiment tient dans l'emprise de son lot et ne dépasse pas sa hauteur max.</li>
+        <li>Pivot au sol, au centre du lot. La façade d'entrée regarde vers la place centrale.</li>
+        <li>Nommage : <span class="coord">Forge_P1</span>, <span class="coord">Forge_P2</span>… Les modèles sont rangés dans <span class="coord">ServerStorage/Batiments/Forge/</span>.</li>
+        <li>Une vingtaine de niveaux en jeu, mais quatre paliers visuels seulement : P1 au niveau 1, P2 au 5, P3 au 10 et P4 au 20. Les niveaux intermédiaires changent les statistiques, pas le modèle.</li>
+        <li>Le rempart suit la même logique : pierre moussue en P1, quartz doré en P4.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>À trancher entre vous</h2>
+      <ul>
+        <li>La base est-elle commune aux trois joueurs d'un serveur, ou chaque joueur a-t-il la sienne ? C'est ce qui décide de l'architecture du back end.</li>
+        <li>On garde l'infirmerie et l'administration ? Codex les a ajoutées, mais l'œuvre ne les cite pas parmi les installations de base.</li>
+        <li>Les niveaux de déblocage et les coûts de chaque palier.</li>
+        <li>Le portail et le quai : il faut agrandir la plateforme hors de l'enceinte. On le fait maintenant ou au moment du dirigeable ?</li>
+      </ul>
+    </div>
+  </section>
+</div>
