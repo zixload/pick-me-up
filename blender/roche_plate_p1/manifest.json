@@ -1,0 +1,51 @@
+{
+  "asset": "P1_Roche_Plate",
+  "reference": "../rempart_p1.blend + approved P1_Cailloux_A",
+  "units": "1 unit intended as 1 stud",
+  "dimensions_xyz": [
+    3.2363693714141846,
+    2.1845145225524902,
+    1.0618892908096313
+  ],
+  "pivot": "Ground center, Z=0",
+  "total_triangles": 1696,
+  "meshes": [
+    {
+      "mesh": "P1_Roche_Plate_Pierre",
+      "role": "Pierre",
+      "triangles": 880,
+      "dimensions_xyz": [
+        3.2363693714141846,
+        2.1845145225524902,
+        1.0618892908096313
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    },
+    {
+      "mesh": "P1_Roche_Plate_Mousse",
+      "role": "Mousse",
+      "triangles": 816,
+      "dimensions_xyz": [
+        1.0899107456207275,
+        0.7462993264198303,
+        0.1615733504295349
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    }
+  ],
+  "stone_manifold": true,
+  "stone_volume": 4.117183593859222,
+  "moss_optional": true,
+  "approval_status": "Awaiting user visual review",
+  "roblox_import_status": "Not imported"
+}

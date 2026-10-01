@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "fbx_roundtrip": [
+    {
+      "mesh": "P1_Lanterne_Pied_Coeur",
+      "dimensions": [
+        0.4300000071525574,
+        0.4300000071525574,
+        0.9099998474121094
+      ],
+      "triangles": 76,
+      "uv": 1,
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "P1_Lanterne_Pied_Mousse",
+      "dimensions": [
+        1.3267178535461426,
+        1.7960000038146973,
+        0.1899999976158142
+      ],
+      "triangles": 12,
+      "uv": 1,
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "P1_Lanterne_Pied_Structure",
+      "dimensions": [
+        1.7799999713897705,
+        1.7799999713897705,
+        9.59000015258789
+      ],
+      "triangles": 4704,
+      "uv": 1,
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "P1_Lanterne_Pied_Vitres",
+      "dimensions": [
+        1.2640000581741333,
+        1.2640000581741333,
+        1.3500003814697266
+      ],
+      "triangles": 8,
+      "uv": 1,
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "embedded_images": [
+    "P1_Lanterne_Color",
+    "P1_Lanterne_Color.001",
+    "P1_Lanterne_Metalness",
+    "P1_Lanterne_Roughness"
+  ],
+  "glb_meshes": 4,
+  "glb_triangles": 4800,
+  "scope": "Blender export integrity; Roblox import and live lighting still pending."
+}

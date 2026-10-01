@@ -1,0 +1,17 @@
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\blender\\cailloux_p1\\exports\\P1_Cailloux_A.fbx'
+export finished in 0.0102 sec.
+INFO Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.5\4.5\scripts\addons_core\io_scene_gltf2\extern_draco.dll
+23:49:35 | INFO: Starting glTF 2.0 export
+23:49:35 | INFO: Extracting primitive: 01_Pierre_Plate.001
+23:49:35 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+23:49:35 | INFO: Primitives created: 1
+23:49:35 | INFO: Finished glTF 2.0 export in 0.022397994995117188 s
+
+Info: Saved as "P1_Cailloux_A.blend"
+FBX version: 7400
+VERIFICATION_PASS {"status": "PASS", "fbx_roundtrip": [{"mesh": "P1_Cailloux_A_Pierres", "triangles": 1812, "dimensions_xyz": [2.2383968830108643, 1.3620727062225342, 0.4848281741142273], "pivot_xyz": [-2.9802322387695312e-08, 0.0, 0.0], "uv_layers": 1}], "embedded_images": ["P1_Cailloux_Color", "P1_Cailloux_Color.001", "P1_Cailloux_Metalness", "P1_Cailloux_Roughness"], "glb_meshes": 1, "glb_triangles": 1812, "scope": "Export integrity in Blender; Roblox import pending."}
+Blender 4.5.10 LTS (hash 6dc0b208d1b5 built 2026-05-19 01:33:42)
+Read blend: "C:\Users\ingam\OneDrive\Documents\ChatGPT\Pick me up\blender\cailloux_p1\P1_Cailloux_A.blend"
+
+Blender quit

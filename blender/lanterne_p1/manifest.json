@@ -1,0 +1,82 @@
+{
+  "asset": "P1_Lanterne_Pied",
+  "reference": "../rempart_p1.blend",
+  "units": "1 unit intended as 1 stud",
+  "dimensions_xyz": [
+    1.7799999713897705,
+    1.7960000038146973,
+    9.59000015258789
+  ],
+  "total_triangles": 4800,
+  "meshes": [
+    {
+      "mesh": "P1_Lanterne_Pied_Structure",
+      "role": "Structure",
+      "triangles": 4704,
+      "dimensions_xyz": [
+        1.7799999713897705,
+        1.7799999713897705,
+        9.59000015258789
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    },
+    {
+      "mesh": "P1_Lanterne_Pied_Vitres",
+      "role": "Vitres",
+      "triangles": 8,
+      "dimensions_xyz": [
+        1.2640000581741333,
+        1.2640000581741333,
+        1.3500003814697266
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    },
+    {
+      "mesh": "P1_Lanterne_Pied_Coeur",
+      "role": "Coeur",
+      "triangles": 76,
+      "dimensions_xyz": [
+        0.4300000071525574,
+        0.4300000071525574,
+        0.9099998474121094
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    },
+    {
+      "mesh": "P1_Lanterne_Pied_Mousse",
+      "role": "Mousse",
+      "triangles": 12,
+      "dimensions_xyz": [
+        1.3267178535461426,
+        1.7960000038146973,
+        0.1899999976158142
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    }
+  ],
+  "approval_status": "Approved by user",
+  "approval_source": "User: Validé; passe à la suite",
+  "roblox_import_status": "Not imported",
+  "glass_note": "Separate mesh: configure transparency in Roblox.",
+  "light_note": "Emission and render point light are presentation settings; configure runtime light in Roblox."
+}

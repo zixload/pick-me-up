@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "fbx_roundtrip": [
+    {
+      "mesh": "P1_Lanterne_Murale_Coeur",
+      "triangles": 76,
+      "dimensions_xyz": [
+        0.4300000071525574,
+        0.43000006675720215,
+        0.9099998474121094
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    },
+    {
+      "mesh": "P1_Lanterne_Murale_Structure",
+      "triangles": 5344,
+      "dimensions_xyz": [
+        1.6263456344604492,
+        2.5631728172302246,
+        3.6418540477752686
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    },
+    {
+      "mesh": "P1_Lanterne_Murale_Vitres",
+      "triangles": 8,
+      "dimensions_xyz": [
+        1.2640000581741333,
+        1.2639999389648438,
+        1.3500003814697266
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    }
+  ],
+  "embedded_images": [
+    "P1_Lanterne_Color",
+    "P1_Lanterne_Color.001",
+    "P1_Lanterne_Metalness",
+    "P1_Lanterne_Roughness"
+  ],
+  "glb_meshes": 3,
+  "glb_triangles": 5428,
+  "scope": "Export integrity in Blender; Roblox import and runtime light pending."
+}

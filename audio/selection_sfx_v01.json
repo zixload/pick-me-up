@@ -1,0 +1,1611 @@
+{
+  "version": 1,
+  "date": "2026-10-01",
+  "studioPlaceId": "107076511400081",
+  "universeId": "10768886580",
+  "auditionStatus": "Selection approved by user; assistant did not perform artistic listening",
+  "selectionStatus": "approved",
+  "approval": {
+    "date": "2026-10-01",
+    "source": "User message in project conversation",
+    "message": "ok tout me va",
+    "scope": "All main candidates and listed alternatives",
+    "gameplayIntegration": "pending"
+  },
+  "entries": [
+    {
+      "key": "SFX_01",
+      "category": "Interface",
+      "role": "Survol de bouton",
+      "id": "139800881181209",
+      "cue": "Petit tic discret.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "ui user interface simple button hover",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/139800881181209",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=139800881181209&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "139800881181209",
+        "name": "ui-simple-button-hover",
+        "priceCents": 0,
+        "creatorName": "AmbientSorcery",
+        "source": "creator_store"
+      },
+      "duration": 0.13139583333333332,
+      "loadValidation": {
+        "id": "139800881181209",
+        "isLoaded": true,
+        "duration": 0.13139583333333332,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_02",
+      "category": "Interface",
+      "role": "Clic de bouton",
+      "id": "88442833509532",
+      "cue": "Confirmation immédiate du clic.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "ui user interface simple button click",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/88442833509532",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=88442833509532&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "88442833509532",
+        "name": "ui-simple-button-click",
+        "priceCents": 0,
+        "creatorName": "AmbientSorcery",
+        "source": "creator_store"
+      },
+      "duration": 0.03375,
+      "loadValidation": {
+        "id": "88442833509532",
+        "isLoaded": true,
+        "duration": 0.03375,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_03",
+      "category": "Interface",
+      "role": "Confirmation / achat",
+      "id": "116995696565929",
+      "cue": "Valider une action importante.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/116995696565929",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=116995696565929&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "116995696565929",
+        "name": "UI - Confirm 1",
+        "priceCents": 0,
+        "creatorName": "lluma3D",
+        "source": "creator_store"
+      },
+      "duration": 1.850952380952381,
+      "loadValidation": {
+        "id": "116995696565929",
+        "isLoaded": true,
+        "duration": 1.850952380952381,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_04",
+      "category": "Interface",
+      "role": "Erreur / ressources insuffisantes",
+      "id": "87519554692663",
+      "cue": "Action impossible ou compétence indisponible.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "ui user interface negative alert error",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/87519554692663",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=87519554692663&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "87519554692663",
+        "name": "ui-simple-negative-error",
+        "priceCents": 0,
+        "creatorName": "AmbientSorcery",
+        "source": "creator_store"
+      },
+      "duration": 0.31016666666666665,
+      "loadValidation": {
+        "id": "87519554692663",
+        "isLoaded": true,
+        "duration": 0.31016666666666665,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_05",
+      "category": "Interface",
+      "role": "Notification",
+      "id": "106553517979212",
+      "cue": "Quête, message ou invitation.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "UI Notification",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/106553517979212",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=106553517979212&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "106553517979212",
+        "name": "UI Notification",
+        "priceCents": 0,
+        "creatorName": "CoreCraft Studio",
+        "source": "creator_store"
+      },
+      "duration": 0.9701587301587301,
+      "loadValidation": {
+        "id": "106553517979212",
+        "isLoaded": true,
+        "duration": 0.9701587301587301,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_06",
+      "category": "Interface",
+      "role": "Ouverture inventaire",
+      "id": "127877437691780",
+      "cue": "Entrée dans l'inventaire ou le menu du héros.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "ui user interface simple inventory open",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/127877437691780",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=127877437691780&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "127877437691780",
+        "name": "ui-simple-inventory-open",
+        "priceCents": 0,
+        "creatorName": "AmbientSorcery",
+        "source": "creator_store"
+      },
+      "duration": 0.04672916666666667,
+      "loadValidation": {
+        "id": "127877437691780",
+        "isLoaded": true,
+        "duration": 0.04672916666666667,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_07",
+      "category": "Interface",
+      "role": "Fermeture inventaire",
+      "id": "74657965144290",
+      "cue": "Retour au jeu.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "ui user interface simple inventory close",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/74657965144290",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=74657965144290&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "74657965144290",
+        "name": "ui-simple-inventory-close",
+        "priceCents": 0,
+        "creatorName": "AmbientSorcery",
+        "source": "creator_store"
+      },
+      "duration": 0.040875,
+      "loadValidation": {
+        "id": "74657965144290",
+        "isLoaded": true,
+        "duration": 0.040875,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_08",
+      "category": "Interface",
+      "role": "Équipement d'un objet",
+      "id": "138323438407619",
+      "cue": "Arme ou équipement sélectionné.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "ui user interface simple equip\n",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/138323438407619",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=138323438407619&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "138323438407619",
+        "name": "ui-simple-equip",
+        "priceCents": 0,
+        "creatorName": "AmbientSorcery",
+        "source": "creator_store"
+      },
+      "duration": 0.1206875,
+      "loadValidation": {
+        "id": "138323438407619",
+        "isLoaded": true,
+        "duration": 0.1206875,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_09",
+      "category": "Combat",
+      "role": "Coup d'épée léger",
+      "id": "134671877618939",
+      "cue": "Souffle de la lame, même si le coup manque.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Clean swing woosh sound for sword attacks, abilities, and fast movement. Ideal for combat and action games. No background noise.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/134671877618939",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=134671877618939&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "134671877618939",
+        "name": "Sword Swing Sound",
+        "priceCents": 0,
+        "creatorName": "0FFZ3TI",
+        "source": "creator_store"
+      },
+      "duration": 0.5580272108843537,
+      "loadValidation": {
+        "id": "134671877618939",
+        "isLoaded": true,
+        "duration": 0.5580272108843537,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_10",
+      "category": "Combat",
+      "role": "Coup d'épée lourd",
+      "id": "6241709963",
+      "cue": "Attaque chargée, plus ample.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "sword heavy swing metal woosh air",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/6241709963",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=6241709963&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "6241709963",
+        "name": "Sword Swing Metal Heavy",
+        "priceCents": 0,
+        "creatorName": "Aurarus",
+        "source": "creator_store"
+      },
+      "duration": 0.5888208616780045,
+      "loadValidation": {
+        "id": "6241709963",
+        "isLoaded": true,
+        "duration": 0.5888208616780045,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_11",
+      "category": "Combat",
+      "role": "Impact d'épée",
+      "id": "7171761940",
+      "cue": "Uniquement quand une cible est touchée.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "epic sword hit",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/7171761940",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=7171761940&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "7171761940",
+        "name": "Sword Hit (Impact)",
+        "priceCents": 0,
+        "creatorName": "BushSeed",
+        "source": "creator_store"
+      },
+      "duration": 1.3699773242630386,
+      "loadValidation": {
+        "id": "7171761940",
+        "isLoaded": true,
+        "duration": 1.3699773242630386,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_12",
+      "category": "Combat",
+      "role": "Dégâts reçus / coup au corps",
+      "id": "127495971181378",
+      "cue": "Retour sonore quand le héros prend un coup.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/127495971181378",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=127495971181378&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "127495971181378",
+        "name": "Body Hit Impact",
+        "priceCents": 0,
+        "creatorName": "NickySergal",
+        "source": "creator_store"
+      },
+      "duration": 0.8855102040816326,
+      "loadValidation": {
+        "id": "127495971181378",
+        "isLoaded": true,
+        "duration": 0.8855102040816326,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_13",
+      "category": "Combat",
+      "role": "Blocage au bouclier",
+      "id": "9119072660",
+      "cue": "Impact métallique amorti.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Shield, Clang As Hit, Metal Sword, Hubcap\n\nDuration: 0.8 seconds\nCategory: Metal - Hits\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9119072660",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9119072660&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9119072660",
+        "name": "Shield Clang As Hit Metal Sword Hubcap 1 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 0.7398958333333333,
+      "loadValidation": {
+        "id": "9119072660",
+        "isLoaded": true,
+        "duration": 0.7398958333333333,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_14",
+      "category": "Combat",
+      "role": "Parade parfaite",
+      "id": "9119072674",
+      "cue": "Impact net ; sera à distinguer du blocage au mixage.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Shield, Clang As Hit, Metal Sword, Hubcap\n\nDuration: 1.3 seconds\nCategory: Metal - Hits\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9119072674",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9119072674&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9119072674",
+        "name": "Shield Clang As Hit Metal Sword Hubcap 2 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 1.26425,
+      "loadValidation": {
+        "id": "9119072674",
+        "isLoaded": true,
+        "duration": 1.26425,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_15",
+      "category": "Combat",
+      "role": "Esquive / dash",
+      "id": "124044443087502",
+      "cue": "Souffle bref pendant le déplacement.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/124044443087502",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=124044443087502&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "124044443087502",
+        "name": "Swift/Whooshes Potential Dash/Fast Hits SFX",
+        "priceCents": 0,
+        "creatorName": "DragonndineWhite2",
+        "source": "creator_store"
+      },
+      "duration": 0.405375,
+      "loadValidation": {
+        "id": "124044443087502",
+        "isLoaded": true,
+        "duration": 0.405375,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_16",
+      "category": "Déplacements",
+      "role": "Saut",
+      "id": "135162567109750",
+      "cue": "Départ d'un saut ; comparer avec le son Roblox par défaut.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/135162567109750",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=135162567109750&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "135162567109750",
+        "name": "Jump Sound",
+        "priceCents": 0,
+        "creatorName": "EightyKoii",
+        "source": "creator_store"
+      },
+      "duration": 0.626938775510204,
+      "loadValidation": {
+        "id": "135162567109750",
+        "isLoaded": true,
+        "duration": 0.626938775510204,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_17",
+      "category": "Déplacements",
+      "role": "Réception / chute",
+      "id": "9113480915",
+      "cue": "Réception forte ou corps qui tombe.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Body Fall, Impact, Thud, Slide\n\nDuration: 1.1 seconds\nCategory: Crashes - Metal\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9113480915",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9113480915&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9113480915",
+        "name": "Body Fall Thud 2 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 1.0806666666666667,
+      "loadValidation": {
+        "id": "9113480915",
+        "isLoaded": true,
+        "duration": 1.0806666666666667,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_18",
+      "category": "Déplacements",
+      "role": "Pas sur pierre",
+      "id": "133325104274958",
+      "cue": "Dalles de la base et de la tour.",
+      "priority": "Prototype",
+      "alternatives": [
+        {
+          "id": "140594308250996",
+          "name": "Stone Footstep 5 (SFX)",
+          "creator": "ChamoyBaconXD",
+          "url": "https://create.roblox.com/store/asset/140594308250996",
+          "duration": 0.494875283446712,
+          "loadValidation": {
+            "id": "140594308250996",
+            "isLoaded": true,
+            "duration": 0.494875283446712,
+            "status": "Success"
+          }
+        },
+        {
+          "id": "82615619091463",
+          "name": "Stone Footstep 6 (SFX)",
+          "creator": "ChamoyBaconXD",
+          "url": "https://create.roblox.com/store/asset/82615619091463",
+          "duration": 0.44843537414965984,
+          "loadValidation": {
+            "id": "82615619091463",
+            "isLoaded": true,
+            "duration": 0.44843537414965984,
+            "status": "Success"
+          }
+        }
+      ],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/133325104274958",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=133325104274958&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "133325104274958",
+        "name": "Stone Footstep 1 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ChamoyBaconXD",
+        "source": "creator_store"
+      },
+      "duration": 0.49777777777777776,
+      "loadValidation": {
+        "id": "133325104274958",
+        "isLoaded": true,
+        "duration": 0.49777777777777776,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_19",
+      "category": "Déplacements",
+      "role": "Pas sur herbe",
+      "id": "135037154891351",
+      "cue": "Jardins et zones d'exploration.",
+      "priority": "Plus tard",
+      "alternatives": [
+        {
+          "id": "110522236020035",
+          "name": "footstep grass 3",
+          "creator": "Robloxmastermanyay",
+          "url": "https://create.roblox.com/store/asset/110522236020035",
+          "duration": 0.39424036281179137,
+          "loadValidation": {
+            "id": "110522236020035",
+            "isLoaded": true,
+            "duration": 0.39424036281179137,
+            "status": "Success"
+          }
+        },
+        {
+          "id": "129956418693357",
+          "name": "footstep grass 1",
+          "creator": "Robloxmastermanyay",
+          "url": "https://create.roblox.com/store/asset/129956418693357",
+          "duration": 0.35095238095238096,
+          "loadValidation": {
+            "id": "129956418693357",
+            "isLoaded": true,
+            "duration": 0.35095238095238096,
+            "status": "Success"
+          }
+        }
+      ],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/135037154891351",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=135037154891351&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "135037154891351",
+        "name": "footstep grass 4",
+        "priceCents": 0,
+        "creatorName": "Robloxmastermanyay",
+        "source": "creator_store"
+      },
+      "duration": 0.3798185941043084,
+      "loadValidation": {
+        "id": "135037154891351",
+        "isLoaded": true,
+        "duration": 0.3798185941043084,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_20",
+      "category": "Magie / classes",
+      "role": "Lancement d'un sort",
+      "id": "93989620006639",
+      "cue": "Sort générique de départ.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/93989620006639",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=93989620006639&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "93989620006639",
+        "name": "Magic Spell Cast",
+        "priceCents": 0,
+        "creatorName": "GleonoffG",
+        "source": "creator_store"
+      },
+      "duration": 1.4624583333333334,
+      "loadValidation": {
+        "id": "93989620006639",
+        "isLoaded": true,
+        "duration": 1.4624583333333334,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_21",
+      "category": "Magie / classes",
+      "role": "Charge magique",
+      "id": "5696557721",
+      "cue": "Préparation avant libération de l'énergie.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/5696557721",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=5696557721&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "5696557721",
+        "name": "Magic Charge",
+        "priceCents": 0,
+        "creatorName": "Ekyuklia",
+        "source": "creator_store"
+      },
+      "duration": 2.0375510204081633,
+      "loadValidation": {
+        "id": "5696557721",
+        "isLoaded": true,
+        "duration": 2.0375510204081633,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_22",
+      "category": "Magie / classes",
+      "role": "Impact magique",
+      "id": "75300135616235",
+      "cue": "Explosion d'un projectile ou d'une zone.",
+      "priority": "Plus tard",
+      "alternatives": [
+        {
+          "id": "83680922290300",
+          "name": "[SFX] Magic Explosion 3",
+          "creator": "Just_Sear",
+          "url": "https://create.roblox.com/store/asset/83680922290300",
+          "duration": 6.199727891156463,
+          "loadValidation": {
+            "id": "83680922290300",
+            "isLoaded": true,
+            "duration": 6.199727891156463,
+            "status": "Success"
+          }
+        }
+      ],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/75300135616235",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=75300135616235&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "75300135616235",
+        "name": "[SFX] Magic Explosion 2",
+        "priceCents": 0,
+        "creatorName": "Just_Sear",
+        "source": "creator_store"
+      },
+      "duration": 4.527891156462585,
+      "loadValidation": {
+        "id": "75300135616235",
+        "isLoaded": true,
+        "duration": 4.527891156462585,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_23",
+      "category": "Magie / classes",
+      "role": "Soin",
+      "id": "139481162475902",
+      "cue": "Gain de vie / soutien.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "A basic healing magic level",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/139481162475902",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=139481162475902&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "139481162475902",
+        "name": "Fast healing magic sound",
+        "priceCents": 0,
+        "creatorName": "Kaoriox",
+        "source": "creator_store"
+      },
+      "duration": 2.11156462585034,
+      "loadValidation": {
+        "id": "139481162475902",
+        "isLoaded": true,
+        "duration": 2.11156462585034,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_24",
+      "category": "Magie / classes",
+      "role": "Arc : tension de corde",
+      "id": "82271313074659",
+      "cue": "Préparation d'un tir.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/82271313074659",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=82271313074659&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "82271313074659",
+        "name": "[SFX] Bow Draw",
+        "priceCents": 0,
+        "creatorName": "Just_Sear",
+        "source": "creator_store"
+      },
+      "duration": 1.9272562358276644,
+      "loadValidation": {
+        "id": "82271313074659",
+        "isLoaded": true,
+        "duration": 1.9272562358276644,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_25",
+      "category": "Magie / classes",
+      "role": "Arc : tir",
+      "id": "89390229858498",
+      "cue": "Départ de la flèche.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/89390229858498",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=89390229858498&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "89390229858498",
+        "name": "Arrow Shoot",
+        "priceCents": 0,
+        "creatorName": "thefuture1687",
+        "source": "creator_store"
+      },
+      "duration": 1.008185941043084,
+      "loadValidation": {
+        "id": "89390229858498",
+        "isLoaded": true,
+        "duration": 1.008185941043084,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_26",
+      "category": "Magie / classes",
+      "role": "Arc : impact",
+      "id": "106118762903032",
+      "cue": "Flèche qui touche.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/106118762903032",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=106118762903032&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "106118762903032",
+        "name": "[SFX] Arrow Impact 2",
+        "priceCents": 0,
+        "creatorName": "Just_Sear",
+        "source": "creator_store"
+      },
+      "duration": 2.2987755102040817,
+      "loadValidation": {
+        "id": "106118762903032",
+        "isLoaded": true,
+        "duration": 2.2987755102040817,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_27",
+      "category": "Tour / PvP",
+      "role": "Rugissement de boss",
+      "id": "9113980319",
+      "cue": "Apparition du boss ou avertissement d'attaque.",
+      "priority": "Plus tard",
+      "alternatives": [
+        {
+          "id": "9113985604",
+          "name": "Creature Roar Mix Of Animals Gate Creaks 1 (SFX)",
+          "creator": "ProSoundEffects",
+          "url": "https://create.roblox.com/store/asset/9113985604",
+          "duration": 3.2950833333333334,
+          "loadValidation": {
+            "id": "9113985604",
+            "isLoaded": true,
+            "duration": 3.2950833333333334,
+            "status": "Success"
+          }
+        }
+      ],
+      "asset": {
+        "description": "Creature Mix, Giant Crab Monster, Roar, Growl, Groan, Giant Footsteps, Spider Attack\n\nDuration: 4.1 seconds\nCategory: Voices - Beasts\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9113980319",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9113980319&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9113980319",
+        "name": "Creature Mix Giant Crab Monster Roar Growl 1 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 3.124979166666667,
+      "loadValidation": {
+        "id": "9113980319",
+        "isLoaded": true,
+        "duration": 3.124979166666667,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_28",
+      "category": "Tour / PvP",
+      "role": "Vie critique",
+      "id": "139481207162657",
+      "cue": "Battements doux et intermittents à faible vie.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/139481207162657",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=139481207162657&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "139481207162657",
+        "name": "Heartbeat",
+        "priceCents": 0,
+        "creatorName": "Marksmansz",
+        "source": "creator_store"
+      },
+      "duration": 3.9183673469387754,
+      "loadValidation": {
+        "id": "139481207162657",
+        "isLoaded": true,
+        "duration": 3.9183673469387754,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_29",
+      "category": "Tour / PvP",
+      "role": "Compte à rebours",
+      "id": "117751546358455",
+      "cue": "Départ d'une mission ou d'un duel.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/117751546358455",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=117751546358455&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "117751546358455",
+        "name": "Countdown beep",
+        "priceCents": 0,
+        "creatorName": "santt2848",
+        "source": "creator_store"
+      },
+      "duration": 1.0187755102040816,
+      "loadValidation": {
+        "id": "117751546358455",
+        "isLoaded": true,
+        "duration": 1.0187755102040816,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_30",
+      "category": "Tour / PvP",
+      "role": "Victoire / étage terminé",
+      "id": "135165335432475",
+      "cue": "Signal bref de réussite ; fanfare à choisir séparément.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Clean success sound for positive feedback. Perfect for confirmations, rewards, level completion, and UI interactions. Short and satisfying.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/135165335432475",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=135165335432475&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "135165335432475",
+        "name": "Success Correct Sound",
+        "priceCents": 0,
+        "creatorName": "0FFZ3TI",
+        "source": "creator_store"
+      },
+      "duration": 0.6875056689342404,
+      "loadValidation": {
+        "id": "135165335432475",
+        "isLoaded": true,
+        "duration": 0.6875056689342404,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_31",
+      "category": "Tour / PvP",
+      "role": "Défaite",
+      "id": "9042163336",
+      "cue": "Sting sombre de fin de mission, à écouter pour le ton.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Foreboding and futuristic sting\n\nDuration: 10 seconds\nGenre: Sound Elements/Atmospheres\nLibrary: KPM Main Series\nAlbum: Inside the Machine\nAlbum Info: Cinematic, analogue synth-score for all technological areas, from science and exploration to futuristic dystopian worlds\nAsset Type: Music\n\nCourtesy of APM Music.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9042163336",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9042163336&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9042163336",
+        "name": "Without Emotion (sting)",
+        "priceCents": 0,
+        "creatorName": "APMOfficial",
+        "source": "creator_store"
+      },
+      "duration": 10.762448979591836,
+      "loadValidation": {
+        "id": "9042163336",
+        "isLoaded": true,
+        "duration": 10.762448979591836,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_32",
+      "category": "Invocation / progression",
+      "role": "Invocation : charge du cercle",
+      "id": "5696557721",
+      "cue": "Réutilise la charge magique pendant la montée.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/5696557721",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=5696557721&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "5696557721",
+        "name": "Magic Charge",
+        "priceCents": 0,
+        "creatorName": "Ekyuklia",
+        "source": "creator_store"
+      },
+      "duration": 2.0375510204081633,
+      "loadValidation": {
+        "id": "5696557721",
+        "isLoaded": true,
+        "duration": 2.0375510204081633,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_33",
+      "category": "Invocation / progression",
+      "role": "Invocation : apparition",
+      "id": "9116394545",
+      "cue": "Carillon lors de l'apparition du héros.",
+      "priority": "Prototype",
+      "alternatives": [
+        {
+          "id": "9116394876",
+          "name": "Magic Glows Soft Clusters Of Chiming Hits 2 (SFX)",
+          "creator": "ProSoundEffects",
+          "url": "https://create.roblox.com/store/asset/9116394876",
+          "duration": 2.006479166666667,
+          "loadValidation": {
+            "id": "9116394876",
+            "isLoaded": true,
+            "duration": 2.006479166666667,
+            "status": "Success"
+          }
+        }
+      ],
+      "asset": {
+        "description": "Magic Glow, Soft Cluster of Chiming Hits, Ringing, Shimmering, Twinkling\n\nDuration: 2.1 seconds\nCategory: Energy\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9116394545",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9116394545&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9116394545",
+        "name": "Magic Glows Soft Clusters Of Chiming Hits 1 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 1.4305625,
+      "loadValidation": {
+        "id": "9116394545",
+        "isLoaded": true,
+        "duration": 1.4305625,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_34",
+      "category": "Invocation / progression",
+      "role": "Invocation : rare",
+      "id": "132381858621446",
+      "cue": "Cristal et scintillement en couche supplémentaire.",
+      "priority": "Plus tard",
+      "alternatives": [
+        {
+          "id": "131722051883127",
+          "name": "Magic crystal sparkle sound effect 2",
+          "creator": "roblox_user_1996596200",
+          "url": "https://create.roblox.com/store/asset/131722051883127",
+          "duration": 5.781333333333333,
+          "loadValidation": {
+            "id": "131722051883127",
+            "isLoaded": true,
+            "duration": 5.781333333333333,
+            "status": "Success"
+          }
+        }
+      ],
+      "asset": {
+        "description": "Not loopable at all",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/132381858621446",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=132381858621446&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "132381858621446",
+        "name": "Magic crystal sparkle sound effect 3",
+        "priceCents": 0,
+        "creatorName": "roblox_user_1996596200",
+        "source": "creator_store"
+      },
+      "duration": 4.1386666666666665,
+      "loadValidation": {
+        "id": "132381858621446",
+        "isLoaded": true,
+        "duration": 4.1386666666666665,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_35",
+      "category": "Invocation / progression",
+      "role": "Invocation : légendaire",
+      "id": "9116384485",
+      "cue": "Impact magique plus ample, accompagné du carillon.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Magic Burst, Big Beefy Impact, Thudding Hits, Light Rattling, Glowing Tonal Decay\n\nDuration: 3.2 seconds\nCategory: Stings\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9116384485",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9116384485&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9116384485",
+        "name": "Magic Burst 1 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 3.1786666666666665,
+      "loadValidation": {
+        "id": "9116384485",
+        "isLoaded": true,
+        "duration": 3.1786666666666665,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_36",
+      "category": "Invocation / progression",
+      "role": "Synthèse / absorption",
+      "id": "9116418035",
+      "cue": "Shimmer descendant pour le transfert d'énergie.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Magic Tone, Falling Shimmer, Flanged, Descending Twinkles\n\nDuration: 3.3 seconds\nCategory: Energy\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9116418035",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9116418035&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9116418035",
+        "name": "Magic Tone Falling Shimmer Flanged 3 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 3.2853333333333334,
+      "loadValidation": {
+        "id": "9116418035",
+        "isLoaded": true,
+        "duration": 3.2853333333333334,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_37",
+      "category": "Invocation / progression",
+      "role": "Promotion / évolution",
+      "id": "9116426727",
+      "cue": "Libération d'énergie lors du changement de rang.",
+      "priority": "Prototype",
+      "alternatives": [
+        {
+          "id": "9116421550",
+          "name": "Magic Transformation 6 (SFX)",
+          "creator": "ProSoundEffects",
+          "url": "https://create.roblox.com/store/asset/9116421550",
+          "duration": 1.4183541666666666,
+          "loadValidation": {
+            "id": "9116421550",
+            "isLoaded": true,
+            "duration": 1.4183541666666666,
+            "status": "Success"
+          }
+        }
+      ],
+      "asset": {
+        "description": "Magic Transformation, Oscillating Flutter, Big Airy Gusty Burst\n\nDuration: 3.2 seconds\nCategory: Energy\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9116426727",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9116426727&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9116426727",
+        "name": "Magic Transformation Oscillating Flutter 2 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 3.1893333333333334,
+      "loadValidation": {
+        "id": "9116426727",
+        "isLoaded": true,
+        "duration": 3.1893333333333334,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_38",
+      "category": "Invocation / progression",
+      "role": "Nouvelle étoile",
+      "id": "9116395089",
+      "cue": "Carillon au moment où l'étoile s'affiche.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Magic Glow, Soft Cluster of Chiming Hits, Ringing, Shimmering, Twinkling\n\nDuration: 2.9 seconds\nCategory: Energy\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9116395089",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9116395089&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9116395089",
+        "name": "Magic Glows Soft Clusters Of Chiming Hits 4 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 2.4622083333333333,
+      "loadValidation": {
+        "id": "9116395089",
+        "isLoaded": true,
+        "duration": 2.4622083333333333,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_39",
+      "category": "Invocation / progression",
+      "role": "Niveau gagné",
+      "id": "112485797063762",
+      "cue": "Montée de niveau ordinaire.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "UI Level Up sound",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/112485797063762",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=112485797063762&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "112485797063762",
+        "name": "UI - Level Up",
+        "priceCents": 0,
+        "creatorName": "SodaBreadle",
+        "source": "creator_store"
+      },
+      "duration": 1.5400208333333334,
+      "loadValidation": {
+        "id": "112485797063762",
+        "isLoaded": true,
+        "duration": 1.5400208333333334,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_40",
+      "category": "Récompenses / objets",
+      "role": "Quête terminée",
+      "id": "95148743653937",
+      "cue": "Validation d'un objectif.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/95148743653937",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=95148743653937&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "95148743653937",
+        "name": "Quest-Complete!",
+        "priceCents": 0,
+        "creatorName": "ValtAoi947",
+        "source": "creator_store"
+      },
+      "duration": 4.999977324263039,
+      "loadValidation": {
+        "id": "95148743653937",
+        "isLoaded": true,
+        "duration": 4.999977324263039,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_41",
+      "category": "Récompenses / objets",
+      "role": "Or ramassé",
+      "id": "113730061669739",
+      "cue": "Petite récompense monétaire.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/113730061669739",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=113730061669739&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "113730061669739",
+        "name": "Coin Pickup",
+        "priceCents": 0,
+        "creatorName": "Narplox",
+        "source": "creator_store"
+      },
+      "duration": 1.4651020408163264,
+      "loadValidation": {
+        "id": "113730061669739",
+        "isLoaded": true,
+        "duration": 1.4651020408163264,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_42",
+      "category": "Récompenses / objets",
+      "role": "Ouverture de coffre",
+      "id": "119461042040425",
+      "cue": "Ouverture physique ; ajouter le carillon pour le butin.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/119461042040425",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=119461042040425&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "119461042040425",
+        "name": "chest open",
+        "priceCents": 0,
+        "creatorName": "RoyaI_Squire",
+        "source": "creator_store"
+      },
+      "duration": 0.9386666666666666,
+      "loadValidation": {
+        "id": "119461042040425",
+        "isLoaded": true,
+        "duration": 0.9386666666666666,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_43",
+      "category": "Récompenses / objets",
+      "role": "Cristal brisé",
+      "id": "111044884172919",
+      "cue": "Ressource, pierre de synthèse ou objet destructible.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "w",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/111044884172919",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=111044884172919&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "111044884172919",
+        "name": "Crystal Break",
+        "priceCents": 0,
+        "creatorName": "jmlopes08",
+        "source": "creator_store"
+      },
+      "duration": 1.6501666666666666,
+      "loadValidation": {
+        "id": "111044884172919",
+        "isLoaded": true,
+        "duration": 1.6501666666666666,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_44",
+      "category": "Base / exploration",
+      "role": "Faille : ambiance",
+      "id": "9063726568",
+      "cue": "Bourdonnement près du portail ; raccord de boucle à vérifier.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9063726568",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9063726568&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9063726568",
+        "name": "Portal ambience sound effect",
+        "priceCents": 0,
+        "creatorName": "1nnter",
+        "source": "creator_store"
+      },
+      "duration": 5.171541950113379,
+      "loadValidation": {
+        "id": "9063726568",
+        "isLoaded": true,
+        "duration": 5.171541950113379,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_45",
+      "category": "Base / exploration",
+      "role": "Téléportation",
+      "id": "86284095824874",
+      "cue": "Passage vers une mission / retour à la base.",
+      "priority": "Prototype",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/86284095824874",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=86284095824874&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "86284095824874",
+        "name": "Portal Teleport",
+        "priceCents": 0,
+        "creatorName": "Minish1910",
+        "source": "creator_store"
+      },
+      "duration": 2.2375510204081634,
+      "loadValidation": {
+        "id": "86284095824874",
+        "isLoaded": true,
+        "duration": 2.2375510204081634,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_46",
+      "category": "Base / exploration",
+      "role": "Vent de l'île",
+      "id": "9114057104",
+      "cue": "Fond léger ; raccord de boucle à vérifier.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Desert Wind, Whistley, Light Gusts, Particle Movement\n\nDuration: 37.4 seconds\nCategory: Winds\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9114057104",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9114057104&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9114057104",
+        "name": "Desert Wind Whistley Light Gusts 1 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 37.3835,
+      "loadValidation": {
+        "id": "9114057104",
+        "isLoaded": true,
+        "duration": 37.3835,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_47",
+      "category": "Base / exploration",
+      "role": "Oiseaux des jardins",
+      "id": "72220890067268",
+      "cue": "Touches naturelles espacées.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Birds Chirping in the background",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/72220890067268",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=72220890067268&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "72220890067268",
+        "name": "Background Birds Ambience",
+        "priceCents": 0,
+        "creatorName": "CBE_Simon",
+        "source": "creator_store"
+      },
+      "duration": 8.544943310657596,
+      "loadValidation": {
+        "id": "72220890067268",
+        "isLoaded": true,
+        "duration": 8.544943310657596,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_48",
+      "category": "Base / exploration",
+      "role": "Porte : ouverture",
+      "id": "82104982606471",
+      "cue": "Porte en bois de dortoir ou cantine.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/82104982606471",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=82104982606471&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "82104982606471",
+        "name": "door-double-wood-open-start",
+        "priceCents": 0,
+        "creatorName": "Forezzk",
+        "source": "creator_store"
+      },
+      "duration": 0.8598412698412699,
+      "loadValidation": {
+        "id": "82104982606471",
+        "isLoaded": true,
+        "duration": 0.8598412698412699,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_49",
+      "category": "Base / exploration",
+      "role": "Porte : fermeture",
+      "id": "111763202035471",
+      "cue": "Fermeture d'une porte.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Audio",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/111763202035471",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=111763202035471&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "111763202035471",
+        "name": "door-close-wood",
+        "priceCents": 0,
+        "creatorName": "Forezzk",
+        "source": "creator_store"
+      },
+      "duration": 1.1139909297052155,
+      "loadValidation": {
+        "id": "111763202035471",
+        "isLoaded": true,
+        "duration": 1.1139909297052155,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_50",
+      "category": "Base / exploration",
+      "role": "Forge : marteau",
+      "id": "9113447467",
+      "cue": "Coups localisés près de l'enclume.",
+      "priority": "Plus tard",
+      "alternatives": [
+        {
+          "id": "9113447116",
+          "name": "Blacksmith Anvil Hammer Hits 11 (SFX)",
+          "creator": "ProSoundEffects",
+          "url": "https://create.roblox.com/store/asset/9113447116",
+          "duration": 1.5553125,
+          "loadValidation": {
+            "id": "9113447116",
+            "isLoaded": true,
+            "duration": 1.5553125,
+            "status": "Success"
+          }
+        }
+      ],
+      "asset": {
+        "description": "Blacksmith Anvil, Sharp Ringing Metallic Hammer Hits, Bouncing, Clanking, Light Echoing\n\nDuration: 1.3 seconds\nCategory: Tools - Hand\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9113447467",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9113447467&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9113447467",
+        "name": "Blacksmith Anvil Hammer Hits 16 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 1.2814791666666667,
+      "loadValidation": {
+        "id": "9113447467",
+        "isLoaded": true,
+        "duration": 1.2814791666666667,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_51",
+      "category": "Base / exploration",
+      "role": "Feu / brasero",
+      "id": "9112780193",
+      "cue": "Crépitement local ; boucle annoncée par l'éditeur.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Fireplace, Crackly, Constant Burning Flame, Loop\n\nDuration: 36.0 seconds\nCategory: Fire - Burning\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9112780193",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9112780193&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9112780193",
+        "name": "Fireplace Constant Burning Flame 1 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 36.0105625,
+      "loadValidation": {
+        "id": "9112780193",
+        "isLoaded": true,
+        "duration": 36.0105625,
+        "status": "Success"
+      }
+    },
+    {
+      "key": "SFX_52",
+      "category": "Base / exploration",
+      "role": "Fontaine / eau",
+      "id": "9120557577",
+      "cue": "Ambiance proche d'une fontaine ; raccord à vérifier.",
+      "priority": "Plus tard",
+      "alternatives": [],
+      "asset": {
+        "description": "Water Fountain, Huntington Park, California, Exterior, CU, Water Splashing, Spraying, Light Fizzing, Flowing, Humming, Birds Chirping\n\nDuration: 37.0 seconds\nCategory: Water - Flowing\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/9120557577",
+        "assetType": "Audio",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9120557577&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "9120557577",
+        "name": "Water Fountain 2 (SFX)",
+        "priceCents": 0,
+        "creatorName": "ProSoundEffects",
+        "source": "creator_store"
+      },
+      "duration": 37.04533333333333,
+      "loadValidation": {
+        "id": "9120557577",
+        "isLoaded": true,
+        "duration": 37.04533333333333,
+        "status": "Success"
+      }
+    }
+  ]
+}

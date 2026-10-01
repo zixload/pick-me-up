@@ -1,0 +1,75 @@
+{
+  "asset": "P1_Lanterne_Murale",
+  "reference": "Approved standing lantern P1 + rempart_p1.blend",
+  "dimensions_xyz": [
+    1.6263456344604492,
+    2.5631728379931324,
+    3.6418540477752686
+  ],
+  "bounds_min": [
+    -0.8131728172302246,
+    -2.5631728172302246,
+    -1.6018540859222412
+  ],
+  "bounds_max": [
+    0.8131728172302246,
+    2.076290783747936E-08,
+    2.0399999618530273
+  ],
+  "pivot": "Backplate center at wall contact, face -Y",
+  "units": "1 unit intended as 1 stud",
+  "total_triangles": 5428,
+  "meshes": [
+    {
+      "mesh": "P1_Lanterne_Murale_Structure",
+      "role": "Structure",
+      "triangles": 5344,
+      "dimensions_xyz": [
+        1.6263456344604492,
+        2.5631728172302246,
+        3.6418540477752686
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    },
+    {
+      "mesh": "P1_Lanterne_Murale_Vitres",
+      "role": "Vitres",
+      "triangles": 8,
+      "dimensions_xyz": [
+        1.2640000581741333,
+        1.2639999389648438,
+        1.3500003814697266
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    },
+    {
+      "mesh": "P1_Lanterne_Murale_Coeur",
+      "role": "Coeur",
+      "triangles": 76,
+      "dimensions_xyz": [
+        0.4300000071525574,
+        0.43000006675720215,
+        0.9099998474121094
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    }
+  ],
+  "approval_status": "Approved by user",
+  "roblox_import_status": "Not imported",
+  "approval_source": "User: validé; suite"
+}

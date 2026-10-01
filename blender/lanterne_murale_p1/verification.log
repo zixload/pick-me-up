@@ -1,0 +1,21 @@
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\blender\\lanterne_murale_p1\\exports\\P1_Lanterne_Murale.fbx'
+export finished in 0.0139 sec.
+INFO Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.5\4.5\scripts\addons_core\io_scene_gltf2\extern_draco.dll
+23:41:41 | INFO: Starting glTF 2.0 export
+23:41:41 | INFO: Extracting primitive: Cube.035
+23:41:41 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+23:41:41 | INFO: Primitives created: 1
+23:41:41 | INFO: Extracting primitive: Vitre_Ambre.004
+23:41:41 | INFO: Primitives created: 1
+23:41:41 | INFO: Extracting primitive: Cristal_Ivoire.001
+23:41:41 | INFO: Primitives created: 1
+23:41:41 | INFO: Finished glTF 2.0 export in 0.030961990356445312 s
+
+Info: Saved as "P1_Lanterne_Murale.blend"
+FBX version: 7400
+VERIFICATION_PASS {"status": "PASS", "fbx_roundtrip": [{"mesh": "P1_Lanterne_Murale_Coeur", "triangles": 76, "dimensions_xyz": [0.4300000071525574, 0.43000006675720215, 0.9099998474121094], "pivot_xyz": [0.0, 0.0, 0.0], "uv_layers": 1}, {"mesh": "P1_Lanterne_Murale_Structure", "triangles": 5344, "dimensions_xyz": [1.6263456344604492, 2.5631728172302246, 3.6418540477752686], "pivot_xyz": [0.0, 0.0, 0.0], "uv_layers": 1}, {"mesh": "P1_Lanterne_Murale_Vitres", "triangles": 8, "dimensions_xyz": [1.2640000581741333, 1.2639999389648438, 1.3500003814697266], "pivot_xyz": [0.0, 0.0, 0.0], "uv_layers": 1}], "embedded_images": ["P1_Lanterne_Color", "P1_Lanterne_Color.001", "P1_Lanterne_Metalness", "P1_Lanterne_Roughness"], "glb_meshes": 3, "glb_triangles": 5428, "scope": "Export integrity in Blender; Roblox import and runtime light pending."}
+Blender 4.5.10 LTS (hash 6dc0b208d1b5 built 2026-05-19 01:33:42)
+Read blend: "C:\Users\ingam\OneDrive\Documents\ChatGPT\Pick me up\blender\lanterne_murale_p1\P1_Lanterne_Murale.blend"
+
+Blender quit

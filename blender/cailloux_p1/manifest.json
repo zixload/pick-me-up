@@ -1,0 +1,34 @@
+{
+  "asset": "P1_Cailloux_A",
+  "reference": "../rempart_p1.blend",
+  "units": "1 unit intended as 1 stud",
+  "dimensions_xyz": [
+    2.2383968830108643,
+    1.3620727062225342,
+    0.4848281741142273
+  ],
+  "pivot": "Ground center, Z=0",
+  "source_stones": 6,
+  "total_triangles": 1812,
+  "meshes": [
+    {
+      "mesh": "P1_Cailloux_A_Pierres",
+      "role": "Pierres",
+      "triangles": 1812,
+      "dimensions_xyz": [
+        2.2383968830108643,
+        1.3620727062225342,
+        0.4848281741142273
+      ],
+      "pivot_xyz": [
+        -2.980232238769531E-08,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1
+    }
+  ],
+  "approval_status": "Approved by user",
+  "roblox_import_status": "Not imported",
+  "approval_source": "User: caillou validé là"
+}
