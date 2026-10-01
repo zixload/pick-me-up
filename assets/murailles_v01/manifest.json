@@ -1,0 +1,140 @@
+{
+  "kit": "PMU_Murailles_V01",
+  "spacing": 16,
+  "height_max": 28.525,
+  "assets": [
+    {
+      "asset": "PMU_Mur_Panneau_16",
+      "triangles": 3204,
+      "vertices": 1800,
+      "dimensions_blender_xyz": [
+        16.0,
+        1.8005,
+        24.0
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1,
+      "material_slots": 1,
+      "fbx": "PMU_Mur_Panneau_16.fbx",
+      "glb": "PMU_Mur_Panneau_16.glb"
+    },
+    {
+      "asset": "PMU_Pilier_Orne",
+      "triangles": 1720,
+      "vertices": 964,
+      "dimensions_blender_xyz": [
+        3.48,
+        2.97,
+        28.525
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1,
+      "material_slots": 1,
+      "fbx": "PMU_Pilier_Orne.fbx",
+      "glb": "PMU_Pilier_Orne.glb"
+    },
+    {
+      "asset": "PMU_Corniche_16",
+      "triangles": 264,
+      "vertices": 144,
+      "dimensions_blender_xyz": [
+        16.0,
+        2.29,
+        1.37
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1,
+      "material_slots": 1,
+      "fbx": "PMU_Corniche_16.fbx",
+      "glb": "PMU_Corniche_16.glb"
+    },
+    {
+      "asset": "PMU_Balustrade_16",
+      "triangles": 2724,
+      "vertices": 1392,
+      "dimensions_blender_xyz": [
+        16.0,
+        1.5,
+        2.405
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1,
+      "material_slots": 1,
+      "fbx": "PMU_Balustrade_16.fbx",
+      "glb": "PMU_Balustrade_16.glb"
+    },
+    {
+      "asset": "PMU_Pilier_Angle_90",
+      "triangles": 2868,
+      "vertices": 1616,
+      "dimensions_blender_xyz": [
+        3.48,
+        2.97,
+        28.525
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1,
+      "material_slots": 1,
+      "fbx": "PMU_Pilier_Angle_90.fbx",
+      "glb": "PMU_Pilier_Angle_90.glb"
+    },
+    {
+      "asset": "PMU_Lierre_Grimpant",
+      "triangles": 4784,
+      "vertices": 3680,
+      "dimensions_blender_xyz": [
+        3.8408,
+        0.1735,
+        7.6299
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1,
+      "material_slots": 1,
+      "fbx": "PMU_Lierre_Grimpant.fbx",
+      "glb": "PMU_Lierre_Grimpant.glb"
+    },
+    {
+      "asset": "PMU_Haie_8",
+      "triangles": 640,
+      "vertices": 384,
+      "dimensions_blender_xyz": [
+        8.6449,
+        2.1444,
+        1.8922
+      ],
+      "pivot_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "uv_layers": 1,
+      "material_slots": 1,
+      "fbx": "PMU_Haie_8.fbx",
+      "glb": "PMU_Haie_8.glb"
+    }
+  ]
+}

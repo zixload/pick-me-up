@@ -1,0 +1,11 @@
+# Blender
+*.blend1
+*.blend@
+
+# Archives redondantes avec les exports
+*.zip
+
+# Systeme
+Thumbs.db
+Desktop.ini
+.DS_Store

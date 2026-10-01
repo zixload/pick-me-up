@@ -1,0 +1,254 @@
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\assets\\murailles_v01\\exports\\PMU_Mur_Panneau_16.fbx'
+export finished in 0.0097 sec.
+INFO Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.5\4.5\scripts\addons_core\io_scene_gltf2\extern_draco.dll
+21:22:28 | INFO: Starting glTF 2.0 export
+21:22:28 | INFO: Extracting primitive: PMU_Mur_Panneau_16_Mesh
+21:22:29 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+21:22:29 | INFO: Primitives created: 1
+21:22:29 | INFO: Finished glTF 2.0 export in 0.06523466110229492 s
+
+EXPORTED PMU_Mur_Panneau_16 3204
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\assets\\murailles_v01\\exports\\PMU_Pilier_Orne.fbx'
+export finished in 0.0087 sec.
+21:22:31 | INFO: Starting glTF 2.0 export
+21:22:31 | INFO: Extracting primitive: PMU_Pilier_Orne_Mesh
+21:22:31 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+21:22:31 | INFO: Primitives created: 1
+21:22:31 | INFO: Finished glTF 2.0 export in 0.05423545837402344 s
+
+EXPORTED PMU_Pilier_Orne 1720
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\assets\\murailles_v01\\exports\\PMU_Corniche_16.fbx'
+export finished in 0.0061 sec.
+21:22:31 | INFO: Starting glTF 2.0 export
+21:22:31 | INFO: Extracting primitive: PMU_Corniche_16_Mesh
+21:22:31 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+21:22:31 | INFO: Primitives created: 1
+21:22:31 | INFO: Finished glTF 2.0 export in 0.05039215087890625 s
+
+EXPORTED PMU_Corniche_16 264
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\assets\\murailles_v01\\exports\\PMU_Balustrade_16.fbx'
+export finished in 0.0085 sec.
+21:22:32 | INFO: Starting glTF 2.0 export
+21:22:32 | INFO: Extracting primitive: PMU_Balustrade_16_Mesh
+21:22:32 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+21:22:32 | INFO: Primitives created: 1
+21:22:32 | INFO: Finished glTF 2.0 export in 0.05421018600463867 s
+
+EXPORTED PMU_Balustrade_16 2724
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\assets\\murailles_v01\\exports\\PMU_Pilier_Angle_90.fbx'
+export finished in 0.0112 sec.
+21:22:36 | INFO: Starting glTF 2.0 export
+21:22:36 | INFO: Extracting primitive: PMU_Pilier_Angle_90_Mesh
+21:22:36 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+21:22:36 | INFO: Primitives created: 1
+21:22:36 | INFO: Finished glTF 2.0 export in 0.06600236892700195 s
+
+EXPORTED PMU_Pilier_Angle_90 2868
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\assets\\murailles_v01\\exports\\PMU_Lierre_Grimpant.fbx'
+export finished in 0.0124 sec.
+21:22:52 | INFO: Starting glTF 2.0 export
+21:22:52 | INFO: Extracting primitive: PMU_Lierre_Grimpant_Mesh
+21:22:52 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+21:22:52 | INFO: Primitives created: 1
+21:22:52 | INFO: Finished glTF 2.0 export in 0.05973505973815918 s
+
+EXPORTED PMU_Lierre_Grimpant 4784
+
+FBX export starting... 'C:\\Users\\ingam\\OneDrive\\Documents\\ChatGPT\\Pick me up\\assets\\murailles_v01\\exports\\PMU_Haie_8.fbx'
+export finished in 0.0076 sec.
+21:22:53 | INFO: Starting glTF 2.0 export
+21:22:53 | INFO: Extracting primitive: PMU_Haie_8_Mesh
+21:22:53 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+21:22:53 | INFO: Primitives created: 1
+21:22:53 | INFO: Finished glTF 2.0 export in 0.05377364158630371 s
+
+EXPORTED PMU_Haie_8 640
+Info: Saved as "PMU_Murailles_V01.blend"
+BLEND_SAVED
+Blender 4.5.10 LTS (hash 6dc0b208d1b5 built 2026-05-19 01:33:42)
+Fra:1 Mem:22.22M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Mur_Panneau_16
+Fra:1 Mem:22.22M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Balustrade_16
+Fra:1 Mem:22.46M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Pilier_Orne
+Fra:1 Mem:22.54M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Pilier_Angle_90
+Fra:1 Mem:22.54M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Lierre_Grimpant
+Fra:1 Mem:22.56M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Haie_8
+Fra:1 Mem:23.02M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Rim_Softbox
+Fra:1 Mem:23.09M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Fill_Softbox
+Fra:1 Mem:23.16M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Key_Softbox
+Fra:1 Mem:23.17M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sol_Presentation
+Fra:1 Mem:23.44M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:22.34M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:22.34M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:22.34M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:22.34M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:22.42M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:22.42M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:22.42M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:22.42M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:22.42M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:22.42M (Peak 33.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:22.43M (Peak 33.09M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:22.43M (Peak 33.09M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:22.43M (Peak 33.09M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:22.43M (Peak 33.09M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:22.43M (Peak 33.09M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:0.50M, Peak:0.50M | Scene, ViewLayer | Updating Geometry BVH PMU_Haie_8_Mesh 7/6 | Building BVH
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:0.50M, Peak:0.50M | Scene, ViewLayer | Updating Geometry BVH PMU_Balustrade_16_Mesh 4/6 | Building BVH
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:0.50M, Peak:0.50M | Scene, ViewLayer | Updating Geometry BVH PMU_Lierre_Grimpant_Mesh 6/6 | Building BVH
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:0.90M, Peak:0.90M | Scene, ViewLayer | Updating Geometry BVH PMU_Lierre_Grimpant_Mesh 6/6 | Building BVH 0%
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:1.33M, Peak:1.53M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:1.33M, Peak:1.53M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:1.53M, Peak:1.62M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:22.92M (Peak 33.09M) | Time:00:00.00 | Mem:1.53M, Peak:1.62M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:23.40M (Peak 33.09M) | Time:00:00.01 | Mem:1.53M, Peak:1.62M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:23.40M (Peak 33.09M) | Time:00:00.01 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:23.40M (Peak 33.09M) | Time:00:00.01 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:23.40M (Peak 33.09M) | Time:00:00.01 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:23.40M (Peak 33.09M) | Time:00:00.01 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Images | Loading PMU_Muraille_Roughness.png
+Fra:1 Mem:23.40M (Peak 33.09M) | Time:00:00.01 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Images | Loading PMU_Muraille_Metalness.png
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.01M, Peak:14.01M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.01M, Peak:14.01M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.09M, Peak:14.09M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.09M, Peak:14.09M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.09M, Peak:14.09M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.09M, Peak:14.09M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.01M, Peak:14.09M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.10M, Peak:14.10M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.10M, Peak:14.10M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:35.42M (Peak 35.42M) | Time:00:00.02 | Mem:14.10M, Peak:14.10M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:35.42M (Peak 35.42M) | Time:00:00.02 | Mem:14.10M, Peak:14.10M | Scene, ViewLayer | Sample 0/40
+Fra:1 Mem:163.11M (Peak 163.11M) | Time:00:00.68 | Remaining:00:25.62 | Mem:141.67M, Peak:141.67M | Scene, ViewLayer | Sample 1/40
+Fra:1 Mem:163.11M (Peak 163.11M) | Time:00:18.97 | Remaining:00:04.01 | Mem:141.67M, Peak:141.67M | Scene, ViewLayer | Sample 33/40
+Fra:1 Mem:216.82M (Peak 297.39M) | Time:00:29.33 | Mem:141.67M, Peak:141.67M | Scene, ViewLayer | Sample 40/40
+Fra:1 Mem:216.82M (Peak 297.39M) | Time:00:29.33 | Mem:141.67M, Peak:141.67M | Scene, ViewLayer | Finished
+Saved: 'C:\Users\ingam\OneDrive\Documents\ChatGPT\Pick me up\assets\murailles_v01\previews\01_assemblage.png'
+Time: 00:29.64 (Saving: 00:00.30)
+
+Fra:1 Mem:22.34M (Peak 22.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Mur_Panneau_16
+Fra:1 Mem:22.34M (Peak 22.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Balustrade_16
+Fra:1 Mem:22.55M (Peak 22.55M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Pilier_Orne
+Fra:1 Mem:22.60M (Peak 22.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Pilier_Angle_90
+Fra:1 Mem:22.72M (Peak 22.72M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Lierre_Grimpant
+Fra:1 Mem:22.93M (Peak 22.93M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Haie_8
+Fra:1 Mem:23.40M (Peak 23.40M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sol_Presentation
+Fra:1 Mem:23.33M (Peak 23.40M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Rim_Softbox
+Fra:1 Mem:23.44M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Fill_Softbox
+Fra:1 Mem:23.44M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:22.34M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:22.34M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:22.34M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:22.34M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:22.42M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:22.42M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:22.42M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:22.42M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:22.42M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:22.42M (Peak 23.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:22.43M (Peak 23.44M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:22.43M (Peak 23.44M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:22.43M (Peak 23.44M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:22.43M (Peak 23.44M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:22.43M (Peak 23.44M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:0.50M, Peak:0.50M | Scene, ViewLayer | Updating Geometry BVH PMU_Haie_8_Mesh 7/6 | Building BVH
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:0.50M, Peak:0.50M | Scene, ViewLayer | Updating Geometry BVH PMU_Corniche_16_Mesh 3/6 | Building BVH
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:0.50M, Peak:0.50M | Scene, ViewLayer | Updating Geometry BVH PMU_Pilier_Orne_Mesh 5/6 | Building BVH
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:0.50M, Peak:0.50M | Scene, ViewLayer | Updating Geometry BVH PMU_Lierre_Grimpant_Mesh 6/6 | Building BVH
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:0.60M, Peak:0.60M | Scene, ViewLayer | Updating Geometry BVH PMU_Lierre_Grimpant_Mesh 6/6 | Building BVH 0%
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:0.62M, Peak:0.62M | Scene, ViewLayer | Updating Geometry BVH PMU_Lierre_Grimpant_Mesh 6/6 | Building BVH
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:1.33M, Peak:1.48M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:1.33M, Peak:1.48M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:1.53M, Peak:1.62M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:22.92M (Peak 23.44M) | Time:00:00.00 | Mem:1.53M, Peak:1.62M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:23.40M (Peak 23.44M) | Time:00:00.00 | Mem:1.53M, Peak:1.62M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:23.40M (Peak 23.44M) | Time:00:00.00 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:23.40M (Peak 23.44M) | Time:00:00.00 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:23.40M (Peak 23.44M) | Time:00:00.00 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:23.40M (Peak 23.44M) | Time:00:00.00 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Images | Loading PMU_Muraille_Roughness.png
+Fra:1 Mem:27.40M (Peak 27.40M) | Time:00:00.00 | Mem:2.01M, Peak:2.01M | Scene, ViewLayer | Updating Images | Loading PMU_Muraille_Metalness.png
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.01M, Peak:14.01M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.01M, Peak:14.01M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.09M, Peak:14.09M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.09M, Peak:14.09M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.09M, Peak:14.09M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.09M, Peak:14.09M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.01M, Peak:14.09M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.10M, Peak:14.10M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:35.41M (Peak 35.41M) | Time:00:00.02 | Mem:14.10M, Peak:14.10M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:35.42M (Peak 35.42M) | Time:00:00.02 | Mem:14.10M, Peak:14.10M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:35.42M (Peak 35.42M) | Time:00:00.02 | Mem:14.10M, Peak:14.10M | Scene, ViewLayer | Sample 0/40
+Fra:1 Mem:163.11M (Peak 163.11M) | Time:00:00.76 | Remaining:00:29.00 | Mem:141.67M, Peak:141.67M | Scene, ViewLayer | Sample 1/40
+Fra:1 Mem:163.11M (Peak 163.11M) | Time:00:24.28 | Remaining:00:05.14 | Mem:141.67M, Peak:141.67M | Scene, ViewLayer | Sample 33/40
+Fra:1 Mem:216.82M (Peak 297.39M) | Time:00:35.79 | Mem:141.67M, Peak:141.67M | Scene, ViewLayer | Sample 40/40
+Fra:1 Mem:216.82M (Peak 297.39M) | Time:00:35.79 | Mem:141.67M, Peak:141.67M | Scene, ViewLayer | Finished
+Saved: 'C:\Users\ingam\OneDrive\Documents\ChatGPT\Pick me up\assets\murailles_v01\previews\02_detail.png'
+Time: 00:35.95 (Saving: 00:00.15)
+
+Fra:1 Mem:24.85M (Peak 24.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Key_Softbox
+Fra:1 Mem:24.85M (Peak 24.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Mur_Panneau_16.005
+Fra:1 Mem:24.85M (Peak 24.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Pilier_Angle_90.001
+Fra:1 Mem:24.93M (Peak 24.93M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Corniche_16.005
+Fra:1 Mem:25.03M (Peak 25.03M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | DEMO_PMU_Balustrade_16.005
+Fra:1 Mem:25.12M (Peak 25.12M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Label_PMU_Mur_Panneau_16
+Fra:1 Mem:26.03M (Peak 26.03M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Label_PMU_Pilier_Orne
+Fra:1 Mem:26.09M (Peak 26.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Label_PMU_Pilier_Angle_90
+Fra:1 Mem:26.19M (Peak 26.19M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Label_PMU_Corniche_16
+Fra:1 Mem:26.26M (Peak 26.26M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Label_PMU_Balustrade_16
+Fra:1 Mem:26.37M (Peak 26.37M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Label_PMU_Lierre_Grimpant
+Fra:1 Mem:26.47M (Peak 26.47M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Label_PMU_Haie_8
+Fra:1 Mem:26.53M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:24.30M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:24.30M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:24.30M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:24.30M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:24.38M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:24.38M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:24.38M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:24.38M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:24.38M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:24.38M (Peak 26.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:24.39M (Peak 26.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:24.39M (Peak 26.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:24.39M (Peak 26.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:24.39M (Peak 26.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:24.39M (Peak 26.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:24.87M (Peak 26.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:24.87M (Peak 26.53M) | Time:00:00.00 | Mem:0.49M, Peak:0.49M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:24.87M (Peak 26.53M) | Time:00:00.00 | Mem:0.49M, Peak:0.49M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:24.87M (Peak 26.53M) | Time:00:00.00 | Mem:1.16M, Peak:1.16M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:24.87M (Peak 26.53M) | Time:00:00.00 | Mem:1.90M, Peak:2.57M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:24.87M (Peak 26.53M) | Time:00:00.00 | Mem:1.90M, Peak:2.57M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:25.57M (Peak 26.53M) | Time:00:00.00 | Mem:1.90M, Peak:2.57M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:25.57M (Peak 26.53M) | Time:00:00.00 | Mem:2.60M, Peak:2.60M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:25.57M (Peak 26.53M) | Time:00:00.00 | Mem:2.60M, Peak:2.60M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:25.57M (Peak 26.53M) | Time:00:00.00 | Mem:2.60M, Peak:2.60M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:25.57M (Peak 26.53M) | Time:00:00.00 | Mem:2.60M, Peak:2.60M | Scene, ViewLayer | Updating Images | Loading PMU_Muraille_Roughness.png
+Fra:1 Mem:29.57M (Peak 29.57M) | Time:00:00.00 | Mem:2.60M, Peak:2.60M | Scene, ViewLayer | Updating Images | Loading PMU_Muraille_Metalness.png
+Fra:1 Mem:37.58M (Peak 37.58M) | Time:00:00.02 | Mem:14.60M, Peak:14.60M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:37.58M (Peak 37.58M) | Time:00:00.02 | Mem:14.60M, Peak:14.60M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:37.58M (Peak 37.58M) | Time:00:00.02 | Mem:14.68M, Peak:14.68M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:37.58M (Peak 37.58M) | Time:00:00.02 | Mem:14.68M, Peak:14.68M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:37.59M (Peak 37.59M) | Time:00:00.02 | Mem:14.68M, Peak:14.68M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:37.59M (Peak 37.59M) | Time:00:00.02 | Mem:14.68M, Peak:14.68M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:37.59M (Peak 37.59M) | Time:00:00.02 | Mem:14.60M, Peak:14.68M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:37.59M (Peak 37.59M) | Time:00:00.02 | Mem:14.68M, Peak:14.68M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:37.59M (Peak 37.59M) | Time:00:00.02 | Mem:14.68M, Peak:14.68M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:37.59M (Peak 37.59M) | Time:00:00.02 | Mem:14.68M, Peak:14.68M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:37.59M (Peak 37.59M) | Time:00:00.02 | Mem:14.68M, Peak:14.68M | Scene, ViewLayer | Sample 0/40
+Fra:1 Mem:182.68M (Peak 182.68M) | Time:00:00.18 | Remaining:00:06.10 | Mem:159.65M, Peak:159.65M | Scene, ViewLayer | Sample 1/40
+Fra:1 Mem:243.72M (Peak 335.27M) | Time:00:13.04 | Mem:159.65M, Peak:159.65M | Scene, ViewLayer | Sample 40/40
+Fra:1 Mem:243.72M (Peak 335.27M) | Time:00:13.04 | Mem:159.65M, Peak:159.65M | Scene, ViewLayer | Finished
+Saved: 'C:\Users\ingam\OneDrive\Documents\ChatGPT\Pick me up\assets\murailles_v01\previews\03_modules.png'
+Time: 00:13.23 (Saving: 00:00.18)
+
+Info: Saved as "PMU_Murailles_V01.blend"
+DONE C:\Users\ingam\OneDrive\Documents\ChatGPT\Pick me up\assets\murailles_v01
+
+Blender quit

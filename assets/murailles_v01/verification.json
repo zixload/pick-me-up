@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "scope": "Blender FBX re-import; Roblox Studio import not yet tested",
+  "assets": [
+    {
+      "asset": "PMU_Mur_Panneau_16",
+      "fbx_roundtrip": "PASS",
+      "glb_structure": "PASS",
+      "triangles": 3204,
+      "uv_layers": 1,
+      "embedded_images": 3,
+      "dimensions_blender_xyz": [
+        16.0,
+        1.8005,
+        24.0
+      ]
+    },
+    {
+      "asset": "PMU_Pilier_Orne",
+      "fbx_roundtrip": "PASS",
+      "glb_structure": "PASS",
+      "triangles": 1720,
+      "uv_layers": 1,
+      "embedded_images": 3,
+      "dimensions_blender_xyz": [
+        3.48,
+        2.97,
+        28.525
+      ]
+    },
+    {
+      "asset": "PMU_Corniche_16",
+      "fbx_roundtrip": "PASS",
+      "glb_structure": "PASS",
+      "triangles": 264,
+      "uv_layers": 1,
+      "embedded_images": 3,
+      "dimensions_blender_xyz": [
+        16.0,
+        2.29,
+        1.37
+      ]
+    },
+    {
+      "asset": "PMU_Balustrade_16",
+      "fbx_roundtrip": "PASS",
+      "glb_structure": "PASS",
+      "triangles": 2724,
+      "uv_layers": 1,
+      "embedded_images": 3,
+      "dimensions_blender_xyz": [
+        16.0,
+        1.5,
+        2.405
+      ]
+    },
+    {
+      "asset": "PMU_Pilier_Angle_90",
+      "fbx_roundtrip": "PASS",
+      "glb_structure": "PASS",
+      "triangles": 2868,
+      "uv_layers": 1,
+      "embedded_images": 3,
+      "dimensions_blender_xyz": [
+        3.48,
+        2.97,
+        28.525
+      ]
+    },
+    {
+      "asset": "PMU_Lierre_Grimpant",
+      "fbx_roundtrip": "PASS",
+      "glb_structure": "PASS",
+      "triangles": 4784,
+      "uv_layers": 1,
+      "embedded_images": 3,
+      "dimensions_blender_xyz": [
+        3.8408,
+        0.1735,
+        7.6299
+      ]
+    },
+    {
+      "asset": "PMU_Haie_8",
+      "fbx_roundtrip": "PASS",
+      "glb_structure": "PASS",
+      "triangles": 640,
+      "uv_layers": 1,
+      "embedded_images": 3,
+      "dimensions_blender_xyz": [
+        8.6449,
+        2.1444,
+        1.8922
+      ]
+    }
+  ]
+}
