@@ -43,9 +43,15 @@ mission par la Faille, revient avec des matériaux et améliore ses bâtiments. 
 
 ## Combat du héros
 
+- **Une seule classe pour le héros : épée et bouclier**, avec un seul système d'animations de combat.
+  Le bouclier rond est sanglé sur l'avant-bras gauche et sert à parer.
+  Changer d'arme sera possible, mais seulement pour des armes qui vont avec ce style (autres épées,
+  sabres…), pas pour un arc ou un bâton.
 - Épée de départ : combo de trois coups, esquive avec une courte invulnérabilité.
 - Le serveur valide chaque coup et cherche lui-même les cibles (base du PvP sans triche).
 - Gestes « cinéma » : anticipation, frappe en fente, pose figée, arrêt sur image à l'impact.
+- **Mode visée (Ctrl)** : souris bloquée au centre avec un petit viseur, la caméra suit la souris
+  sans clic droit, le héros regarde dans l'axe de la caméra (vue par-dessus l'épaule).
 
 ## Invocations et escouades
 
@@ -79,7 +85,30 @@ et un comportement en mode attaque.
 - Duels en **1v1, 2v2 et 3v3** (joueurs), avec un classement. Chaque joueur combat **avec ses
   invocations** : le placement de l'escouade et ses ordres font partie du skill. Comme en mission,
   il emmène autant d'équipes que ses Logements le permettent.
-- Combat en **manches** : on gagne une manche quand tous les ennemis sont morts.
+- Combat en **manches**, **sans limite de temps** : on gagne une manche quand tous les ennemis sont
+  à terre. Premier à deux manches. On ne meurt pas en arène : à 0 PV, le héros tombe à genoux
+  jusqu'à la manche suivante.
+- Chacun combat avec **ses vraies stats** (points de vie et attaque tirés de son niveau) : pas
+  d'égalisation en arène.
+- **Étourdissement** : un coup reçu coupe l'attaque en préparation et empêche d'agir un instant.
+- **Parade** (F, L2 à la manette) : un coup reçu de face dans une fenêtre de 0,28 s ne fait rien,
+  et l'attaquant est étourdi 0,9 s, ce qui laisse le temps de riposter. Ratée, elle laisse exposé
+  un instant ; recharge d'une seconde.
+- L'esquive laisse une courte traînée derrière le héros.
+- **Cote Elo et rangs** (cote de départ 1000, rangs divisés en III, II, I sauf le dernier) :
+
+  | Rang | Titre | À partir de | Étoiles |
+  |---|---|---|---|
+  | Stone | Recruit | — | 1 |
+  | Iron | Fighter | 1100 | 2 |
+  | Silver | Duelist | 1250 | 3 |
+  | Gold | Champion | 1400 | 4 |
+  | Quartz | Paragon | 1600 | 5 |
+  | Seven Star | Legend | 1850 | 7 |
+
+  Insigne en losange aux couleurs du rang (reflet animé à partir de Gold, irisé pour Seven Star),
+  écran de fin avec la cote gagnée ou perdue et l'animation de montée de rang.
+- Quitter le jeu ou réapparaître pendant un duel le fait perdre par forfait.
 - **Le plus important** : le PvP doit récompenser le skill — le placement, la manière de se
   déplacer et d'attaquer, le kiting, le rush sur la cible prioritaire.
 
@@ -104,9 +133,31 @@ et un comportement en mode attaque.
 - Une tour dans l'idée et dans le lore : chaque étage est une **salle ou un donjon**.
   Franchir un étage fait avancer l'histoire et déverrouille les styles de la base.
 
-### PvP de base
+### PvP de base : attaque en dirigeable
 
-- Attaque de la base d'un autre joueur (prévu, règles à définir).
+- **Carte partagée** : un serveur réunit 10 joueurs, et donc **10 bases disposées en cercle**,
+  chacune avec son quai de dirigeable. On attaque la base d'un joueur **connecté** (sa base n'est
+  sur la carte que s'il est là). Pas d'appariement : on peut attaquer n'importe quel voisin.
+  Pas de lieu commun au centre du cercle : les autres dimensions (Wilderness, arène) s'atteignent
+  depuis sa propre base, par la Faille. Le chargement progressif de Roblox (StreamingEnabled) est à
+  tester pour tenir dix bases sur une carte.
+- **Arrivée en cinématique** (6 à 8 s, passable) : bandes noires, le dirigeable de l'attaquant
+  arrive de l'horizon, survole le rempart et s'arrête au-dessus de l'avenue sud ; l'attaquant et ses
+  invocations descendent et atterrissent en formation. Côté défense, plan sur la place où les
+  équipes sont déjà en position (cor d'alerte). Compte à rebours, puis combat.
+- **Défense** : les équipes de l'attaqué se déploient sur la place selon un **preset** de formation
+  (le même éditeur sert pour les missions).
+- **Les deux héros combattent** sur le champ de bataille et commandent leurs troupes avec le système
+  décrit plus haut (suivre, maintenir, attaquer).
+- Une base déjà attaquée ne peut pas être attaquée par un troisième joueur en même temps.
+- **Victoire de l'attaquant** (tous les défenseurs vaincus) : il reçoit une récompense **calculée
+  d'après la richesse de l'attaqué** (un pourcentage de ses ressources) et **créée** pour lui :
+  l'attaqué ne perd rien. Attaquer un joueur pauvre rapporte donc peu.
+- **Défaite de l'attaquant** : ses invocations sont blessées et passent par l'Infirmerie (attente
+  réduite par son niveau), et il perd une petite part de ses ressources.
+- **Défaite de la défense** : aucune conséquence pour l'attaqué.
+- **Bouclier** : après une attaque, l'attaqué ne peut plus être attaqué pendant 30 minutes.
+- Limite de temps proposée : 3 minutes ; si elle est atteinte, la défense gagne.
 
 ## À trancher
 
