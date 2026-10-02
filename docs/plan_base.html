@@ -77,15 +77,16 @@ svg text { font-family: var(--display); }
 
 <div class="wrap">
   <header>
-    <span class="eyebrow">Pick me up · Roblox · plan v1 du 01/10/2026</span>
+    <span class="eyebrow">Pick me up · Roblox · plan v2 du 02/10/2026 · base ×1,5</span>
     <h1>Plan directeur de la base</h1>
-    <p class="lede">Où chaque bâtiment se pose, ce qu'on garde de la base actuelle de Codex et les emplacements à réserver pour les extensions de l'œuvre : salle de magie, synthèse, transfert, dirigeable et fusion des ateliers. Les cotes sont en studs, dans le repère de Studio vu de dessus.</p>
+    <p class="lede">Où chaque bâtiment se pose, à l'échelle finale de la base (agrandie de 1,5). Les cotes sont en studs, dans le repère de Studio vu de dessus. La version à lire avant de modéliser, avec les conventions Blender, est <span class="coord">docs/LOTS_BATIMENTS.md</span> dans le dépôt.</p>
   </header>
 
   <section class="top">
     <div class="map" aria-label="Plan de la base vu de dessus">
-      <svg viewBox="-162 -158 324 362" role="img" aria-labelledby="mapTitle">
-        <title id="mapTitle">Plan de la base circulaire, rayon 140 studs, avec les lots existants, ajustés et réservés</title>
+      <svg viewBox="-243 -237 486 543" role="img" aria-labelledby="mapTitle">
+        <title id="mapTitle">Plan de la base circulaire, rempart de rayon 210 studs, avec les lots existants et réservés</title>
+        <g transform="scale(1.5)">
         <defs>
           <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <rect width="5" height="5" fill="var(--panel)"/>
@@ -97,8 +98,8 @@ svg text { font-family: var(--display); }
         <circle cx="0" cy="0" r="145" fill="var(--platform)"/>
         <circle cx="0" cy="0" r="140" fill="none" stroke="var(--exist-stroke)" stroke-width="5"/>
         <circle cx="0" cy="0" r="128" fill="none" stroke="var(--muted)" stroke-width=".7" stroke-dasharray="3 3"/>
-        <text x="124" y="-10" font-size="4.6" text-anchor="middle" fill="var(--muted)" transform="rotate(90 124 -10)">limite constructible r = 128</text>
-        <text x="96" y="-112" font-size="5.5" font-weight="600" fill="var(--exist-stroke)" transform="rotate(40 96 -112)">REMPART r = 140</text>
+        <text x="124" y="-10" font-size="4.6" text-anchor="middle" fill="var(--muted)" transform="rotate(90 124 -10)">limite constructible r = 192</text>
+        <text x="96" y="-112" font-size="5.5" font-weight="600" fill="var(--exist-stroke)" transform="rotate(40 96 -112)">REMPART r = 210</text>
 
         <!-- grand portail -->
         <rect x="-20" y="135" width="40" height="11" fill="var(--platform)"/>
@@ -106,7 +107,7 @@ svg text { font-family: var(--display); }
         <rect x="18" y="135.5" width="5" height="9" fill="var(--exist-stroke)"/>
         <rect x="-8" y="116.5" width="16" height="22" fill="var(--path)" stroke="var(--gold)" stroke-width=".8" stroke-dasharray="2 2"/>
 
-        <!-- allées de Codex -->
+        <!-- allées -->
         <g fill="var(--path)" stroke="var(--line)" stroke-width=".6">
           <rect x="-8" y="25.5" width="16" height="91"/>
           <rect x="-8" y="-70" width="16" height="66"/>
@@ -117,14 +118,6 @@ svg text { font-family: var(--display); }
           <rect x="12" y="-63" width="74" height="12"/>
           <rect x="61" y="18" width="12" height="74"/>
         </g>
-
-        <!-- jardins qui débordent sous le rempart -->
-        <g fill="none" stroke="var(--warn)" stroke-width="1.2">
-          <rect x="-119" y="70.5" width="26" height="21"/>
-          <rect x="91" y="67.5" width="22" height="25"/>
-        </g>
-        <text x="-106" y="83" font-size="4.2" text-anchor="middle" fill="var(--warn)">jardin à reculer</text>
-        <text x="102" y="82" font-size="4.2" text-anchor="middle" fill="var(--warn)">jardin à reculer</text>
 
         <!-- lieux existants -->
         <g fill="var(--exist)" stroke="var(--exist-stroke)" stroke-width="1">
@@ -138,9 +131,8 @@ svg text { font-family: var(--display); }
           <rect x="81" y="-58" width="30" height="26"/>
         </g>
 
-        <!-- entraînement : ancienne position et nouvelle -->
-        <rect x="-88.5" y="-106.5" width="45" height="31" fill="none" stroke="var(--warn)" stroke-width=".8" stroke-dasharray="2 2"/>
-        <rect x="-78.5" y="-99.5" width="45" height="31" fill="var(--exist)" stroke="var(--gold)" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <!-- entraînement -->
+        <rect x="-78.5" y="-99.5" width="45" height="31" fill="var(--exist)" stroke="var(--exist-stroke)" stroke-width="1"/>
 
         <!-- quartier artisanal -->
         <rect x="-70" y="40" width="50" height="66" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-dasharray="4 2.5"/>
@@ -179,7 +171,7 @@ svg text { font-family: var(--display); }
           <text x="-61" y="92" font-size="4.3" fill="var(--reserve)">SERIE</text>
           <text x="-45" y="113" font-size="4.6" fill="var(--gold)">QUARTIER ARTISANAL</text>
           <text x="-45" y="118.5" font-size="3.8" font-weight="500" fill="var(--gold)">devient l'atelier d'équipement</text>
-          <text x="55" y="-28" fill="var(--reserve)">SALLE</text>
+          <text x="55" y="-28" fill="var(--reserve)">ACADÉMIE</text>
           <text x="55" y="-22" fill="var(--reserve)">DE MAGIE</text>
           <text x="-22" y="-102" font-size="4.3" fill="var(--reserve)">TERRAIN</text>
           <text x="-22" y="-97" font-size="4.3" fill="var(--reserve)">MAGIQUE</text>
@@ -203,7 +195,8 @@ svg text { font-family: var(--display); }
           <rect x="100" y="190" width="50" height="2.4" fill="var(--ink)"/>
           <rect x="100" y="190" width="25" height="2.4" fill="var(--panel)" stroke="var(--ink)" stroke-width=".5"/>
           <text x="100" y="186.5" font-size="4.2" fill="var(--muted)">0</text>
-          <text x="150" y="186.5" font-size="4.2" fill="var(--muted)" text-anchor="end">50 studs</text>
+          <text x="150" y="186.5" font-size="4.2" fill="var(--muted)" text-anchor="end">75 studs</text>
+        </g>
         </g>
       </svg>
     </div>
@@ -212,22 +205,22 @@ svg text { font-family: var(--display); }
       <section>
         <h2>Légende</h2>
         <ul class="legend">
-          <li><span class="sw exist"></span><span>Lieu gardé tel que Codex l'a placé</span></li>
-          <li><span class="sw adjust"></span><span>Lieu gardé mais déplacé ou renommé</span></li>
+          <li><span class="sw exist"></span><span>Bâtiment présent dès le départ (niveau 1)</span></li>
+          <li><span class="sw adjust"></span><span>Aménagement prévu plus tard (grand portail)</span></li>
           <li><span class="sw reserve"></span><span>Emplacement réservé, vide au début, construit quand il est débloqué</span></li>
           <li><span class="sw fusion"></span><span>Quartier artisanal : ses trois ateliers fusionnent plus tard en un seul bâtiment</span></li>
-          <li><span class="sw warn"></span><span>Conflit dans la base actuelle, à corriger</span></li>
         </ul>
       </section>
       <section>
-        <h2>Ce qui change par rapport à la base actuelle</h2>
+        <h2>Ce qui a changé depuis la v1</h2>
         <ol class="changes">
-          <li>La forge, l'atelier et une nouvelle menuiserie sont regroupés dans un quartier artisanal de 50 × 66. Dans l'œuvre, ces trois ateliers fusionnent en <em>atelier d'équipement</em>, qui prendra tout ce quartier.</li>
-          <li>L'« Atelier » de Codex devient l'atelier de <em>traitement des métaux</em>. L'allée ouest s'arrête à <span class="coord">z = 72</span> et sert de rue intérieure au quartier.</li>
-          <li>L'entraînement se décale de 10 studs vers le centre, en <span class="coord">(−56, −84)</span> : son coin sud-ouest touchait le rempart.</li>
-          <li>Deux jardins, en <span class="coord">(−106, 81)</span> et <span class="coord">(102, 80)</span>, passent en partie sous le rempart. Il faut les rapprocher du centre.</li>
-          <li>Le jardin en <span class="coord">(44, −91)</span> laisse sa place à la chambre de synthèse, à côté de l'invocation.</li>
-          <li>L'allée principale se prolonge jusqu'à un grand portail percé dans le rempart, avec deux travées en moins. Le quai du dirigeable se trouve derrière, hors de l'enceinte.</li>
+          <li>La base est agrandie de 1,5 : rempart de 66 travées (piliers tous les 20 studs) sur un rayon de <span class="coord">210</span> ; rien ne doit dépasser un rayon de <span class="coord">192</span>.</li>
+          <li>Le sol P1 (pierre gris-bleu) et le sol P3 (quartz et or, anciennement P4) sont posés sur les allées, la place et les socles, aux cotes de ce plan.</li>
+          <li>Chaque lot a un identifiant (<span class="coord">LotId</span>) utilisé par le code, et un nom anglais affiché au joueur.</li>
+          <li>Les améliorations fonctionnent : une borne par lot, 20 niveaux, 3 paliers visuels animés, progression sauvegardée par joueur.</li>
+          <li>La base de Codex, ses jardins et l'ancienne enceinte ont été retirés.</li>
+          <li>La salle de magie devient l'<strong>académie de magie</strong> (même lot, identifiant <span class="coord">Academie_Magie</span>).</li>
+          <li>Progression revue : la Tour déverrouille les styles, les matériaux d'expédition paient les améliorations, le niveau du joueur ne sert plus qu'au combat.</li>
         </ol>
       </section>
     </div>
@@ -238,35 +231,35 @@ svg text { font-family: var(--display); }
     <div class="tablebox">
       <table>
         <thead>
-          <tr><th>Lot</th><th>Statut</th><th>Centre (x, z)</th><th>Emprise</th><th>Hauteur max</th><th>Débloqué au niveau global*</th><th>Rôle</th></tr>
+          <tr><th>Lot</th><th>Statut</th><th>Centre (x, z)</th><th>Emprise (façade × profondeur)</th><th>Hauteur max</th><th>Construit / évolue avec*</th><th>Rôle</th></tr>
         </thead>
         <tbody>
           <tr class="group"><td colspan="7">Dès le départ</td></tr>
-          <tr><td>Place centrale</td><td><span class="pill exist">gardé</span></td><td class="coord">(0, 8)</td><td class="coord">r 25</td><td class="coord">10</td><td>1</td><td>Rassemblement, monument</td></tr>
-          <tr><td>Faille spatio-temporelle</td><td><span class="pill exist">gardé</span></td><td class="coord">(78, 29)</td><td class="coord">r 24</td><td class="coord">30</td><td>1</td><td>Départ des missions, choix de l'équipe</td></tr>
-          <tr><td>Salle d'invocation</td><td><span class="pill exist">gardé</span></td><td class="coord">(12, −82)</td><td class="coord">r 22</td><td class="coord">40</td><td>1</td><td>Invocation des compagnons</td></tr>
-          <tr><td>Logements</td><td><span class="pill exist">gardé</span></td><td class="coord">(−87, −52)</td><td class="coord">26 × 28</td><td class="coord">45</td><td>1</td><td>Gagnent des étages aux paliers suivants</td></tr>
-          <tr><td>Logements annexe</td><td><span class="pill exist">gardé</span></td><td class="coord">(−88, −11)</td><td class="coord">26 × 28</td><td class="coord">45</td><td>1</td><td>Idem</td></tr>
-          <tr><td>Cantine</td><td><span class="pill exist">gardé</span></td><td class="coord">(−93, 35)</td><td class="coord">28 × 28</td><td class="coord">30</td><td>1</td><td>Repas, bonus temporaires</td></tr>
-          <tr><td>Entraînement</td><td><span class="pill adjust">déplacé</span></td><td class="coord">(−56, −84)</td><td class="coord">45 × 31</td><td class="coord">20</td><td>1</td><td>Mannequins, parades, combats d'entraînement</td></tr>
-          <tr><td>Infirmerie</td><td><span class="pill exist">gardé</span></td><td class="coord">(34, 92)</td><td class="coord">26 × 28</td><td class="coord">30</td><td>1</td><td>Soin des blessures après une mission</td></tr>
-          <tr><td>Administration</td><td><span class="pill exist">gardé</span></td><td class="coord">(96, −45)</td><td class="coord">30 × 26</td><td class="coord">30</td><td>1</td><td>Bureau de la fée, vitrine des trophées</td></tr>
-          <tr class="group"><td colspan="7">Quartier artisanal · 50 × 66, centre (−45, 73)</td></tr>
-          <tr><td>Forge</td><td><span class="pill exist">gardé</span></td><td class="coord">(−35, 55)</td><td class="coord">28 × 28</td><td class="coord">30</td><td>1</td><td>Armes et armures</td></tr>
-          <tr><td>Traitement des métaux</td><td><span class="pill adjust">renommé</span></td><td class="coord">(−36, 92)</td><td class="coord">26 × 24</td><td class="coord">30</td><td>1</td><td>Lingots, alliages (ancien « Atelier »)</td></tr>
-          <tr><td>Menuiserie</td><td><span class="pill reserve">réservé</span></td><td class="coord">(−61, 88)</td><td class="coord">18 × 28</td><td class="coord">30</td><td>5</td><td>Manches, arcs, boucliers</td></tr>
-          <tr><td>Atelier d'équipement</td><td><span class="pill reserve">fusion</span></td><td class="coord">(−45, 73)</td><td class="coord">50 × 66</td><td class="coord">40</td><td>30</td><td>Remplace les trois ateliers, débloque le meilleur équipement</td></tr>
+          <tr><td>Place centrale</td><td><span class="pill exist">gardé</span></td><td class="coord">(0, 12)</td><td class="coord">r 37,5</td><td class="coord">10</td><td>étage de la Tour</td><td>Rassemblement, monument</td></tr>
+          <tr><td>Faille spatio-temporelle<br><span class="note">Space-Time Rift</span></td><td><span class="pill exist">existant</span></td><td class="coord">(117, 43.5)</td><td class="coord">r 36</td><td class="coord">40</td><td>étage de la Tour</td><td>Départ des missions</td></tr>
+          <tr><td>Salle d'invocation<br><span class="note">Summoning Hall</span></td><td><span class="pill exist">existant</span></td><td class="coord">(18, −123)</td><td class="coord">r 33</td><td class="coord">45</td><td>—</td><td>Invocation des compagnons</td></tr>
+          <tr><td>Logements<br><span class="note">Lodging</span></td><td><span class="pill exist">existant</span></td><td class="coord">(−130.5, −78)</td><td class="coord">42 × 39</td><td class="coord">50</td><td>—</td><td>Gagnent des étages aux paliers suivants</td></tr>
+          <tr><td>Logements annexe<br><span class="note">Lodging Annex</span></td><td><span class="pill exist">existant</span></td><td class="coord">(−132, −16.5)</td><td class="coord">42 × 39</td><td class="coord">50</td><td>—</td><td>Idem</td></tr>
+          <tr><td>Cantine<br><span class="note">Restaurant</span></td><td><span class="pill exist">existant</span></td><td class="coord">(−139.5, 52.5)</td><td class="coord">42 × 42</td><td class="coord">35</td><td>—</td><td>Repas, bonus temporaires</td></tr>
+          <tr><td>Entraînement<br><span class="note">Training Center</span></td><td><span class="pill exist">existant</span></td><td class="coord">(−84, −126)</td><td class="coord">67.5 × 46.5</td><td class="coord">20</td><td>—</td><td>Mannequins, parades, combats d'entraînement</td></tr>
+          <tr><td>Infirmerie<br><span class="note">Infirmary</span></td><td><span class="pill exist">existant</span></td><td class="coord">(51, 138)</td><td class="coord">39 × 42</td><td class="coord">35</td><td>—</td><td>Soin des blessures après une mission</td></tr>
+          <tr><td>Administration<br><span class="note">Administration</span></td><td><span class="pill exist">existant</span></td><td class="coord">(144, −67.5)</td><td class="coord">39 × 45</td><td class="coord">40</td><td>—</td><td>Bureau de la fée, vitrine des trophées</td></tr>
+          <tr class="group"><td colspan="7">Quartier artisanal · 75 × 99, centre (−67.5, 109.5)</td></tr>
+          <tr><td>Forge<br><span class="note">Smithy</span></td><td><span class="pill exist">existant</span></td><td class="coord">(−52.5, 82.5)</td><td class="coord">42 × 42</td><td class="coord">35</td><td>—</td><td>Armes et armures</td></tr>
+          <tr><td>Traitement des métaux<br><span class="note">Metal Processing</span></td><td><span class="pill exist">existant</span></td><td class="coord">(−54, 138)</td><td class="coord">39 × 36</td><td class="coord">35</td><td>—</td><td>Lingots, alliages</td></tr>
+          <tr><td>Menuiserie<br><span class="note">Woodworking Shop</span></td><td><span class="pill reserve">réservé</span></td><td class="coord">(−91.5, 132)</td><td class="coord">27 × 42</td><td class="coord">30</td><td>Forge 5</td><td>Matériaux des améliorations avancées, manches, arcs</td></tr>
+          <tr><td>Atelier d'équipement<br><span class="note">Equipment Workshop</span></td><td><span class="pill reserve">fusion</span></td><td class="coord">(−67.5, 109.5)</td><td class="coord">75 × 99</td><td class="coord">50</td><td>à définir</td><td>Remplace les trois ateliers</td></tr>
           <tr class="group"><td colspan="7">Extensions de l'œuvre</td></tr>
-          <tr><td>Chambre de synthèse</td><td><span class="pill reserve">réservé</span></td><td class="coord">(50, −90)</td><td class="coord">28 × 28</td><td class="coord">35</td><td>8</td><td>Fusion de compagnons ou de matériaux</td></tr>
-          <tr><td>Salle de magie</td><td><span class="pill reserve">réservé</span></td><td class="coord">(55, −27)</td><td class="coord">30 × 28</td><td class="coord">40</td><td>15</td><td>Recherche, avec ses propres niveaux</td></tr>
-          <tr><td>Terrain d'entraînement magique</td><td><span class="pill reserve">réservé</span></td><td class="coord">(−22, −101)</td><td class="coord">22 × 22</td><td class="coord">15</td><td>20</td><td>Pratique des sorts, à côté de l'entraînement</td></tr>
-          <tr><td>Station de transfert</td><td><span class="pill reserve">réservé</span></td><td class="coord">(−30, −56)</td><td class="coord">20 × 18</td><td class="coord">25</td><td>25</td><td>Transfert de compétences</td></tr>
-          <tr><td>Grand portail</td><td><span class="pill adjust">nouveau</span></td><td class="coord">(0, 140)</td><td class="coord">40 de large</td><td class="coord">45</td><td>35</td><td>Remplace deux travées du rempart</td></tr>
-          <tr><td>Quai du dirigeable</td><td><span class="pill out">hors enceinte</span></td><td class="coord">(0, 174)</td><td class="coord">80 × 48</td><td class="coord">60</td><td>35</td><td>Hangar et entretien du dirigeable</td></tr>
+          <tr><td>Chambre de synthèse<br><span class="note">Synthesis Chamber</span></td><td><span class="pill reserve">réservé</span></td><td class="coord">(75, −135)</td><td class="coord">42 × 42</td><td class="coord">40</td><td>Invocation 5</td><td>Fusion de compagnons ou de matériaux</td></tr>
+          <tr><td>Académie de magie<br><span class="note">Magic Academy</span></td><td><span class="pill reserve">réservé</span></td><td class="coord">(82.5, −40.5)</td><td class="coord">42 × 45</td><td class="coord">55</td><td>Entraînement 10</td><td>Potions, nouveaux sorts</td></tr>
+          <tr><td>Terrain d'entraînement magique<br><span class="note">Magic Training Grounds</span></td><td><span class="pill reserve">réservé</span></td><td class="coord">(−33, −151.5)</td><td class="coord">33 × 33</td><td class="coord">20</td><td>Entraînement 10</td><td>Pratique des sorts</td></tr>
+          <tr><td>Station de transfert<br><span class="note">Transfer Station</span></td><td><span class="pill reserve">réservé</span></td><td class="coord">(−45, −84)</td><td class="coord">30 × 27</td><td class="coord">35</td><td>Entraînement 15</td><td>Transfert de compétences</td></tr>
+          <tr><td>Grand portail</td><td><span class="pill adjust">plus tard</span></td><td class="coord">(0, 210)</td><td class="coord">60 de large</td><td class="coord">45</td><td>à définir</td><td>Remplace trois travées du rempart</td></tr>
+          <tr><td>Quai du dirigeable</td><td><span class="pill out">hors enceinte</span></td><td class="coord">(0, 261)</td><td class="coord">120 × 72</td><td class="coord">60</td><td>à définir</td><td>Hangar et entretien du dirigeable</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note">* Les niveaux de déblocage sont une première proposition, à équilibrer ensemble. L'œuvre ne fixe que l'ordre d'apparition : salle de magie et pierres de rediffusion vers l'étage 25, dirigeable à l'étage 33. À Niflheim, la base la plus avancée, les bâtiments sont entre les niveaux 18 et 22 en fin de partie.</p>
+    <p class="note">* Un emplacement réservé se construit quand son bâtiment parent atteint le niveau indiqué. La place, la faille et l'enceinte (rempart et sol) ne s'achètent pas : leur style suit l'étage atteint dans la Tour (P2 à l'étage 10, P3 au 50). Les autres bâtiments s'améliorent contre de l'or et les matériaux du style visé, récoltés en expédition ; le niveau qui change de style attend en plus l'étage de Tour correspondant. Ces seuils sont une première proposition, à équilibrer ensemble. L'œuvre ne fixe que l'ordre d'apparition : salle de magie et pierres de rediffusion vers l'étage 25, dirigeable à l'étage 33. À Niflheim, la base la plus avancée, les bâtiments sont entre les niveaux 18 et 22 en fin de partie.</p>
   </section>
 
   <section class="cols">
@@ -274,19 +267,19 @@ svg text { font-family: var(--display); }
       <h2>Règles pour produire un bâtiment</h2>
       <ul>
         <li>Chaque version d'un bâtiment tient dans l'emprise de son lot et ne dépasse pas sa hauteur max.</li>
-        <li>Pivot au sol, au centre du lot. La façade d'entrée regarde vers la place centrale.</li>
-        <li>Nommage : <span class="coord">Forge_P1</span>, <span class="coord">Forge_P2</span>… Les modèles sont rangés dans <span class="coord">ServerStorage/Batiments/Forge/</span>.</li>
-        <li>Une vingtaine de niveaux en jeu, mais quatre paliers visuels seulement : P1 au niveau 1, P2 au 5, P3 au 10 et P4 au 20. Les niveaux intermédiaires changent les statistiques, pas le modèle.</li>
-        <li>Le rempart suit la même logique : pierre moussue en P1, quartz doré en P4.</li>
+        <li>Pivot au sol, au centre du lot, avec un socle d'au moins 1 stud. La façade d'entrée regarde vers la place centrale (direction exacte par lot dans <span class="coord">docs/LOTS_BATIMENTS.md</span>).</li>
+        <li>Nommage : <span class="coord">Forge_P1</span>, <span class="coord">Forge_P2</span>… Les modèles sont rangés dans <span class="coord">ServerStorage/Batiments/&lt;LotId&gt;/P&lt;n&gt;</span> ; le jeu les affiche tout seul selon le niveau.</li>
+        <li>Une vingtaine de niveaux en jeu, mais trois paliers visuels seulement pour l'instant : P1 au niveau 1, P2 au 5 et P3 au 20. Les niveaux intermédiaires changent les statistiques, pas le modèle.</li>
+        <li>Styles : P1 pierre gris-bleu, mousse et argent ; P2 roche noir nuit et argent ; P3 quartz clair et or.</li>
       </ul>
     </div>
     <div>
-      <h2>À trancher entre vous</h2>
+      <h2>Encore à trancher</h2>
       <ul>
-        <li>La base est-elle commune aux trois joueurs d'un serveur, ou chaque joueur a-t-il la sienne ? C'est ce qui décide de l'architecture du back end.</li>
-        <li>On garde l'infirmerie et l'administration ? Codex les a ajoutées, mais l'œuvre ne les cite pas parmi les installations de base.</li>
-        <li>Les niveaux de déblocage et les coûts de chaque palier.</li>
-        <li>Le portail et le quai : il faut agrandir la plateforme hors de l'enceinte. On le fait maintenant ou au moment du dirigeable ?</li>
+        <li>Le style du palier P3.</li>
+        <li>On garde l'infirmerie et l'administration ? L'œuvre ne les cite pas parmi les installations de base.</li>
+        <li>Les coûts et niveaux de déblocage (premier jet dans <span class="coord">src/shared/Config/Batiments.luau</span>).</li>
+        <li>Le portail et le quai : il faut agrandir la plateforme hors de l'enceinte. Maintenant ou au moment du dirigeable ?</li>
       </ul>
     </div>
   </section>

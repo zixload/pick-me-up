@@ -1,22 +1,29 @@
 -- Profils des joueurs, sauvegardés avec ProfileStore (verrou de session : un profil n'est ouvert
--- que sur un serveur à la fois). Contenu : niveau global, expérience, or, niveau de chaque bâtiment.
+-- que sur un serveur à la fois). Contenu : niveau du joueur (combat), expérience, or, étage le plus
+-- haut franchi dans la Tour, matériaux, niveau de chaque bâtiment.
 -- Dans Studio sans accès aux API, ProfileStore fonctionne mais n'enregistre rien.
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local ProfileStore = require(script.Parent.Parent.Packages.ProfileStore)
 local Batiments = require(ReplicatedStorage.Shared.Config.Batiments)
+local Materiaux = require(ReplicatedStorage.Shared.Config.Materiaux)
 local Progression = require(ReplicatedStorage.Shared.Config.Progression)
 
 local MODELE = {
-	Version = 1,
+	Version = 2,
 	Niveau = 1,
 	XP = 0,
 	Or = 0,
+	Etage = 0,
+	Materiaux = {},
 	Batiments = {},
 }
 for id, lot in Batiments.LOTS do
 	MODELE.Batiments[id] = lot.depart
+end
+for _, id in Materiaux.ORDRE do
+	MODELE.Materiaux[id] = 0
 end
 
 local Store = ProfileStore.New("PMU_Profils_v1", MODELE)
@@ -83,6 +90,14 @@ local function charger(joueur: Player)
 	end
 	profil:AddUserId(joueur.UserId)
 	profil:Reconcile()
+	-- bâtiments sortis de la liste (Enceinte et Faille suivent la Tour, Salle_Magie devenue Academie_Magie)
+	for id in profil.Data.Batiments do
+		if not Batiments.LOTS[id] then profil.Data.Batiments[id] = nil end
+	end
+	for id in profil.Data.Materiaux do
+		if not Materiaux.NOMS[id] then profil.Data.Materiaux[id] = nil end
+	end
+	profil.Data.Version = MODELE.Version
 	profil.OnSessionEnd:Connect(function()
 		profils[joueur] = nil
 		if joueur.Parent == Players then

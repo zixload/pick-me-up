@@ -27,12 +27,17 @@ local EtatBase = distant("RemoteEvent", "EtatBase")        -- serveur -> clients
 local LireEtat = distant("RemoteFunction", "LireEtat")     -- client -> serveur : état au démarrage
 local Ameliorer = distant("RemoteFunction", "Ameliorer")   -- client -> serveur : (lotId) -> ok, message
 
--- niveaux affichés : ceux du propriétaire, ou les niveaux de départ s'il n'y en a pas encore
-local function niveaux()
+-- palier de style de chaque lot affiché : selon son niveau pour les bâtiments, selon l'étage de Tour
+-- pour les lots automatiques ; ceux du propriétaire, ou ceux de départ s'il n'y en a pas encore
+local function paliersVoulus()
 	local d = proprietaire and Donnees.profil(proprietaire)
 	local t = {}
 	for id, lot in Batiments.LOTS do
-		t[id] = d and d.Batiments[id] or lot.depart
+		t[id] = {Regles.palier(d and d.Batiments[id] or lot.depart), lot.visuels}
+	end
+	local tour = Regles.palierTour(d and d.Etage or 0)
+	for id, lot in Batiments.AUTOMATIQUES do
+		t[id] = {tour, lot.visuels}
 	end
 	return t
 end
@@ -42,7 +47,8 @@ local function etat()
 	return {
 		proprietaireId = proprietaire and proprietaire.UserId or 0,
 		proprietaireNom = proprietaire and proprietaire.DisplayName or "",
-		donnees = d and {Niveau = d.Niveau, XP = d.XP, Or = d.Or, Batiments = d.Batiments} or nil,
+		donnees = d and {Niveau = d.Niveau, XP = d.XP, Or = d.Or, Etage = d.Etage, Materiaux = d.Materiaux,
+			Batiments = d.Batiments} or nil,
 	}
 end
 
@@ -55,9 +61,9 @@ end
 local function appliquer(origine: Vector3?)
 	local son = true
 	local aReprendre = false
-	for id, niveau in niveaux() do
-		local cible = Regles.palier(niveau)
-		for _, visuel in Batiments.LOTS[id].visuels do
+	for _, voulu in paliersVoulus() do
+		local cible, visuels = voulu[1], voulu[2]
+		for _, visuel in visuels do
 			local p = cible > 0 and Paliers.disponible(visuel, cible) or nil
 			if p == nil then
 				if Paliers.actuel(visuel) ~= nil and not Paliers.retirer(visuel) then aReprendre = true end
@@ -117,9 +123,10 @@ function Base.proprietaire(): Player?
 	return proprietaire
 end
 
--- réapplique les visuels sans animation (après une commande de développement, par exemple)
-function Base.rafraichir()
-	appliquer(nil)
+-- réapplique les visuels (après une commande de développement, par exemple) : sans animation,
+-- ou en vague à partir d'une origine
+function Base.rafraichir(origine: Vector3?)
+	appliquer(origine)
 	diffuser()
 end
 
@@ -162,6 +169,9 @@ function Base.demarrer()
 		end
 		Donnees.modifier(joueur, function(donnees)
 			donnees.Or -= detail.cout
+			for _, m in detail.materiaux do
+				donnees.Materiaux[m[1]] -= m[2]
+			end
 			donnees.Batiments[lotId] = detail.cible
 		end)
 		if detail.palierCible ~= detail.palierActuel then

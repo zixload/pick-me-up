@@ -1,4 +1,4 @@
--- Interface du lobby : affichage permanent (base, niveau, expérience, or) et panneau d'amélioration
+-- Interface du lobby : affichage permanent (base, niveau, expérience, or, étage de Tour) et panneau d'amélioration
 -- qui s'ouvre aux bornes des bâtiments. Le serveur fait foi : ce script ne fait qu'afficher et demander.
 -- Tout texte affiché est en anglais.
 local Players = game:GetService("Players")
@@ -9,6 +9,7 @@ local RunService = game:GetService("RunService")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Batiments = require(Shared.Config.Batiments)
 local Progression = require(Shared.Config.Progression)
+local Materiaux = require(Shared.Config.Materiaux)
 local Regles = require(Shared.Regles)
 local reseau = ReplicatedStorage:WaitForChild("Reseau")
 local EtatBase = reseau:WaitForChild("EtatBase")
@@ -74,7 +75,7 @@ ecran.ResetOnSpawn = false
 ecran.IgnoreGuiInset = false
 ecran.Parent = joueur:WaitForChild("PlayerGui")
 
-local hud = cadre(ecran, UDim2.fromOffset(270, 92), UDim2.fromOffset(16, 16))
+local hud = cadre(ecran, UDim2.fromOffset(270, 112), UDim2.fromOffset(16, 16))
 local hudBase = texte(hud, "Loading…", UDim2.new(1, -24, 0, 18), UDim2.fromOffset(12, 8), DISCRET, POLICE, 14)
 local hudNiveau = texte(hud, "", UDim2.new(1, -24, 0, 22), UDim2.fromOffset(12, 28), TEXTE, POLICE_FORTE, 19)
 local barre = Instance.new("Frame")
@@ -87,14 +88,17 @@ remplissage.Size, remplissage.BackgroundColor3, remplissage.BorderSizePixel = UD
 remplissage.Parent = barre
 Instance.new("UICorner", remplissage).CornerRadius = UDim.new(1, 0)
 local hudOr = texte(hud, "", UDim2.new(1, -24, 0, 18), UDim2.fromOffset(12, 66), OR, POLICE_FORTE, 16)
+local hudEtage = texte(hud, "", UDim2.new(1, -24, 0, 18), UDim2.fromOffset(12, 86), ARGENT, POLICE, 15)
 
-local panneau = cadre(ecran, UDim2.fromOffset(400, 214), UDim2.new(0.5, 0, 1, -24), Vector2.new(0.5, 1))
+local panneau = cadre(ecran, UDim2.fromOffset(400, 244), UDim2.new(0.5, 0, 1, -24), Vector2.new(0.5, 1))
 panneau.Visible = false
 local pTitre = texte(panneau, "", UDim2.new(1, -32, 0, 26), UDim2.fromOffset(16, 12), TEXTE, POLICE_FORTE, 21)
 local pNiveau = texte(panneau, "", UDim2.new(1, -32, 0, 20), UDim2.fromOffset(16, 42), DISCRET, POLICE, 15)
 local pCout = texte(panneau, "", UDim2.new(1, -32, 0, 22), UDim2.fromOffset(16, 72), OR, POLICE_FORTE, 17)
-local pCondition = texte(panneau, "", UDim2.new(1, -32, 0, 20), UDim2.fromOffset(16, 98), TEXTE, POLICE, 15)
-local pMessage = texte(panneau, "", UDim2.new(1, -32, 0, 20), UDim2.fromOffset(16, 124), VERT, POLICE, 15)
+local pMateriaux = texte(panneau, "", UDim2.new(1, -32, 0, 20), UDim2.fromOffset(16, 98), TEXTE, POLICE, 15)
+pMateriaux.RichText = true
+local pCondition = texte(panneau, "", UDim2.new(1, -32, 0, 20), UDim2.fromOffset(16, 124), TEXTE, POLICE, 15)
+local pMessage = texte(panneau, "", UDim2.new(1, -32, 0, 20), UDim2.fromOffset(16, 150), VERT, POLICE, 15)
 local bAmeliorer = bouton(panneau, "Upgrade", UDim2.new(0.62, -22, 0, 40), UDim2.new(0, 16, 1, -54), OR)
 local bFermer = bouton(panneau, "Close", UDim2.new(0.38, -14, 0, 40), UDim2.new(0.62, 2, 1, -54), Color3.fromRGB(150, 162, 180))
 
@@ -119,6 +123,11 @@ local function majHud()
 	local besoin = Progression.xpPourNiveau(d.Niveau)
 	remplissage.Size = UDim2.fromScale(if d.Niveau >= Progression.NIVEAU_MAX then 1 else math.clamp(d.XP / besoin, 0, 1), 1)
 	hudOr.Text = `{milliers(d.Or)} gold`
+	hudEtage.Text = if (d.Etage or 0) > 0 then `Tower: Floor {d.Etage} cleared` else "Tower: no floor cleared yet"
+end
+
+local function hex(c: Color3): string
+	return "#" .. c:ToHex()
 end
 
 local function majPanneau()
@@ -132,15 +141,38 @@ local function majPanneau()
 		pNiveau.Text = `Level {detail.niveau} / {Batiments.NIVEAU_MAX}  ·  tier P{detail.palierActuel}`
 	end
 	if detail.niveau >= Batiments.NIVEAU_MAX then
-		pCout.Text = "Max level reached"
+		pCout.Text, pCout.TextColor3 = "Max level reached", OR
+		pMateriaux.Text = ""
 		pCondition.Text = ""
 	else
+		local d = etat.donnees
 		local action = if detail.niveau == 0 then "Build" else `Level {detail.cible}`
-		local palier = if detail.palierCible ~= detail.palierActuel then `  ·  new tier P{detail.palierCible}` else ""
+		local palier = if detail.palierCible ~= detail.palierActuel and detail.niveau > 0
+			then `  ·  new style P{detail.palierCible}` else ""
 		pCout.Text = `{action}: {milliers(detail.cout)} gold{palier}`
-		local requisOk = etat.donnees.Niveau >= detail.requis
-		pCondition.Text = `Global level required: {detail.requis}` .. (if requisOk then "  ✓" else "")
-		pCondition.TextColor3 = if requisOk then TEXTE else ROUGE
+		pCout.TextColor3 = if d.Or >= detail.cout then OR else ROUGE
+		local morceaux = {}
+		for _, m in detail.materiaux do
+			local possede = d.Materiaux and d.Materiaux[m[1]] or 0
+			local couleur = if possede >= m[2] then TEXTE else ROUGE
+			table.insert(morceaux, `<font color="{hex(couleur)}">{Materiaux.NOMS[m[1]]} {milliers(possede)}/{milliers(m[2])}</font>`)
+		end
+		pMateriaux.Text = table.concat(morceaux, "   ·   ")
+		-- conditions en plus des ressources : bâtiment parent (construction), étage de Tour (changement de style)
+		local conditions, toutesOk = {}, true
+		if detail.parent then
+			local id, requis = detail.parent[1], detail.parent[2]
+			local ok_ = (d.Batiments[id] or 0) >= requis
+			toutesOk = toutesOk and ok_
+			table.insert(conditions, `{Batiments.LOTS[id].nom} level {requis}` .. (if ok_ then " ✓" else ""))
+		end
+		if detail.etage > 0 then
+			local ok_ = (d.Etage or 0) >= detail.etage
+			toutesOk = toutesOk and ok_
+			table.insert(conditions, `Tower Floor {detail.etage} cleared` .. (if ok_ then " ✓" else ""))
+		end
+		pCondition.Text = if #conditions > 0 then "Requires: " .. table.concat(conditions, "  ·  ") else ""
+		pCondition.TextColor3 = if toutesOk then TEXTE else ROUGE
 	end
 	local peut = ok and estProprietaire()
 	bAmeliorer.Text = if detail.niveau == 0 then "Build" else "Upgrade"
