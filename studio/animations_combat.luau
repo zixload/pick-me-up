@@ -79,24 +79,25 @@ local COUP2_SUITE = avec(COUP2_FRAPPE, {
 })
 
 -- coup 3 : l'épée se tient à une main ; le bras gauche fait contrepoids (tendu vers l'avant à l'armé
--- et pendant le bond, rejeté en arrière et sur le côté quand la lame s'abat)
+-- et pendant le bond, rejeté en arrière et sur le côté quand la lame s'abat). Le poignet tourne d'un
+-- quart de tour (y = 90) pour que le tranchant, et non le plat, s'abatte vers le bas.
 local COUP3_ACCROUPI = {
 	LowerTorso = {10, 0, 0, 0, -0.7, 0.15}, UpperTorso = {15, -10, 0}, Head = {-15, 10, 0},
-	RightUpperArm = {175, 0, 15}, RightLowerArm = {30, 0, 0}, RightHand = {0, 0, 0},
+	RightUpperArm = {175, 0, 15}, RightLowerArm = {30, 0, 0}, RightHand = {0, 90, 0},
 	LeftUpperArm = {60, 0, -25}, LeftLowerArm = {25, 0, 0}, LeftHand = {0, 0, 0},
 	RightUpperLeg = {40, 0, 8}, RightLowerLeg = {-75, 0, 0}, RightFoot = {35, 0, 0},
 	LeftUpperLeg = {40, 0, -8}, LeftLowerLeg = {-75, 0, 0}, LeftFoot = {35, 0, 0},
 }
 local COUP3_SAUT = {
 	LowerTorso = {18, 0, 0, 0, 0.6, 0}, UpperTorso = {20, -15, 0}, Head = {-20, 15, 0},
-	RightUpperArm = {190, 0, 10}, RightLowerArm = {45, 0, 0}, RightHand = {-10, 0, 0},
+	RightUpperArm = {190, 0, 10}, RightLowerArm = {45, 0, 0}, RightHand = {-10, 90, 0},
 	LeftUpperArm = {95, 0, -45}, LeftLowerArm = {15, 0, 0}, LeftHand = {0, 0, -10},
 	RightUpperLeg = {50, 0, 5}, RightLowerLeg = {-80, 0, 0}, RightFoot = {20, 0, 0},
 	LeftUpperLeg = {50, 0, -5}, LeftLowerLeg = {-80, 0, 0}, LeftFoot = {20, 0, 0},
 }
 local COUP3_IMPACT = {
 	LowerTorso = {-25, 0, 0, 0, -0.75, -0.4}, UpperTorso = {-30, 12, 0}, Head = {15, -12, 0},
-	RightUpperArm = {40, 0, -5}, RightLowerArm = {0, 0, 0}, RightHand = {15, 0, 0},
+	RightUpperArm = {40, 0, -5}, RightLowerArm = {0, 0, 0}, RightHand = {15, 90, 0},
 	LeftUpperArm = {-45, 0, -55}, LeftLowerArm = {30, 0, 0}, LeftHand = {0, 0, -10},
 	LeftUpperLeg = {70, 0, -5}, LeftLowerLeg = {-80, 0, 0}, LeftFoot = {10, 0, 0},
 	RightUpperLeg = {-20, 0, 10}, RightLowerLeg = {-60, 0, 0}, RightFoot = {30, 0, 0},
@@ -111,7 +112,46 @@ local ESQUIVE_BAS = {
 	LeftUpperLeg = {-25, 0, 0}, LeftLowerLeg = {-40, 0, 0}, LeftFoot = {15, 0, 0},
 }
 
+local TOUCHE = {
+	LowerTorso = {6, 0, 0, 0, -0.1, 0.2}, UpperTorso = {14, 0, 0}, Head = {12, 0, 0},
+	RightUpperArm = {-15, 0, 25}, LeftUpperArm = {-15, 0, -25},
+}
+-- à genoux, un genou au sol, buste affaissé (en boucle, respiration lente)
+local A_GENOUX = {
+	LowerTorso = {-8, 0, 0, 0, -1.3, 0}, UpperTorso = {-28, 0, 0}, Head = {-25, 0, 0},
+	RightUpperLeg = {80, 0, 4}, RightLowerLeg = {-85, 0, 0}, RightFoot = {8, 0, 0},
+	LeftUpperLeg = {-8, 0, -4}, LeftLowerLeg = {-95, 0, 0}, LeftFoot = {45, 0, 0},
+	RightUpperArm = {12, 0, 8}, RightLowerArm = {10, 0, 0}, LeftUpperArm = {40, 0, -5}, LeftLowerArm = {30, 0, 0},
+}
+
+-- parade au bouclier : le bras gauche monte le bouclier devant le buste (pose calculée sur un R15 pour
+-- que le bouclier, sanglé sur l'avant-bras, fasse face à l'adversaire), l'épaule gauche mène, l'épée
+-- reste armée en retrait à droite, prête pour la riposte ; appuis fléchis et légèrement en recul
+local GARDE = {
+	LowerTorso = {0, -10, 0, 0, -0.3, 0.2}, UpperTorso = {-4, -15, 0}, Head = {-5, 12, 0},
+	LeftUpperArm = {70, -50, 40}, LeftLowerArm = {110, 0, 0},
+	RightUpperArm = {30, 0, 25}, RightLowerArm = {70, 0, 0}, RightHand = {0, 0, 0},
+	RightUpperLeg = {-12, 0, 8}, RightLowerLeg = {-30, 0, 0}, RightFoot = {12, 0, 0},
+	LeftUpperLeg = {28, 0, -5}, LeftLowerLeg = {-32, 0, 0}, LeftFoot = {5, 0, 0},
+}
+
 local SEQUENCES = {
+	Parade = {   -- 0,6 s : garde tenue pendant la fenêtre de parade, puis retour
+		{0, {}, LACHE},
+		{0.06, GARDE, DOUX},
+		{0.34, avec(GARDE, {LowerTorso = {0, -10, 0, 0, -0.33, 0.22}, LeftUpperArm = {72, -50, 40}}), DOUX},
+		{0.6, {}, DOUX},
+	},
+	Touche = {   -- 0,3 s : recul quand on prend un coup
+		{0, {}, LACHE},
+		{0.06, TOUCHE, DOUX},
+		{0.3, {}, DOUX},
+	},
+	KO = {   -- en boucle, 2 s
+		{0, A_GENOUX, DOUX},
+		{1, avec(A_GENOUX, {UpperTorso = {-24, 0, 0}, Head = {-22, 0, 0}}), DOUX},
+		{2, A_GENOUX, DOUX},
+	},
 	Coup1 = {   -- 0,75 s, impact à 0,34
 		{0, {}, DOUX},
 		{0.18, COUP1_ARME, TENDU},
@@ -154,7 +194,8 @@ local function sequence(nom, cles)
 		for art in cle[2] do animees[art] = true end
 	end
 	local ks = Instance.new("KeyframeSequence")
-	ks.Name, ks.Loop, ks.Priority = nom, false, Enum.AnimationPriority.Action
+	ks.Name, ks.Loop, ks.Priority = nom, nom == "KO", if nom == "KO" then Enum.AnimationPriority.Action4
+		else Enum.AnimationPriority.Action
 	for _, cle in cles do
 		local kf = Instance.new("Keyframe")
 		kf.Time = cle[1]

@@ -31,6 +31,13 @@ Combat.EPEE = {
 	prise = CFrame.new(0, -0.3, 0) * CFrame.Angles(math.rad(-155), 0, 0),
 }
 
+-- Bouclier rond sanglé sur l'avant-bras gauche (LeftLowerArm), face vers l'extérieur du bras : au repos
+-- il pend contre le flanc, en garde de parade il couvre le buste. Le modèle a son pivot au centre du dos
+-- et regarde (LookVector) du côté de sa face. Position calculée sur un R15 avec la pose de parade.
+Combat.BOUCLIER = {
+	prise = CFrame.new(-0.62, -0.2, 0) * CFrame.Angles(0, math.rad(90), 0),
+}
+
 Combat.ESQUIVE = {
 	vitesse = 55,         -- studs/s pendant la poussée
 	duree = 0.22,         -- durée de la poussée (s)
@@ -40,6 +47,20 @@ Combat.ESQUIVE = {
 
 Combat.REAPPARITION = 4   -- secondes avant de réapparaître après une mort
 
+-- touché : on ne peut ni frapper ni esquiver pendant ce temps, et le coup en préparation est perdu.
+-- C'est ce qui récompense le premier qui touche, et punit celui qui frappe dans le vide.
+Combat.ETOURDISSEMENT = 0.35
+
+-- Parade (F, L2 à la manette) : un coup reçu de face pendant la fenêtre ne fait rien, et l'attaquant
+-- est longuement étourdi. Ratée, elle laisse un instant exposé ; elle a une courte recharge.
+Combat.PARADE = {
+	fenetre = 0.28,          -- s pendant lesquelles un coup de face est paré
+	recuperation = 0.25,     -- s après la fenêtre pendant lesquelles on ne peut pas agir
+	recharge = 1.0,          -- s avant la parade suivante
+	etourdissement = 0.9,    -- s d'étourdissement de l'attaquant paré
+	demiAngle = 80,          -- degrés : l'attaquant doit être devant
+}
+
 -- effets de frappe : arrêt sur image pour l'attaquant quand la lame touche, secousse de caméra
 Combat.EFFETS = {
 	arretImage = 0.07,          -- s pendant lesquelles le geste est presque figé
@@ -48,26 +69,29 @@ Combat.EFFETS = {
 	secousseDuree = 0.18,
 }
 
--- Animations publiées (rbxassetid://…). Tant qu'un identifiant est vide, Studio joue la séquence
--- du même nom rangée dans ReplicatedStorage.Animations (créée par studio/animations_combat.luau) ;
--- en jeu publié, il faut l'identifiant.
+-- Animations publiées (rbxassetid://…). Si un identifiant est vide, Studio joue la séquence du même
+-- nom rangée dans ReplicatedStorage.Animations (créée par studio/animations_combat.luau), mais
+-- seulement pour soi : les autres joueurs ne la voient pas, et le jeu publié ne la joue pas.
+-- Publiées le 02/10/2026 depuis le compte propriétaire du jeu (séquences du 02/10, version « cinéma »).
+-- Après une retouche d'une séquence, la republier et remplacer son identifiant ici.
 Combat.ANIMATIONS = {
-	Coup1 = "",
-	Coup2 = "",
-	Coup3 = "",
-	Esquive = "",
+	Coup1 = "rbxassetid://110906412686539",
+	Coup2 = "rbxassetid://75486995073874",
+	Coup3 = "rbxassetid://120430126845776",   -- republié le 02/10 : tranchant vers le bas
+	Esquive = "rbxassetid://84381095727648",
+	Touche = "rbxassetid://97237406117422",   -- recul quand on est touché
+	Parade = "rbxassetid://116019242952207",  -- bouclier levé devant le buste, épée armée en retrait
+	KO = "rbxassetid://84467509626244",       -- à genoux, en arène, jusqu'à la manche suivante (en boucle)
 }
 
--- sons choisis dans audio/selection_sfx_v01.md (SFX_09, 10, 11, 12, 15)
+-- sons choisis dans audio/selection_sfx_v01.md (SFX_09, 10, 11, 12, 14, 15)
 Combat.SONS = {
 	Souffle = "rbxassetid://134671877618939",
 	SouffleLourd = "rbxassetid://6241709963",
 	Impact = "rbxassetid://7171761940",
 	Blessure = "rbxassetid://127495971181378",
 	Esquive = "rbxassetid://124044443087502",
+	Parade = "rbxassetid://9119072674",   -- SFX_14, parade parfaite
 }
-
--- mannequins de test posés sur le lot de l'Entraînement, en attendant le vrai bâtiment
-Combat.MANNEQUINS_TEST = true
 
 return Combat

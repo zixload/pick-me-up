@@ -1,6 +1,8 @@
 -- Combat côté joueur : attaques à l'épée (combo de trois coups), esquive, chiffres de dégâts et barre
 -- de vie. Le client joue les gestes et prévient le serveur, qui seul décide de ce qui est touché.
--- Commandes : clic gauche ou R2 pour frapper, Q ou B pour esquiver ; boutons à l'écran sur mobile.
+-- Commandes : clic gauche ou R2 pour frapper, Q ou B pour esquiver, F ou L2 pour parer, Ctrl pour le
+-- mode visée ;
+-- boutons à l'écran sur mobile.
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
@@ -16,6 +18,8 @@ local reseau = ReplicatedStorage:WaitForChild("Reseau")
 local Attaquer = reseau:WaitForChild("Attaquer")
 local Esquiver = reseau:WaitForChild("Esquiver")
 local Impact = reseau:WaitForChild("Impact")
+local Parer = reseau:WaitForChild("Parer")
+local Pare = reseau:WaitForChild("Pare")
 
 local joueur = Players.LocalPlayer
 local camera = workspace.CurrentCamera
@@ -115,19 +119,7 @@ local function secouer(force: number)
 	secousse.duree = Config.EFFETS.secousseDuree
 	secousse.fin = os.clock() + secousse.duree
 end
-RunService.RenderStepped:Connect(function()
-	if not humanoide then return end
-	local reste = secousse.fin - os.clock()
-	if reste <= 0 then
-		if secousse.force > 0 then
-			humanoide.CameraOffset = Vector3.zero
-			secousse.force = 0
-		end
-		return
-	end
-	local a = secousse.force * reste / secousse.duree
-	humanoide.CameraOffset = Vector3.new(math.random(-100, 100), math.random(-100, 100), 0) / 100 * a
-end)
+-- (appliquée chaque image avec le mode visée, plus bas)
 
 -- la lame touche : le geste se fige un instant, comme un arrêt sur image
 local function arretImage()
@@ -157,9 +149,15 @@ end
 -- ---------------------------------------------------------------- attaques
 local coupActuel, libreA, finCombo = 0, 0, 0
 local enAttente = false   -- un clic pendant le geste lance le coup suivant dès que possible
+local etourdiJusque = 0   -- touché : ni coup ni esquive jusque-là
+
+-- figé par le compte à rebours de l'arène, ou à terre
+local function bloque(): boolean
+	return joueur:GetAttribute("Fige") == true or joueur:GetAttribute("KO") == true
+end
 
 local function attaquer()
-	if not vivant() then return end
+	if not vivant() or bloque() then return end
 	local t = os.clock()
 	if t < libreA then
 		if not enAttente then
@@ -181,7 +179,7 @@ local function attaquer()
 	humanoide:SetAttribute("PMU_RalentiCombat", 0.35)
 	local h = humanoide
 	task.delay(coup.duree * 0.75, function()
-		if h.Parent then
+		if h.Parent and not bloque() then
 			h.AutoRotate = true
 			h:SetAttribute("PMU_RalentiCombat", nil)
 		end
@@ -201,9 +199,9 @@ end
 local esquiveDispo = 0
 
 local function esquiver()
-	if not vivant() then return end
+	if not vivant() or bloque() then return end
 	local t = os.clock()
-	if t < esquiveDispo then return end
+	if t < esquiveDispo or t < etourdiJusque then return end
 	esquiveDispo = t + Config.ESQUIVE.recharge
 	coupActuel = 0
 	local direction = humanoide.MoveDirection * Vector3.new(1, 0, 1)
@@ -228,6 +226,24 @@ local function esquiver()
 	Esquiver:FireServer()
 end
 
+-- ---------------------------------------------------------------- parade
+local paradeDispo = 0
+
+local function parer()
+	if not vivant() or bloque() then return end
+	local t = os.clock()
+	if t < paradeDispo or t < etourdiJusque then return end
+	paradeDispo = t + Config.PARADE.recharge
+	-- pendant la parade et juste après, rien d'autre (une parade réussie libère aussitôt)
+	etourdiJusque = t + Config.PARADE.fenetre + Config.PARADE.recuperation
+	libreA = math.max(libreA, etourdiJusque)
+	coupActuel = 0
+	if pisteEnCours then pisteEnCours:Stop(0.05) end
+	pisteEnCours = pistes.Parade
+	if pistes.Parade then pistes.Parade:Play(0.04) end
+	Parer:FireServer()
+end
+
 -- ---------------------------------------------------------------- commandes
 UserInputService.InputBegan:Connect(function(entree, traite)
 	if traite then return end
@@ -241,8 +257,14 @@ ContextActionService:BindAction("PMU_Esquiver", function(_, etat)
 	if etat == Enum.UserInputState.Begin then esquiver() end
 	return Enum.ContextActionResult.Sink
 end, true, Enum.KeyCode.Q, Enum.KeyCode.ButtonB)
+ContextActionService:BindAction("PMU_Parer", function(_, etat)
+	if etat == Enum.UserInputState.Begin then parer() end
+	return Enum.ContextActionResult.Sink
+end, true, Enum.KeyCode.F, Enum.KeyCode.ButtonL2)
 ContextActionService:SetTitle("PMU_Attaquer", "Attack")
 ContextActionService:SetTitle("PMU_Esquiver", "Dodge")
+ContextActionService:SetTitle("PMU_Parer", "Parry")
+ContextActionService:SetPosition("PMU_Parer", UDim2.new(1, -90, 1, -80))
 ContextActionService:SetPosition("PMU_Attaquer", UDim2.new(1, -150, 1, -140))
 ContextActionService:SetPosition("PMU_Esquiver", UDim2.new(1, -210, 1, -80))
 
@@ -276,7 +298,8 @@ local function majVie()
 	local part = math.clamp(humanoide.Health / math.max(humanoide.MaxHealth, 1), 0, 1)
 	jauge.Size = UDim2.new(part, -6 * part, 1, -6)
 	jauge.BackgroundColor3 = if part > 0.3 then VIE else ROUGE
-	valeur.Text = `{math.ceil(humanoide.Health)} / {math.floor(humanoide.MaxHealth)}`
+	local pv = if humanoide.Health < 1 then 0 else math.ceil(humanoide.Health)   -- à terre en arène : 0,01
+	valeur.Text = `{pv} / {math.floor(humanoide.MaxHealth)}`
 end
 
 -- ---------------------------------------------------------------- impacts : chiffres et sons
@@ -289,6 +312,13 @@ Impact.OnClientEvent:Connect(function(position: Vector3, degats: number, modele:
 	etincelles(point)
 	if surMoi then
 		secouer(Config.EFFETS.secousseBlessure)
+		-- étourdi : le geste en cours est coupé, recul, pas d'action pendant un instant
+		etourdiJusque = os.clock() + Config.ETOURDISSEMENT
+		libreA = math.max(libreA, etourdiJusque)
+		coupActuel = 0
+		if pisteEnCours then pisteEnCours:Stop(0.05) end
+		pisteEnCours = nil
+		if pistes.Touche and not joueur:GetAttribute("KO") then pistes.Touche:Play(0.03) end
 	elseif auteur == joueur then
 		arretImage()
 		secouer(Config.EFFETS.secousseFrappe)
@@ -308,6 +338,123 @@ Impact.OnClientEvent:Connect(function(position: Vector3, degats: number, modele:
 	TweenService:Create(texte, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
 		{TextTransparency = 1, TextStrokeTransparency = 1}):Play()
 	Debris:AddItem(point, 3)
+end)
+
+-- ---------------------------------------------------------------- parade réussie
+Pare.OnClientEvent:Connect(function(position: Vector3, modele: Instance, attaquant: Player?)
+	local point = Instance.new("Attachment")
+	point.WorldPosition = position + Vector3.new(0, 2.5, 0)
+	point.Parent = workspace.Terrain
+	son("Parade", point, 0.7)
+	etincelles(point)
+	etincelles(point)
+	Debris:AddItem(point, 3)
+	if modele == perso then
+		-- j'ai paré : libre de riposter tout de suite
+		etourdiJusque = 0
+		libreA = os.clock()
+		secouer(Config.EFFETS.secousseFrappe)
+	elseif attaquant == joueur then
+		-- je suis paré : déséquilibré, longuement exposé
+		etourdiJusque = os.clock() + Config.PARADE.etourdissement
+		libreA = math.max(libreA, etourdiJusque)
+		coupActuel = 0
+		if pisteEnCours then pisteEnCours:Stop(0.05) end
+		pisteEnCours = nil
+		if pistes.Touche then
+			pistes.Touche:Play(0.03)
+			pistes.Touche:AdjustSpeed(0.5)   -- recul deux fois plus lent : on sent le déséquilibre
+		end
+		secouer(Config.EFFETS.secousseBlessure)
+	end
+end)
+
+-- ---------------------------------------------------------------- arène : figé, à terre
+joueur:GetAttributeChangedSignal("Fige"):Connect(function()
+	if not humanoide then return end
+	local fige = joueur:GetAttribute("Fige") == true
+	-- la vitesse est gérée par Course.client (attributs Fige et KO)
+	humanoide.AutoRotate = not fige
+	if fige and pisteEnCours then pisteEnCours:Stop(0.2) end
+end)
+joueur:GetAttributeChangedSignal("KO"):Connect(function()
+	local piste = pistes.KO
+	if not piste then return end
+	if joueur:GetAttribute("KO") then
+		if pisteEnCours then pisteEnCours:Stop(0.1) end
+		piste.Looped = true
+		piste.Priority = Enum.AnimationPriority.Action4
+		piste:Play(0.25)
+	else
+		piste:Stop(0.3)
+	end
+end)
+
+-- ---------------------------------------------------------------- mode visée (Ctrl)
+-- Ctrl bascule le mode visée : la souris reste bloquée au centre et la caméra suit directement ses
+-- mouvements (plus besoin du clic droit), le héros regarde dans l'axe de la caméra, la caméra passe
+-- au-dessus de l'épaule droite et un petit viseur s'affiche au centre de l'écran.
+local visee = false
+local EPAULE = Vector3.new(1.75, 0.35, 0)
+
+local viseur = Instance.new("Frame")
+viseur.Name = "Viseur"
+viseur.AnchorPoint, viseur.Position = Vector2.new(0.5, 0.5), UDim2.fromScale(0.5, 0.5)
+viseur.Size, viseur.BackgroundTransparency = UDim2.fromOffset(22, 22), 1
+viseur.Visible = false
+viseur.Parent = ecran
+for _, b in {{0, -1}, {0, 1}, {-1, 0}, {1, 0}} do   -- quatre petits traits autour d'un point vide
+	local trait = Instance.new("Frame")
+	trait.AnchorPoint = Vector2.new(0.5, 0.5)
+	trait.Size = if b[1] == 0 then UDim2.fromOffset(2, 6) else UDim2.fromOffset(6, 2)
+	trait.Position = UDim2.new(0.5, b[1] * 7, 0.5, b[2] * 7)
+	trait.BackgroundColor3, trait.BorderSizePixel = Color3.new(1, 1, 1), 0
+	trait.Parent = viseur
+	local bord = Instance.new("UIStroke")
+	bord.Color, bord.Transparency, bord.Thickness = Color3.new(0, 0, 0), 0.5, 1
+	bord.Parent = trait
+end
+local point = Instance.new("Frame")
+point.AnchorPoint, point.Position = Vector2.new(0.5, 0.5), UDim2.fromScale(0.5, 0.5)
+point.Size, point.BackgroundColor3, point.BorderSizePixel = UDim2.fromOffset(2, 2), Color3.new(1, 1, 1), 0
+point.Parent = viseur
+
+local function basculerVisee()
+	visee = not visee
+	viseur.Visible = visee
+	UserInputService.MouseIconEnabled = not visee
+	if not visee then
+		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+		if humanoide and not bloque() then humanoide.AutoRotate = true end
+	end
+end
+UserInputService.InputBegan:Connect(function(entree, traite)
+	if traite then return end
+	if entree.KeyCode == Enum.KeyCode.LeftControl or entree.KeyCode == Enum.KeyCode.RightControl then
+		basculerVisee()
+	end
+end)
+
+-- après la caméra de Roblox, à chaque image : décalage d'épaule et secousse, puis en visée la souris
+-- bloquée au centre et le héros tourné dans l'axe de la caméra
+RunService:BindToRenderStep("PMU_Camera", Enum.RenderPriority.Camera.Value + 1, function()
+	if not humanoide then return end
+	local decalage = if visee then EPAULE else Vector3.zero
+	local reste = secousse.fin - os.clock()
+	if reste > 0 then
+		local a = secousse.force * reste / secousse.duree
+		decalage += Vector3.new(math.random(-100, 100), math.random(-100, 100), 0) / 100 * a
+	end
+	if humanoide.CameraOffset ~= decalage then humanoide.CameraOffset = decalage end
+	if not visee then return end
+	UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+	if vivant() and not bloque() then
+		humanoide.AutoRotate = false
+		local regard = camera.CFrame.LookVector * Vector3.new(1, 0, 1)
+		if regard.Magnitude > 0.01 then
+			racine.CFrame = CFrame.lookAt(racine.Position, racine.Position + regard.Unit)
+		end
+	end
 end)
 
 -- ---------------------------------------------------------------- démarrage
