@@ -13,10 +13,15 @@ dans la place Roblox.
 
 ## Travailler sur le code
 
-1. Dans le dossier du dépôt : `rojo serve`.
-2. Dans Studio, ouvrir la place « Pick me up! », onglet **Plugins > Rojo > Connect**.
-3. Modifier les fichiers de `src/` : Studio se met à jour tout seul. Ne pas modifier ces scripts
-   directement dans Studio (Rojo écraserait les changements).
+1. Modifier et vérifier les fichiers de `src/`, puis faire un commit et un push sur GitHub.
+2. Le collaborateur récupère les changements avec `git pull`, puis lance `rojo serve` dans son dépôt.
+3. Sur son poste, dans Studio : **Plugins > Rojo > Connect**, serveur `localhost:34872`.
+4. Arrêter puis relancer Play pour charger les nouveaux scripts.
+
+Ne pas supposer que la place ouverte sur ce poste est synchronisée. L'autorisation HTTP
+du plugin ne prouve pas une connexion Rojo active. Avant de synchroniser, conserver dans
+Git les changements de scripts présents uniquement dans Studio, sinon ils risquent d'être
+écrasés par les fichiers du dépôt. Les modèles 3D restent dans la place collaborative.
 
 | Dossier | Dans Studio | Contenu |
 |---|---|---|
@@ -25,6 +30,13 @@ dans la place Roblox.
 | `src/client` | `StarterPlayerScripts.Client` | interface du lobby |
 
 ## Tester sans missions
+
+Course : maintenir Shift gauche ou droit en se déplaçant (26 studs/s au lieu de 16).
+Relâcher Shift revient à la marche. Les vitesses et animations R15/R6 sont définies
+dans `src/shared/Config/Deplacement.luau`. La course utilise les animations Roblox
+par défaut ; les attaques conservent leur ralentissement et leur priorité d'animation.
+Shift est réservé à la course ; le verrouillage souris reste sur Ctrl.
+Après synchronisation Rojo, relancer le test pour charger le nouveau LocalScript.
 
 Commandes de chat (Studio, ou comptes listés dans `src/server/Services/Commandes.luau`) :
 `/gold 1000`, `/level 10`, `/xp 250`, `/reset`. Tout texte visible par le joueur est en anglais ;

@@ -28,7 +28,6 @@ local VIE = Color3.fromRGB(120, 210, 140)
 -- ---------------------------------------------------------------- personnage et animations
 local perso, humanoide, racine
 local pistes = {}
-local vitesseBase = 16
 
 -- identifiant publié, ou en Studio la séquence de ReplicatedStorage.Animations enregistrée à la volée
 local function animation(nom: string): Animation?
@@ -58,7 +57,6 @@ local function preparer(nouveau: Model)
 	perso = nouveau
 	humanoide = nouveau:WaitForChild("Humanoid")
 	racine = nouveau:WaitForChild("HumanoidRootPart")
-	vitesseBase = humanoide.WalkSpeed
 	local animateur = humanoide:WaitForChild("Animator")
 	table.clear(pistes)
 	for nom in Config.ANIMATIONS do
@@ -180,12 +178,12 @@ local function attaquer()
 	coupActuel, libreA, finCombo = numero, t + coup.duree * 0.75, t + coup.duree + Config.EPEE.fenetreCombo
 	orienter()
 	humanoide.AutoRotate = false
-	humanoide.WalkSpeed = vitesseBase * 0.35
+	humanoide:SetAttribute("PMU_RalentiCombat", 0.35)
 	local h = humanoide
 	task.delay(coup.duree * 0.75, function()
 		if h.Parent then
 			h.AutoRotate = true
-			h.WalkSpeed = vitesseBase
+			h:SetAttribute("PMU_RalentiCombat", nil)
 		end
 	end)
 	local piste = pistes[coup.animation]
