@@ -16,6 +16,9 @@ local MODELE = {
 	XP = 0,
 	Or = 0,
 	Etage = 0,
+	Cote = 1000,          -- cote Elo de l'arène classée
+	Victoires = 0,
+	Defaites = 0,
 	Materiaux = {},
 	Batiments = {},
 }
@@ -32,6 +35,9 @@ local change = Instance.new("BindableEvent")
 
 local Donnees = {}
 Donnees.Change = change.Event   -- (joueur) : profil chargé ou modifié
+-- fonctions (joueur) appelées au départ d'un joueur, juste avant la fermeture de son profil
+-- (un duel abandonné doit encore pouvoir enregistrer la défaite)
+Donnees.avantDepart = {}
 
 -- copie profonde du modèle (pour une remise à zéro)
 local function copie(t)
@@ -118,6 +124,10 @@ function Donnees.demarrer()
 		task.spawn(charger, j)
 	end
 	Players.PlayerRemoving:Connect(function(joueur)
+		for _, f in Donnees.avantDepart do
+			local ok, err = pcall(f, joueur)
+			if not ok then warn("[Donnees] départ de " .. joueur.Name .. " : " .. tostring(err)) end
+		end
 		local p = profils[joueur]
 		profils[joueur] = nil
 		if p then p:EndSession() end
