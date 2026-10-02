@@ -63,6 +63,15 @@ function Combat.cible(attaquant: Player?, modele: Model): Humanoid?
 	if CollectionService:HasTag(modele, "Ennemi") or CollectionService:HasTag(modele, "Cible") then
 		return h
 	end
+	-- invocation d'un autre joueur : touchable seulement en duel, entre adversaires du même duel
+	local camp = modele:GetAttribute("Camp")
+	if attaquant and type(camp) == "string" and string.sub(camp, 1, 1) == "J" then
+		local maitre = Players:GetPlayerByUserId(tonumber(string.sub(camp, 2)) or 0)
+		if maitre and maitre ~= attaquant and attaquant:GetAttribute("PvP") and maitre:GetAttribute("PvP")
+			and attaquant:GetAttribute("Arene") ~= nil and attaquant:GetAttribute("Arene") == maitre:GetAttribute("Arene") then
+			return h
+		end
+	end
 	return nil
 end
 
@@ -101,6 +110,15 @@ function Combat.infliger(h: Humanoid, degats: number, auteur: Player?): boolean
 		-- en arène, on ne meurt pas : on tombe à genoux et la manche est perdue
 		h.Health = 0.01
 		joueur:SetAttribute("KO", true)
+		-- à terre, la vie reste à zéro jusqu'à la manche suivante (la régénération de Roblox la ferait remonter)
+		local garde
+		garde = h.HealthChanged:Connect(function(pv)
+			if not joueur:GetAttribute("KO") or not h.Parent then
+				garde:Disconnect()
+			elseif pv > 0.01 then
+				h.Health = 0.01
+			end
+		end)
 		task.spawn(Combat.surKO, joueur)
 	else
 		h:TakeDamage(degats)

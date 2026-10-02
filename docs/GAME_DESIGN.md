@@ -159,6 +159,22 @@ et un comportement en mode attaque.
 - **Bouclier** : après une attaque, l'attaqué ne peut plus être attaqué pendant 30 minutes.
 - Limite de temps proposée : 3 minutes ; si elle est atteinte, la défense gagne.
 
+## Escouade : ce qui est en place (2 octobre 2026)
+
+- Formation choisie à la borne « Squad formation » du centre d'entraînement : grille 5 × 4 vue de dessus,
+  héros en 2e rangée, un seul preset gardé dans le profil.
+- Ordres sur X (Suivre), C (Maintenir), V (Attaquer). Maintenir fige la formation autour de l'endroit où est
+  le héros quand l'ordre est donné ; rappuyer sur Maintenir la déplace là où il se trouve maintenant.
+- Comportements en Attaquer : tank qui s'interpose devant les fragiles, archère et mage qui gardent leurs
+  distances et fuient au contact, mage qui vise les groupes, soigneuse qui reste derrière et soigne le plus blessé.
+- Invocations 1 étoile : tank, archère, mage ; soigneuse en cours (nouvelle génération sans sacoche aux hanches).
+
+## À améliorer plus tard
+
+- Animations de coup reçu (héros et invocations), plus marquées.
+- Distinguer clairement les invocations ennemies des siennes (couleur de nom, liseré, barre de vie).
+- Reprendre toutes les interfaces (HUD, barres de vie, ordres, formation) et les animations en général.
+
 ## À trancher
 
 - **Équipes supplémentaires** : vérifier en jeu que les seuils des Logements (5, 10, 20) fonctionnent.

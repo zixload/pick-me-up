@@ -20,6 +20,8 @@ local Materiaux = require(ReplicatedStorage.Shared.Config.Materiaux)
 
 local DEVELOPPEURS = {
 	[11576618213] = true,   -- compte qui développe le jeu dans Studio
+	[2347643521] = true,    -- Daichisback, troisième membre du projet (02/10/2026)
+	[11576651022] = true,   -- camé (t1mts), membre du projet (02/10/2026)
 }
 
 local Commandes = {}

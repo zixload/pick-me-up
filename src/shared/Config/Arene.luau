@@ -4,8 +4,8 @@
 local Arene = {}
 
 Arene.CENTRE = Vector3.new(0, 0, -900)   -- loin de la base, au-dessus du vide
-Arene.RAYON = 42                          -- rayon du sol ; un mur invisible retient les joueurs
-Arene.ECART = 18                          -- distance de chaque héros au centre au début d'une manche
+Arene.RAYON = 85                          -- rayon du sol (place pour deux escouades) ; un mur invisible retient les joueurs
+Arene.ECART = 45                          -- distance de chaque héros au centre au début d'une manche
 Arene.MANCHES_GAGNANTES = 2               -- premier à deux manches
 Arene.COMPTE_A_REBOURS = 3                -- secondes figées avant chaque manche
 Arene.PAUSE_ENTRE_MANCHES = 3             -- secondes d'annonce après une manche

@@ -19,6 +19,7 @@ local MODELE = {
 	Cote = 1000,          -- cote Elo de l'arène classée
 	Victoires = 0,
 	Defaites = 0,
+	Formation = {},       -- invocation -> {colonne, rangée} dans la grille autour du héros
 	Materiaux = {},
 	Batiments = {},
 }

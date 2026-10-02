@@ -88,9 +88,10 @@ Combat.ANIMATIONS = {
 Combat.SONS = {
 	Souffle = "rbxassetid://134671877618939",
 	SouffleLourd = "rbxassetid://6241709963",
-	Impact = "rbxassetid://7171761940",
+	-- « Sword Impact Hit 1, 2, 3 » (Creator Store), choisis le 02/10/2026 : un des trois au hasard à chaque coup
+	Impact = {"rbxassetid://101309544882556", "rbxassetid://121642440688650", "rbxassetid://128314503038887"},
 	Blessure = "rbxassetid://127495971181378",
-	Esquive = "rbxassetid://124044443087502",
+	Esquive = "rbxassetid://136880713327520",   -- « Side Dash » (Creator Store), choisi le 02/10/2026
 	Parade = "rbxassetid://9119072674",   -- SFX_14, parade parfaite
 }
 

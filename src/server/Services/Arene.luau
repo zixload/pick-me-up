@@ -1,6 +1,7 @@
--- Arène classée, premier jet : duels 1v1 entre héros, en manches, sans limite de temps.
+-- Arène classée : duels 1v1, chaque héros avec son escouade (sa formation), en manches, sans limite de temps.
 -- File d'attente (borne « Ranked Duel » sur la place, /duel, /leave), une seule arène de test.
--- Une manche : compte à rebours figé, combat, le premier à terre la perd. Premier à deux manches.
+-- Une manche : chaque héros et son escouade sont placés, compte à rebours figé, combat ; un camp perd la
+-- manche quand son héros est à terre ET que toutes ses invocations sont tombées. Premier à deux manches.
 -- Fin de duel : cote Elo mise à jour et sauvegardée. Quitter le jeu ou réapparaître pendant un duel
 -- le fait perdre par forfait.
 local Players = game:GetService("Players")
@@ -9,6 +10,7 @@ local TextChatService = game:GetService("TextChatService")
 
 local Donnees = require(script.Parent.Donnees)
 local Combat = require(script.Parent.Combat)
+local Invocations = require(script.Parent.Invocations)
 local Config = require(ReplicatedStorage.Shared.Config.Arene)
 
 local Arene = {}
@@ -80,7 +82,7 @@ local function construireArene()
 	disque("AnneauInterieur", r * 0.55 - 0.4, -0.1, 0.05, Color3.fromRGB(30, 40, 58), Enum.Material.Slate)
 	disque("Centre", 3, -0.1, 0.07, Color3.fromRGB(205, 212, 222), Enum.Material.Metal)
 	-- mur invisible qui retient les joueurs sur le sol
-	local n = 40
+	local n = 72   -- murs invisibles tout autour, assez serrés pour le grand rayon
 	for i = 1, n do
 		local a = 2 * math.pi * i / n
 		local p = Instance.new("Part")
@@ -145,6 +147,7 @@ end
 local lancerSiPossible
 
 local function liberer(j: Player)
+	Invocations.renvoyer(j)
 	j:SetAttribute("PvP", nil)
 	j:SetAttribute("Arene", nil)
 	figer(j, false)
@@ -186,10 +189,10 @@ local function debutManche(d)
 	for i, j in d.joueurs do
 		Combat.reinitialiser(j)
 		local pos = Config.CENTRE + Vector3.new(if i == 1 then -Config.ECART else Config.ECART, 3.5, 0)
-		if j.Character then
-			j.Character:PivotTo(CFrame.lookAt(pos, Vector3.new(Config.CENTRE.X, pos.Y, Config.CENTRE.Z)))
-		end
+		local depart = CFrame.lookAt(pos, Vector3.new(Config.CENTRE.X, pos.Y, Config.CENTRE.Z))
+		if j.Character then j.Character:PivotTo(depart) end
 		figer(j, true)
+		Invocations.deployer(j, depart)   -- l'escouade reprend sa formation autour du héros, au complet
 	end
 	diffuser(d, "Manche", {compte = Config.COMPTE_A_REBOURS})
 	task.wait(Config.COMPTE_A_REBOURS)
@@ -199,10 +202,11 @@ local function debutManche(d)
 	diffuser(d, "Combat")
 end
 
--- un joueur tombe à terre : la manche revient à l'autre
-Combat.surKO = function(perdant: Player)
+-- un camp est battu quand son héros est à terre et que toutes ses invocations sont tombées
+local function verifierManche(perdant: Player)
 	local d = duel
 	if not d or not d.enCours or not table.find(d.joueurs, perdant) then return end
+	if not perdant:GetAttribute("KO") or Invocations.vivantes(perdant) > 0 then return end
 	d.enCours = false
 	local gagnant = autre(d, perdant)
 	d.score[gagnant] += 1
@@ -215,6 +219,11 @@ Combat.surKO = function(perdant: Player)
 	else
 		debutManche(d)
 	end
+end
+Combat.surKO = verifierManche
+Invocations.surMort = function(camp: string)
+	local j = Players:GetPlayerByUserId(tonumber(string.sub(camp, 2)) or 0)
+	if j and string.sub(camp, 1, 1) == "J" then verifierManche(j) end
 end
 
 local function lancer(a: Player, b: Player)

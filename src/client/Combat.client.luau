@@ -80,7 +80,8 @@ end
 
 local function son(cle: string, parent: Instance, volume: number?)
 	local s = Instance.new("Sound")
-	s.SoundId = Config.SONS[cle]
+	local id = Config.SONS[cle]
+	s.SoundId = if type(id) == "table" then id[math.random(#id)] else id   -- liste : une variante au hasard
 	s.Volume = volume or 0.6
 	s.RollOffMaxDistance = 80
 	s.Parent = parent
@@ -150,6 +151,7 @@ end
 local coupActuel, libreA, finCombo = 0, 0, 0
 local enAttente = false   -- un clic pendant le geste lance le coup suivant dès que possible
 local etourdiJusque = 0   -- touché : ni coup ni esquive jusque-là
+local jetonRalenti = 0    -- dernier coup qui a posé le ralenti de combat
 
 -- figé par le compte à rebours de l'arène, ou à terre
 local function bloque(): boolean
@@ -178,10 +180,14 @@ local function attaquer()
 	humanoide.AutoRotate = false
 	humanoide:SetAttribute("PMU_RalentiCombat", 0.35)
 	local h = humanoide
+	jetonRalenti += 1
+	local jeton = jetonRalenti
 	task.delay(coup.duree * 0.75, function()
-		if h.Parent and not bloque() then
-			h.AutoRotate = true
+		-- le ralenti du coup est toujours retiré (sinon, figé ou à terre à ce moment, on ne pouvait plus courir) ;
+		-- seul le dernier coup du combo le retire, pour ne pas libérer un coup encore en cours
+		if h.Parent and jeton == jetonRalenti then
 			h:SetAttribute("PMU_RalentiCombat", nil)
+			if not bloque() then h.AutoRotate = true end
 		end
 	end)
 	local piste = pistes[coup.animation]
@@ -373,11 +379,18 @@ end)
 joueur:GetAttributeChangedSignal("Fige"):Connect(function()
 	if not humanoide then return end
 	local fige = joueur:GetAttribute("Fige") == true
-	-- la vitesse est gérée par Course.client (attributs Fige et KO)
+	-- la vitesse est gérée par Course.client (attributs Fige et KO) ; un coup interrompu ne doit pas
+	-- laisser son ralenti derrière lui
+	jetonRalenti += 1
+	humanoide:SetAttribute("PMU_RalentiCombat", nil)
 	humanoide.AutoRotate = not fige
 	if fige and pisteEnCours then pisteEnCours:Stop(0.2) end
 end)
 joueur:GetAttributeChangedSignal("KO"):Connect(function()
+	if humanoide then
+		jetonRalenti += 1
+		humanoide:SetAttribute("PMU_RalentiCombat", nil)
+	end
 	local piste = pistes.KO
 	if not piste then return end
 	if joueur:GetAttribute("KO") then
