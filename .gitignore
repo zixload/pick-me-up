@@ -9,3 +9,10 @@
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Places construites localement par Rojo
+*.rbxl
+*.rbxlx
+*.rbxl.lock
+*.rbxlx.lock
+sourcemap.json

@@ -99,6 +99,25 @@ function Paliers.actuel(lot)
 	return m and m:GetAttribute("Palier")
 end
 
+-- Meilleur palier qui a un modèle pour ce lot, sans dépasser celui demandé (nil si aucun) :
+-- tant que le P2 ou le P3 n'existent pas, un bâtiment de niveau 5 à 19 garde le P1.
+function Paliers.disponible(lot, palier)
+	local dossier = SS:FindFirstChild("Batiments") and SS.Batiments:FindFirstChild(lot)
+	if not dossier then return nil end
+	for p = palier, 1, -1 do
+		if dossier:FindFirstChild("P" .. p) then return p end
+	end
+	return nil
+end
+
+-- Retire l'affichage d'un lot (bâtiment pas encore construit).
+function Paliers.retirer(lot)
+	if enCours[lot] then return false end
+	local m = scene():FindFirstChild(lot)
+	if m then m:Destroy() end
+	return true
+end
+
 -- Affiche le palier demandé. Sans origine, le changement est instantané (chargement de la base) ;
 -- avec une origine (Vector3), il est animé en vague à partir de ce point.
 -- Renvoie false si une animation est déjà en cours sur ce lot.
