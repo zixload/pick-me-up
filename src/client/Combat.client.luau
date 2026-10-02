@@ -1,0 +1,324 @@
+-- Combat côté joueur : attaques à l'épée (combo de trois coups), esquive, chiffres de dégâts et barre
+-- de vie. Le client joue les gestes et prévient le serveur, qui seul décide de ce qui est touché.
+-- Commandes : clic gauche ou R2 pour frapper, Q ou B pour esquiver ; boutons à l'écran sur mobile.
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
+local ContextActionService = game:GetService("ContextActionService")
+local CollectionService = game:GetService("CollectionService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local StarterGui = game:GetService("StarterGui")
+local Debris = game:GetService("Debris")
+
+local Config = require(ReplicatedStorage:WaitForChild("Shared").Config.Combat)
+local reseau = ReplicatedStorage:WaitForChild("Reseau")
+local Attaquer = reseau:WaitForChild("Attaquer")
+local Esquiver = reseau:WaitForChild("Esquiver")
+local Impact = reseau:WaitForChild("Impact")
+
+local joueur = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+
+local ARDOISE = Color3.fromRGB(26, 32, 44)
+local ARGENT = Color3.fromRGB(205, 212, 222)
+local ROUGE = Color3.fromRGB(235, 110, 100)
+local VIE = Color3.fromRGB(120, 210, 140)
+
+-- ---------------------------------------------------------------- personnage et animations
+local perso, humanoide, racine
+local pistes = {}
+local vitesseBase = 16
+
+-- identifiant publié, ou en Studio la séquence de ReplicatedStorage.Animations enregistrée à la volée
+local function animation(nom: string): Animation?
+	local id = Config.ANIMATIONS[nom]
+	if id == nil or id == "" then
+		local dossier = ReplicatedStorage:FindFirstChild("Animations")
+		local sequence = dossier and dossier:FindFirstChild(nom)
+		if not sequence or not RunService:IsStudio() then
+			warn(`[Combat] Animation {nom} : pas d'identifiant publié dans Config.Combat.ANIMATIONS.`)
+			return nil
+		end
+		local ok, provisoire = pcall(function()
+			return game:GetService("AnimationClipProvider"):RegisterAnimationClip(sequence)
+		end)
+		if not ok then
+			warn(`[Combat] Animation {nom} : impossible de l'enregistrer en Studio ({provisoire}).`)
+			return nil
+		end
+		id = provisoire
+	end
+	local a = Instance.new("Animation")
+	a.AnimationId = id
+	return a
+end
+
+local function preparer(nouveau: Model)
+	perso = nouveau
+	humanoide = nouveau:WaitForChild("Humanoid")
+	racine = nouveau:WaitForChild("HumanoidRootPart")
+	vitesseBase = humanoide.WalkSpeed
+	local animateur = humanoide:WaitForChild("Animator")
+	table.clear(pistes)
+	for nom in Config.ANIMATIONS do
+		local a = animation(nom)
+		if a then
+			local piste = animateur:LoadAnimation(a)
+			piste.Priority = Enum.AnimationPriority.Action
+			piste.Looped = false
+			pistes[nom] = piste
+		end
+	end
+end
+
+local function vivant(): boolean
+	return humanoide ~= nil and humanoide.Health > 0 and racine ~= nil and racine.Parent ~= nil
+end
+
+local function son(cle: string, parent: Instance, volume: number?)
+	local s = Instance.new("Sound")
+	s.SoundId = Config.SONS[cle]
+	s.Volume = volume or 0.6
+	s.RollOffMaxDistance = 80
+	s.Parent = parent
+	s:Play()
+	Debris:AddItem(s, 3)
+end
+
+-- tourne le personnage vers la cible la plus proche devant la caméra, sinon dans l'axe de la caméra
+local function orienter()
+	local regard = camera.CFrame.LookVector * Vector3.new(1, 0, 1)
+	if regard.Magnitude < 0.01 then return end
+	regard = regard.Unit
+	local meilleur, distance = nil, Config.EPEE.portee + 4
+	for _, etiquette in {"Ennemi", "Cible"} do
+		for _, m in CollectionService:GetTagged(etiquette) do
+			local rc = m:FindFirstChild("HumanoidRootPart")
+			if rc then
+				local vers = (rc.Position - racine.Position) * Vector3.new(1, 0, 1)
+				if vers.Magnitude < distance and vers.Magnitude > 0.1 and vers.Unit:Dot(regard) > 0.3 then
+					meilleur, distance = vers.Unit, vers.Magnitude
+				end
+			end
+		end
+	end
+	local direction = meilleur or regard
+	racine.CFrame = CFrame.lookAt(racine.Position, racine.Position + direction)
+end
+
+-- ---------------------------------------------------------------- effets de frappe
+local pisteEnCours: AnimationTrack? = nil
+
+-- secousse de caméra : décalage aléatoire qui s'éteint en quelques images
+local secousse = {force = 0, fin = 0, duree = 1}
+local function secouer(force: number)
+	secousse.force = math.max(force, if os.clock() < secousse.fin then secousse.force else 0)
+	secousse.duree = Config.EFFETS.secousseDuree
+	secousse.fin = os.clock() + secousse.duree
+end
+RunService.RenderStepped:Connect(function()
+	if not humanoide then return end
+	local reste = secousse.fin - os.clock()
+	if reste <= 0 then
+		if secousse.force > 0 then
+			humanoide.CameraOffset = Vector3.zero
+			secousse.force = 0
+		end
+		return
+	end
+	local a = secousse.force * reste / secousse.duree
+	humanoide.CameraOffset = Vector3.new(math.random(-100, 100), math.random(-100, 100), 0) / 100 * a
+end)
+
+-- la lame touche : le geste se fige un instant, comme un arrêt sur image
+local function arretImage()
+	local piste = pisteEnCours
+	if not piste or not piste.IsPlaying then return end
+	piste:AdjustSpeed(0.04)
+	task.delay(Config.EFFETS.arretImage, function()
+		if piste.IsPlaying then piste:AdjustSpeed(1) end
+	end)
+end
+
+-- gerbe d'étincelles au point d'impact
+local function etincelles(point: Attachment)
+	local e = Instance.new("ParticleEmitter")
+	e.Color = ColorSequence.new(Color3.fromRGB(255, 244, 214), Color3.fromRGB(190, 210, 240))
+	e.LightEmission, e.LightInfluence = 1, 0
+	e.Size = NumberSequence.new({NumberSequenceKeypoint.new(0, 0.35), NumberSequenceKeypoint.new(1, 0)})
+	e.Transparency = NumberSequence.new(0.1, 1)
+	e.Lifetime = NumberRange.new(0.15, 0.3)
+	e.Speed = NumberRange.new(14, 26)
+	e.SpreadAngle = Vector2.new(180, 180)
+	e.Drag, e.Rate = 6, 0
+	e.Parent = point
+	e:Emit(14)
+end
+
+-- ---------------------------------------------------------------- attaques
+local coupActuel, libreA, finCombo = 0, 0, 0
+local enAttente = false   -- un clic pendant le geste lance le coup suivant dès que possible
+
+local function attaquer()
+	if not vivant() then return end
+	local t = os.clock()
+	if t < libreA then
+		if not enAttente then
+			enAttente = true
+			task.delay(libreA - t, function()
+				enAttente = false
+				attaquer()
+			end)
+		end
+		return
+	end
+	local coups = Config.EPEE.coups
+	local numero = if coupActuel < #coups and t <= finCombo then coupActuel + 1 else 1
+	local coup = coups[numero]
+	-- un peu plus strict que le serveur, pour qu'il ne refuse jamais un coup affiché
+	coupActuel, libreA, finCombo = numero, t + coup.duree * 0.75, t + coup.duree + Config.EPEE.fenetreCombo
+	orienter()
+	humanoide.AutoRotate = false
+	humanoide.WalkSpeed = vitesseBase * 0.35
+	local h = humanoide
+	task.delay(coup.duree * 0.75, function()
+		if h.Parent then
+			h.AutoRotate = true
+			h.WalkSpeed = vitesseBase
+		end
+	end)
+	local piste = pistes[coup.animation]
+	if piste then
+		-- le coup suivant coupe le retour à la garde du précédent, en fondu
+		if pisteEnCours and pisteEnCours ~= piste then pisteEnCours:Stop(0.12) end
+		piste:Play(0.1)
+		pisteEnCours = piste
+	end
+	son(coup.son, racine)
+	Attaquer:FireServer(numero)
+end
+
+-- ---------------------------------------------------------------- esquive
+local esquiveDispo = 0
+
+local function esquiver()
+	if not vivant() then return end
+	local t = os.clock()
+	if t < esquiveDispo then return end
+	esquiveDispo = t + Config.ESQUIVE.recharge
+	coupActuel = 0
+	local direction = humanoide.MoveDirection * Vector3.new(1, 0, 1)
+	if direction.Magnitude < 0.1 then
+		direction = -racine.CFrame.LookVector * Vector3.new(1, 0, 1)   -- immobile : pas en arrière
+	end
+	direction = direction.Unit
+	local point = Instance.new("Attachment")
+	point.Parent = racine
+	local poussee = Instance.new("LinearVelocity")
+	poussee.Attachment0 = point
+	poussee.VelocityConstraintMode = Enum.VelocityConstraintMode.Plane
+	poussee.PrimaryTangentAxis, poussee.SecondaryTangentAxis = Vector3.xAxis, Vector3.zAxis
+	poussee.PlaneVelocity = Vector2.new(direction.X, direction.Z) * Config.ESQUIVE.vitesse
+	poussee.MaxForce = math.huge
+	poussee.Parent = racine
+	Debris:AddItem(poussee, Config.ESQUIVE.duree)
+	Debris:AddItem(point, Config.ESQUIVE.duree)
+	if pisteEnCours then pisteEnCours:Stop(0.08) end
+	if pistes.Esquive then pistes.Esquive:Play(0.05) end
+	son("Esquive", racine, 0.5)
+	Esquiver:FireServer()
+end
+
+-- ---------------------------------------------------------------- commandes
+UserInputService.InputBegan:Connect(function(entree, traite)
+	if traite then return end
+	if entree.UserInputType == Enum.UserInputType.MouseButton1 then attaquer() end
+end)
+ContextActionService:BindAction("PMU_Attaquer", function(_, etat)
+	if etat == Enum.UserInputState.Begin then attaquer() end
+	return Enum.ContextActionResult.Sink
+end, true, Enum.KeyCode.ButtonR2)
+ContextActionService:BindAction("PMU_Esquiver", function(_, etat)
+	if etat == Enum.UserInputState.Begin then esquiver() end
+	return Enum.ContextActionResult.Sink
+end, true, Enum.KeyCode.Q, Enum.KeyCode.ButtonB)
+ContextActionService:SetTitle("PMU_Attaquer", "Attack")
+ContextActionService:SetTitle("PMU_Esquiver", "Dodge")
+ContextActionService:SetPosition("PMU_Attaquer", UDim2.new(1, -150, 1, -140))
+ContextActionService:SetPosition("PMU_Esquiver", UDim2.new(1, -210, 1, -80))
+
+-- ---------------------------------------------------------------- barre de vie
+pcall(function() StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Health, false) end)
+local ecran = Instance.new("ScreenGui")
+ecran.Name = "InterfaceCombat"
+ecran.ResetOnSpawn = false
+ecran.Parent = joueur:WaitForChild("PlayerGui")
+local cadre = Instance.new("Frame")
+cadre.AnchorPoint = Vector2.new(0.5, 1)
+cadre.Position, cadre.Size = UDim2.new(0.5, 0, 1, -18), UDim2.fromOffset(280, 22)
+cadre.BackgroundColor3, cadre.BackgroundTransparency = ARDOISE, 0.15
+cadre.Parent = ecran
+Instance.new("UICorner", cadre).CornerRadius = UDim.new(0, 8)
+local trait = Instance.new("UIStroke", cadre)
+trait.Color, trait.Transparency = ARGENT, 0.35
+local jauge = Instance.new("Frame")
+jauge.Position, jauge.Size = UDim2.fromOffset(3, 3), UDim2.new(1, -6, 1, -6)
+jauge.BackgroundColor3, jauge.BorderSizePixel = VIE, 0
+jauge.Parent = cadre
+Instance.new("UICorner", jauge).CornerRadius = UDim.new(0, 6)
+local valeur = Instance.new("TextLabel")
+valeur.BackgroundTransparency, valeur.Size = 1, UDim2.fromScale(1, 1)
+valeur.Font, valeur.TextSize, valeur.TextColor3 = Enum.Font.GothamBold, 14, Color3.new(1, 1, 1)
+valeur.TextStrokeTransparency = 0.5
+valeur.Parent = cadre
+
+local function majVie()
+	if not humanoide then return end
+	local part = math.clamp(humanoide.Health / math.max(humanoide.MaxHealth, 1), 0, 1)
+	jauge.Size = UDim2.new(part, -6 * part, 1, -6)
+	jauge.BackgroundColor3 = if part > 0.3 then VIE else ROUGE
+	valeur.Text = `{math.ceil(humanoide.Health)} / {math.floor(humanoide.MaxHealth)}`
+end
+
+-- ---------------------------------------------------------------- impacts : chiffres et sons
+Impact.OnClientEvent:Connect(function(position: Vector3, degats: number, modele: Instance, auteur: Player?)
+	local surMoi = modele == perso
+	local point = Instance.new("Attachment")
+	point.WorldPosition = position + Vector3.new(0, 2.5, 0)
+	point.Parent = workspace.Terrain
+	son(if surMoi then "Blessure" else "Impact", point, 0.55)
+	etincelles(point)
+	if surMoi then
+		secouer(Config.EFFETS.secousseBlessure)
+	elseif auteur == joueur then
+		arretImage()
+		secouer(Config.EFFETS.secousseFrappe)
+	end
+	local affiche = Instance.new("BillboardGui")
+	affiche.Size, affiche.AlwaysOnTop = UDim2.fromOffset(120, 40), true
+	affiche.StudsOffsetWorldSpace = Vector3.new(math.random(-10, 10) / 10, 0, 0)
+	affiche.Adornee, affiche.Parent = point, point
+	local texte = Instance.new("TextLabel")
+	texte.BackgroundTransparency, texte.Size = 1, UDim2.fromScale(1, 1)
+	texte.Font, texte.TextSize = Enum.Font.GothamBlack, 26
+	texte.TextColor3 = if surMoi then ROUGE else Color3.new(1, 1, 1)
+	texte.TextStrokeTransparency, texte.Text = 0.3, tostring(degats)
+	texte.Parent = affiche
+	TweenService:Create(affiche, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+		{StudsOffsetWorldSpace = affiche.StudsOffsetWorldSpace + Vector3.new(0, 2.5, 0)}):Play()
+	TweenService:Create(texte, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+		{TextTransparency = 1, TextStrokeTransparency = 1}):Play()
+	Debris:AddItem(point, 3)
+end)
+
+-- ---------------------------------------------------------------- démarrage
+local function arrivee(nouveau: Model)
+	preparer(nouveau)
+	coupActuel, libreA, finCombo, esquiveDispo = 0, 0, 0, 0
+	humanoide.HealthChanged:Connect(majVie)
+	humanoide:GetPropertyChangedSignal("MaxHealth"):Connect(majVie)
+	majVie()
+end
+joueur.CharacterAdded:Connect(arrivee)
+if joueur.Character then task.spawn(arrivee, joueur.Character) end
