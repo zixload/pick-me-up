@@ -27,7 +27,7 @@ Boutique.ARTICLES = {
 		image = "rbxassetid://134775045623355", etiquette = "Best value", contenu = {Or = 30000},
 		description = "The treasury of a seasoned master. The best rate of gold for your Robux."},
 	{id = "CaisseBatisseur", rayon = "Materiaux", nom = "Builder's Crate", prix = 99, produit = 0, rarete = 3,
-		image = "rbxassetid://104924613733889", contenu = {Materiaux = {Bluestone = 50, Timber = 50}},
+		image = "rbxassetid://118032124896002", contenu = {Materiaux = {Bluestone = 50, Timber = 50}},
 		description = "Stone and timber straight from the quarries. Everything the first-style buildings are made of."},
 }
 

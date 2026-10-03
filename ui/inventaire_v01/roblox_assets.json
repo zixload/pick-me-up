@@ -21,5 +21,10 @@
   "fleche_haut": "rbxassetid://116627647332463",
   "onglet_quotidien": "rbxassetid://121228905160706",
   "onglet_hebdo": "rbxassetid://89248754852567",
-  "onglet_histoire": "rbxassetid://115097566438449"
+  "onglet_histoire": "rbxassetid://115097566438449",
+  "objet_bluestone_3d": "rbxassetid://118032124896002",
+  "objet_timber_3d": "rbxassetid://124771022840650",
+  "objet_nightbasalt_3d": "rbxassetid://99683385341819",
+  "objet_silverore_3d": "rbxassetid://127323687872833",
+  "objet_goldore_3d": "rbxassetid://138996996349112"
 }

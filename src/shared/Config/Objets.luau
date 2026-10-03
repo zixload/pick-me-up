@@ -1,7 +1,7 @@
 -- Catalogue des objets montrés dans l'inventaire : catégories (bandeau de gauche) et fiche de chaque objet.
 -- Tout texte affiché est en anglais. Rareté de 1 à 5 étoiles : elle donne la couleur de la carte.
--- image : rbxassetid de l'icône (vide : la carte montre un losange). Icônes provisoires dessinées par
--- ui/inventaire_v01/icones.py, à remplacer par de vraies icônes.
+-- image : rbxassetid de l'icône. Matériaux : rendus 3D (icone_quartz.py, materiaux_3d.py dans ui/inventaire_v01) ;
+-- épée et bouclier : icônes provisoires dessinées par icones.py.
 local Objets = {}
 
 Objets.CATEGORIES = {
@@ -12,19 +12,19 @@ Objets.CATEGORIES = {
 
 -- id -> fiche. Les matériaux ont le même id que dans Config.Materiaux (et le profil du joueur).
 Objets.LISTE = {
-	Bluestone = {nom = "Bluestone", categorie = "Materiaux", type = "Building Material", rarete = 2, image = "rbxassetid://104924613733889",
+	Bluestone = {nom = "Bluestone", categorie = "Materiaux", type = "Building Material", rarete = 2, image = "rbxassetid://118032124896002",   -- rendu 3D (ui/inventaire_v01/materiaux_3d.py)
 		effets = {"Upgrades buildings in the first style"},
 		description = "Blue-grey stone mined on expeditions, outside the Tower. Paired with Timber, it raises the walls of a young base.",
 		source = "Mined on expeditions"},
-	Timber = {nom = "Timber", categorie = "Materiaux", type = "Building Material", rarete = 2, image = "rbxassetid://109674347849677",
+	Timber = {nom = "Timber", categorie = "Materiaux", type = "Building Material", rarete = 2, image = "rbxassetid://124771022840650",   -- rendu 3D (ui/inventaire_v01/materiaux_3d.py)
 		effets = {"Upgrades buildings in the first style"},
 		description = "Seasoned logs gathered on expeditions. Beams, doors and scaffolds of the first style are cut from it.",
 		source = "Gathered on expeditions"},
-	NightBasalt = {nom = "Night Basalt", categorie = "Materiaux", type = "Building Material", rarete = 3, image = "rbxassetid://137223979602772",
+	NightBasalt = {nom = "Night Basalt", categorie = "Materiaux", type = "Building Material", rarete = 3, image = "rbxassetid://99683385341819",   -- rendu 3D (ui/inventaire_v01/materiaux_3d.py)
 		effets = {"Upgrades buildings in the Night Basalt style"},
 		description = "A dense black rock with a faint blue sheen. Only bases whose master has cleared floor 10 of the Tower can work it.",
 		source = "Mined on expeditions"},
-	SilverOre = {nom = "Silver Ore", categorie = "Materiaux", type = "Building Material", rarete = 3, image = "rbxassetid://71060504247809",
+	SilverOre = {nom = "Silver Ore", categorie = "Materiaux", type = "Building Material", rarete = 3, image = "rbxassetid://127323687872833",   -- rendu 3D (ui/inventaire_v01/materiaux_3d.py)
 		effets = {"Upgrades buildings in the Night Basalt style"},
 		description = "Raw silver veined through grey rock. Smelted into the trims and crests of the Night Basalt style.",
 		source = "Mined on expeditions"},
@@ -32,7 +32,7 @@ Objets.LISTE = {
 		effets = {"Upgrades buildings in the Quartz style"},
 		description = "Pale, almost translucent stone. Reserved for masters who have cleared floor 50 of the Tower.",
 		source = "Mined on expeditions"},
-	GoldOre = {nom = "Gold Ore", categorie = "Materiaux", type = "Building Material", rarete = 4, image = "rbxassetid://113697874391024",
+	GoldOre = {nom = "Gold Ore", categorie = "Materiaux", type = "Building Material", rarete = 4, image = "rbxassetid://138996996349112",   -- rendu 3D (ui/inventaire_v01/materiaux_3d.py)
 		effets = {"Upgrades buildings in the Quartz style"},
 		description = "Heavy nuggets of gold. Beaten into the ornaments that crown the Quartz style.",
 		source = "Mined on expeditions"},
