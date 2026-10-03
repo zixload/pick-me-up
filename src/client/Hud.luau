@@ -806,6 +806,90 @@ joueur.CharacterAdded:Connect(function()
 	combo.Visible, coups = false, 0
 end)
 
+-- ---------------------------------------------------------------- noms des bâtiments vus de loin (étape 7)
+-- Le nom anglais de chaque lot flotte au-dessus de lui (Config.Batiments), à taille fixe à l'écran. Il n'apparaît
+-- qu'à distance (fondu entre 45 et 60 studs) : sur le lot, il ne sert plus ; il rapetisse jusqu'à 220 studs, puis disparaît. Position : centre du socle du lot
+-- (workspace.Batiments.Sol.Socle_<Lot>), hauteur : haut du bâtiment affiché (Workspace.Batiments.<Lot>) ; avant
+-- que le socle ne soit chargé (streaming), la position de la config sert.
+local ConfigBatiments = require(ReplicatedStorage.Shared.Config.Batiments)
+local PROCHE, NET, LOIN = 45, 60, 220
+local PETIT = 0.65   -- taille à LOIN (100 % à NET) : de loin, les noms se chevauchent moins
+local SOCLES = {Academie_Magie = "Socle_Salle_Magie"}   -- socles nommés autrement que leur lot
+local noms = {}
+local lots = {}
+for id, lot in ConfigBatiments.LOTS do lots[id] = lot.nom end
+if ConfigBatiments.AUTOMATIQUES and ConfigBatiments.AUTOMATIQUES.Faille then lots.Faille = ConfigBatiments.AUTOMATIQUES.Faille.nom end
+
+for id, nom in lots do
+	local point = Instance.new("Attachment")
+	point.Name = "NomBatiment_" .. id
+	local p = ConfigBatiments.LOTS[id] and ConfigBatiments.LOTS[id].position
+	point.Position = if p then Vector3.new(p[1], 14, p[2]) else Vector3.new(118, 14, 50.5)
+	point.Parent = workspace.Terrain
+	local affiche = Instance.new("BillboardGui")
+	affiche.Name, affiche.Adornee = "Nom_" .. id, point
+	affiche.Size, affiche.AlwaysOnTop, affiche.MaxDistance = UDim2.fromOffset(260, 30), true, LOIN
+	affiche.LightInfluence = 0
+	affiche.Parent = joueur.PlayerGui
+	local texte = etiquette(affiche, nom, 17, Hud.POLICE)
+	texte.AnchorPoint, texte.Position = Vector2.new(0.5, 0.5), UDim2.fromScale(0.5, 0.5)
+	local taille = Instance.new("UIScale")
+	taille.Parent = texte
+	noms[id] = {point = point, texte = texte, trait = texte:FindFirstChildOfClass("UIStroke"), taille = taille}
+end
+
+-- centre du socle et haut du bâtiment, relus de temps en temps (streaming, bâtiments posés ou remplacés)
+local function placerNoms()
+	local sol = workspace:FindFirstChild("Batiments") and workspace.Batiments:FindFirstChild("Sol")
+	for id, n in noms do
+		local socle = sol and sol:FindFirstChild(SOCLES[id] or ("Socle_" .. id))
+		local x, z = n.point.Position.X, n.point.Position.Z
+		if socle then
+			local cf = if socle:IsA("Model") then socle:GetBoundingBox() else socle.CFrame
+			x, z = cf.Position.X, cf.Position.Z
+		end
+		local y = 14
+		-- palier affiché par le système de paliers (Workspace.Batiments.<Lot>), sinon un modèle posé à la main
+		-- (<Lot>_P<n>, éventuellement suivi d'un suffixe ; Logements ne prend pas Logements_Annexe)
+		local bat = workspace:FindFirstChild("Batiments") and workspace.Batiments:FindFirstChild(id)
+		if not (bat and bat:IsA("Model")) then
+			bat = nil
+			for _, c in workspace:GetChildren() do
+				if c:IsA("Model") and string.match(c.Name, "^" .. id .. "_P%d+") then bat = c end
+			end
+		end
+		if bat then
+			local cf, taille = bat:GetBoundingBox()
+			y = cf.Position.Y + taille.Y / 2 + 4
+		end
+		n.point.Position = Vector3.new(x, y, z)
+	end
+end
+task.spawn(function()
+	while true do
+		placerNoms()
+		task.wait(5)
+	end
+end)
+
+-- fondu selon la distance à la caméra
+local cumulNoms = 0
+RunService.RenderStepped:Connect(function(dt)
+	cumulNoms += dt
+	if cumulNoms < 0.1 then return end
+	cumulNoms = 0
+	local camera = workspace.CurrentCamera
+	if not camera then return end
+	for _, n in noms do
+		local d = (n.point.WorldPosition - camera.CFrame.Position).Magnitude
+		local opacite = math.clamp((d - PROCHE) / (NET - PROCHE), 0, 1)
+		n.texte.TextTransparency = 1 - opacite
+		n.trait.Transparency = 1 - opacite * 0.9
+		n.texte.Visible = opacite > 0
+		n.taille.Scale = 1 - (1 - PETIT) * math.clamp((d - NET) / (LOIN - NET), 0, 1)
+	end
+end)
+
 -- ---------------------------------------------------------------- chiffres de dégâts
 local hasard = Random.new()
 
