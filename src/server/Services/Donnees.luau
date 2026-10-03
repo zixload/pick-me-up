@@ -29,6 +29,8 @@ local MODELE = {
 		Semaine = "", Hebdo = {},
 		Histoire = 1, HistoireProgres = 0,
 	},
+	-- offres du jour (Services/Offres) : jour en cours, cadeau pris, échanges tirés et nombre d'achats de chacun
+	Offres = {Jour = "", Cadeau = false, Echanges = {}},
 	-- boutique (Services/Boutique) : articles uniques déjà achetés, derniers reçus traités (pas de double remise)
 	Achats = {},
 	Recus = {},

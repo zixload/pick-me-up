@@ -337,16 +337,18 @@ local function ligne(nom: string, ordre: number, modele: Model?)
 	return l, rond, etiquetteNom
 end
 
--- le héros, actif : bande claire qui s'estompe vers la gauche, ◀ après le nom
+-- le héros, actif : bande noire peu opaque qui part du bord droit du portrait et s'estompe vers la gauche,
+-- ◀ après le nom ; son bout droit est arrondi (rayon = demi-hauteur) pour rester dans le rond du portrait
 local ligneHeros, _, nomHeros = ligne(joueur.DisplayName, 0, nil)
 nomHeros.Position = UDim2.new(1, -86, 0.5, 0)
 local actif = nomOmbre(ligneHeros, "◀", 11)
 actif.AnchorPoint, actif.Position = Vector2.new(1, 0.5), UDim2.new(1, -68, 0.5, 0)
-local bande = cadre(ligneHeros, UDim2.new(1, 20, 0, 34), UDim2.new(1, 0, 0.5, 0), BLANC, 0)
+local bande = cadre(ligneHeros, UDim2.new(1, 20, 0, 34), UDim2.new(1, 0, 0.5, 0), Color3.new(0, 0, 0), 0)
 bande.AnchorPoint, bande.ZIndex = Vector2.new(1, 0.5), 0
+Instance.new("UICorner", bande).CornerRadius = UDim.new(0, 17)
 local fondu = Instance.new("UIGradient")
-fondu.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(0.6, 0.85),
-	NumberSequenceKeypoint.new(1, 0.7)})
+fondu.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(0.5, 0.8),
+	NumberSequenceKeypoint.new(1, 0.6)})
 fondu.Parent = bande
 
 local membres = {}   -- [modèle] = ligne
@@ -497,12 +499,12 @@ end
 -- ---------------------------------------------------------------- icônes en haut à droite (étape 3)
 -- Cinq emplacements de gauche à droite, le dernier collé au bord comme la référence ; images générées avec Meshy (fond vert),
 -- détourées par ui/hud_v01/detourer.py.
--- Emplacements : 1 carte, 2 événement, 3 offres du jour, 4 quêtes quotidiennes, 5 inventaire.
+-- De gauche à droite (après le coffre de la boutique) : offres du jour, carte, événement, quêtes, inventaire.
 -- cache : icône pas encore utile (aucun événement pour l'instant) ; les autres se resserrent vers la droite.
 local ICONES = {
-	{id = "Carte", emplacement = 1, image = "rbxassetid://96444988812766"},
-	{id = "Evenement", emplacement = 2, image = "rbxassetid://109209037564164", cache = true},
-	{id = "Offres", emplacement = 3, image = "rbxassetid://120810365077873"},
+	{id = "Offres", emplacement = 1, image = "rbxassetid://80084685384976", attrayant = true},   -- diamant en couleurs (Meshy), à droite du coffre
+	{id = "Carte", emplacement = 2, image = "rbxassetid://96444988812766"},
+	{id = "Evenement", emplacement = 3, image = "rbxassetid://109209037564164", cache = true},
 	{id = "Quetes", emplacement = 4, image = "rbxassetid://122967294472296"},
 	{id = "Inventaire", emplacement = 5, image = "rbxassetid://97951001415611"},
 }
@@ -528,14 +530,41 @@ for rang, icone in visibles do
 	end)
 end
 
+-- icônes en couleurs qui doivent attirer l'œil (boutique, offres du jour) : halo qui respire et étincelles qui
+-- tournent (comme les techniques), petit balancement toutes les 4 s ; decale : décalage du balancement
+local STYLE_ATTRAYANT = {image = ETINCELLE, nb = 9, taille = {6, 12}, duree = {1.2, 2.2}, vitesse = {0.3, 0.7},
+	opacite = 1, ecart = 0.35, montee = 8, halo = true, eclaircir = 0.35}
+local effetsAttrayants = {}
+local function rendreAttrayant(b: GuiObject, couleur: Color3, decale: number)
+	local effet = effetLumineux(b.Size.X.Offset, b.Position, b.AnchorPoint, couleur, STYLE_ATTRAYANT)
+	b.ZIndex = 2
+	table.insert(effetsAttrayants, effet)
+	task.spawn(function()
+		local balance = TweenInfo.new(0.12, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
+		task.wait(decale)
+		while b.Parent do
+			task.wait(4)
+			for _, angle in {-12, 10, -7, 4, 0} do
+				local tw = TweenService:Create(b, balance, {Rotation = angle})
+				tw:Play()
+				tw.Completed:Wait()
+			end
+		end
+	end)
+end
+RunService.RenderStepped:Connect(function(dt)
+	for _, effet in effetsAttrayants do animerEffet(effet, true, dt) end
+end)
+for _, icone in visibles do
+	local b = ecran:FindFirstChild(icone.id)
+	if icone.attrayant and b then rendreAttrayant(b, Color3.fromRGB(110, 210, 255), 2) end
+end
+
 -- Boutique : coffre doré en couleurs (Meshy, détouré par detourer.py), à gauche des icônes et un peu plus grand.
 -- Pour attirer l'œil : halo qui respire et étincelles qui tournent (comme les techniques), petit balancement régulier.
 -- Le clic est pris par Boutique.client.luau (bouton « Boutique » de ce ScreenGui).
 local TAILLE_BOUTIQUE = 66
-local STYLE_BOUTIQUE = {image = ETINCELLE, nb = 9, taille = {6, 12}, duree = {1.2, 2.2}, vitesse = {0.3, 0.7},
-	opacite = 1, ecart = 0.35, montee = 8, halo = true, eclaircir = 0.35}
 local positionBoutique = UDim2.new(1, -40 - #visibles * PAS_ICONES + 4, 0, 10)
-local effetBoutique = effetLumineux(TAILLE_BOUTIQUE, positionBoutique, Vector2.new(1, 0), Color3.fromRGB(255, 196, 70), STYLE_BOUTIQUE)
 local boutique = Instance.new("ImageButton")
 boutique.Name, boutique.Image, boutique.BackgroundTransparency = "Boutique", "rbxassetid://76413057251104", 1
 boutique.Size, boutique.AnchorPoint, boutique.Position = UDim2.fromOffset(TAILLE_BOUTIQUE, TAILLE_BOUTIQUE), Vector2.new(1, 0), positionBoutique
@@ -549,20 +578,7 @@ end)
 boutique.MouseLeave:Connect(function()
 	TweenService:Create(grossirBoutique, TweenInfo.new(0.12), {Scale = 1}):Play()
 end)
-RunService.RenderStepped:Connect(function(dt)
-	animerEffet(effetBoutique, true, dt)
-end)
-task.spawn(function()
-	local balance = TweenInfo.new(0.12, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
-	while boutique.Parent do
-		task.wait(4)
-		for _, angle in {-12, 10, -7, 4, 0} do
-			local t = TweenService:Create(boutique, balance, {Rotation = angle})
-			t:Play()
-			t.Completed:Wait()
-		end
-	end
-end)
+rendreAttrayant(boutique, Color3.fromRGB(255, 196, 70), 0)
 
 -- ---------------------------------------------------------------- techniques, en bas à droite (étape 4)
 -- Bouton moyen puis grand bouton à droite, comme la référence ; la touche dans une petite case dessous.
@@ -644,7 +660,7 @@ end)
 -- couvrant x et z de -210 à 210. Le cercle (un seul CanvasGroup) reste centré sur le héros : la carte glisse
 -- dessous ; la flèche tourne avec le personnage, le cône clair avec la caméra. Anneau blanc fin et « N » sur le bord.
 local CARTE = {
-	image = "rbxassetid://73535242224879", fleche = "rbxassetid://106719850484589", cone = "rbxassetid://72673449868031",
+	image = "rbxassetid://84856923036863", fleche = "rbxassetid://106719850484589", cone = "rbxassetid://72673449868031",
 	origine = Vector2.new(-210, -210), cote = 420,   -- studs couverts par l'image
 	diametre = 190, champ = 110,                     -- px du cercle à l'écran, studs visibles d'un bord à l'autre
 	position = UDim2.fromOffset(62, 70),             -- sous la barre de Roblox (menu, chat, micro)

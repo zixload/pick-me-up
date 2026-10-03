@@ -1,13 +1,15 @@
 -- Carte plein écran (03/10/2026), d'après la référence du joueur : la carte du lobby en grand sur fond bleu nuit,
 -- noms des bâtiments en lettres blanches à contour, flèche du joueur, zoom (+ / − à gauche, molette) et
 -- déplacement à la souris, nom du lieu en bas à droite. Même image que la mini-carte (ui/hud_v01/carte.py),
--- nord en haut (-Z), couvrant x et z de -210 à 210. S'ouvre par l'icône carte du HUD, un clic sur la
+-- nord en haut (-Z), couvrant x et z de -210 à 210, découpée au cercle du rempart (ui/hud_v01/carte_cercle.py). S'ouvre par l'icône carte du HUD, un clic sur la
 -- mini-carte ou la touche M. Tout texte affiché est en anglais.
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
+local ContextActionService = game:GetService("ContextActionService")
+local Lighting = game:GetService("Lighting")
 
 local Style = require(script.Parent:WaitForChild("StyleMenus"))
 local Hud = require(script.Parent:WaitForChild("Hud"))
@@ -18,7 +20,7 @@ local cree, arrondi, filet, texte, cadre = Style.cree, Style.arrondi, Style.file
 local CREME, ARDOISE, BLANC = Style.CREME, Style.ARDOISE, Style.BLANC
 
 local CARTE = {
-	image = "rbxassetid://73535242224879", fleche = "rbxassetid://106719850484589", icone = "rbxassetid://96444988812766",
+	image = "rbxassetid://84856923036863", fleche = "rbxassetid://106719850484589", icone = "rbxassetid://96444988812766",
 	origine = Vector2.new(-210, -210), cote = 420,   -- studs couverts par l'image
 	taille = 960,                                    -- côté de la carte à l'écran au zoom 1 (écran de 1920 × 1080)
 	zoomMin = 1, zoomMax = 3,
@@ -27,15 +29,18 @@ local SOCLES = {Academie_Magie = "Socle_Salle_Magie"}   -- socles nommés autrem
 
 -- ---------------------------------------------------------------- écran
 local ecran, racine = Style.ecran("Carte", 20)
-local fond = cadre(ecran, UDim2.fromScale(1, 1), UDim2.new(), Color3.fromRGB(16, 24, 38), 0)
-cree("UIGradient", {Rotation = 90, Color = ColorSequence.new(Color3.fromRGB(26, 40, 60), Color3.fromRGB(12, 18, 30))}, fond)
+-- voile bleu nuit peu opaque : hors de la carte, on voit le jeu flouté
+local fond = cadre(ecran, UDim2.fromScale(1, 1), UDim2.new(), Color3.fromRGB(16, 24, 38), 0.6)
 
 -- la vue (ce qui est à l'écran) et le plan (la carte, qu'on déplace et agrandit dedans)
 local vue = cadre(racine, UDim2.fromScale(1, 1), UDim2.new())
 vue.ClipsDescendants = true
 local plan = cadre(vue, UDim2.fromOffset(CARTE.taille, CARTE.taille), UDim2.fromScale(0.5, 0.5))
 plan.AnchorPoint = Vector2.new(0.5, 0.5)
-cree("ImageLabel", {Image = CARTE.image, BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1)}, plan)
+local image = cree("ImageLabel", {Image = CARTE.image, BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1)}, plan)
+-- la carte est un disque (le lobby est circulaire) : le cadre est arrondi en cercle pour que le liseré en fasse le tour
+cree("UICorner", {CornerRadius = UDim.new(0.5, 0)}, image)
+cree("UICorner", {CornerRadius = UDim.new(0.5, 0)}, plan)
 -- liseré clair autour de l'image, comme le rivage de la référence
 filet(plan, Color3.fromRGB(140, 220, 230), 2, 0.5)
 
@@ -75,7 +80,7 @@ local fleche = cree("ImageLabel", {Image = CARTE.fleche, BackgroundTransparency 
 
 -- ---------------------------------------------------------------- habillage
 cree("ImageLabel", {Image = CARTE.icone, BackgroundTransparency = 1, Size = UDim2.fromOffset(52, 52),
-	AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromOffset(110, 60)}, racine)
+	AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromOffset(200, 60)}, racine)
 Style.titre(racine, "Map / Lobby")
 local fermer = Style.boutonFermer(racine)
 
@@ -147,18 +152,25 @@ end
 -- ---------------------------------------------------------------- ouverture et fermeture
 local ouvert = false
 local reafficher = nil
+local flou: BlurEffect? = nil
 local glisse: Vector2? = nil
 local suivi: RBXScriptConnection? = nil
+
+local molette: (string, Enum.UserInputState, InputObject) -> Enum.ContextActionResult   -- défini plus bas
 
 local function ouvrir()
 	if ouvert then return end
 	ouvert = true
 	reafficher = Style.masquerAutres(ecran)
+	flou = cree("BlurEffect", {Name = "FlouCarte", Size = 0}, Lighting)
+	TweenService:Create(flou :: BlurEffect, TweenInfo.new(0.2), {Size = 18}):Play()
 	placerNoms()
 	zoom = 1.6
 	centrerSurJoueur()
 	appliquer(false)
 	ecran.Enabled = true
+	ContextActionService:BindActionAtPriority("MoletteCarte", molette, false, Enum.ContextActionPriority.High.Value + 10,
+		Enum.UserInputType.MouseWheel)
 	suivi = RunService.RenderStepped:Connect(function()
 		local r = joueur.Character and joueur.Character:FindFirstChild("HumanoidRootPart")
 		if r then
@@ -177,10 +189,13 @@ local function fermerCarte()
 	ouvert = false
 	ecran.Enabled = false
 	glisse = nil
+	ContextActionService:UnbindAction("MoletteCarte")
 	if suivi then suivi:Disconnect() end
 	suivi = nil
 	if reafficher then reafficher() end
 	reafficher = nil
+	if flou then flou:Destroy() end
+	flou = nil
 end
 fermer.Activated:Connect(fermerCarte)
 
@@ -203,10 +218,16 @@ UserInputService.InputChanged:Connect(function(entree)
 		decalage += (p - glisse) / (if echelle then echelle.Scale else 1)
 		glisse = p
 		appliquer(false)
-	elseif entree.UserInputType == Enum.UserInputType.MouseWheel then
-		zoomer(if entree.Position.Z > 0 then 1.15 else 1 / 1.15)
 	end
 end)
+
+-- molette : zoome la carte et rien d'autre (la caméra du héros ne bouge pas tant que la carte est ouverte)
+function molette(_, etatEntree, entree)
+	if ouvert and etatEntree == Enum.UserInputState.Change then
+		zoomer(if entree.Position.Z > 0 then 1.15 else 1 / 1.15)
+	end
+	return Enum.ContextActionResult.Sink
+end
 
 UserInputService.InputBegan:Connect(function(entree, traite)
 	if traite then return end

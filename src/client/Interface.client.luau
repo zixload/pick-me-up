@@ -51,7 +51,7 @@ cree("UIGradient", {Transparency = NumberSequence.new({
 })}, voile)
 
 cree("ImageLabel", {Image = Style.IMAGES.constructions, ImageColor3 = Style.OR_PALE, BackgroundTransparency = 1,
-	Size = UDim2.fromOffset(56, 56), AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromOffset(110, 60)}, racine)
+	Size = UDim2.fromOffset(56, 56), AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromOffset(205, 60)}, racine)
 local titre = Style.titre(racine, "Buildings")
 local montantOr = Style.bourse(racine)
 local fermer = Style.boutonFermer(racine)

@@ -120,9 +120,9 @@ function Style.masquerAutres(garde: ScreenGui): () -> ()
 end
 
 -- ---------------------------------------------------------------- éléments
--- titre en haut à gauche (« Inventory / Materials »)
+-- titre en haut à gauche (« Inventory / Materials »), assez à droite pour ne pas passer sous les boutons de Roblox
 function Style.titre(racine, contenu: string)
-	return texte(racine, contenu, 34, Style.OR_PALE, {AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromOffset(180, 60),
+	return texte(racine, contenu, 34, Style.OR_PALE, {AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromOffset(250, 60),
 		Size = UDim2.fromOffset(900, 44), TextXAlignment = Enum.TextXAlignment.Left})
 end
 
