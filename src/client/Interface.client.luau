@@ -76,6 +76,8 @@ ecran.IgnoreGuiInset = false
 ecran.Parent = joueur:WaitForChild("PlayerGui")
 
 local hud = cadre(ecran, UDim2.fromOffset(270, 112), UDim2.fromOffset(16, 16))
+-- Le portrait et le profil individuel sont désormais affichés par CombatPresentation.
+hud.Visible = false
 local hudBase = texte(hud, "Loading…", UDim2.new(1, -24, 0, 18), UDim2.fromOffset(12, 8), DISCRET, POLICE, 14)
 local hudNiveau = texte(hud, "", UDim2.new(1, -24, 0, 22), UDim2.fromOffset(12, 28), TEXTE, POLICE_FORTE, 19)
 local barre = Instance.new("Frame")

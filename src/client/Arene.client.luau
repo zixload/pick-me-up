@@ -63,7 +63,7 @@ local function majFiche(cote: number, victoires: number?, defaites: number?)
 	ficheRang.TextColor3 = r.clair
 	local bilan = if victoires then `  ·  {victoires}W {defaites}L` else ""
 	ficheDetail.Text = `{r.titre}  ·  {cote}{bilan}`
-	fiche.Visible = true
+	fiche.Visible = false   -- insigne retiré du HUD (02/10/2026), le nouveau HUD le reprendra
 end
 
 -- ---------------------------------------------------------------- file d'attente

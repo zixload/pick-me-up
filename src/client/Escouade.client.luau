@@ -51,6 +51,7 @@ ecran.Parent = joueur:WaitForChild("PlayerGui")
 
 -- ---------------------------------------------------------------- ordres
 local barre = cadre(ecran, UDim2.fromOffset(276, 46), UDim2.new(0, 16, 1, -76), Vector2.new(0, 1))
+barre.Visible = false   -- retirée du HUD (02/10/2026) en attendant la liste d'escouade à droite ; X, C, V marchent toujours
 local boutonsOrdre = {}
 for i, o in Config.ORDRES do
 	local b = bouton(barre, `{o.touche.Name}  {o.nom}`, UDim2.fromOffset(84, 34), UDim2.fromOffset(6 + (i - 1) * 90, 6),
