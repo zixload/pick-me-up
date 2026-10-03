@@ -10,6 +10,7 @@ local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local Lighting = game:GetService("Lighting")
 
+local Style = require(script.Parent:WaitForChild("StyleMenus"))
 local Objets = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Config"):WaitForChild("Objets"))
 local reseau = ReplicatedStorage:WaitForChild("Reseau")
 local LireInventaire = reseau:WaitForChild("LireInventaire")
@@ -18,84 +19,14 @@ local InventaireChange = reseau:WaitForChild("InventaireChange")
 local joueur = Players.LocalPlayer
 local playerGui = joueur:WaitForChild("PlayerGui")
 
--- Nunito : la plus proche de la police de la référence parmi celles de Roblox (comparaison du 03/10/2026)
-local POLICE = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold)
-local POLICE_TITRE = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.ExtraBold)
-
-local CREME = Color3.fromRGB(236, 229, 216)
-local OR_PALE = Color3.fromRGB(219, 203, 165)     -- titre en haut à gauche
-local ARDOISE = Color3.fromRGB(59, 66, 85)        -- icône sur la pilule claire, croix du bouton fermer
-local TEXTE_FONCE = Color3.fromRGB(73, 83, 102)   -- quantités, effets, source
-local TEXTE_DESC = Color3.fromRGB(118, 121, 131)  -- description
-local BLANC = Color3.new(1, 1, 1)
--- dégradé de la carte selon la rareté : haut (plus sombre) -> bas
-local RARETES = {
-	{Color3.fromRGB(104, 108, 128), Color3.fromRGB(146, 148, 162)},
-	{Color3.fromRGB(46, 96, 92), Color3.fromRGB(78, 150, 126)},
-	{Color3.fromRGB(70, 94, 148), Color3.fromRGB(86, 140, 198)},
-	{Color3.fromRGB(90, 78, 140), Color3.fromRGB(158, 116, 198)},
-	{Color3.fromRGB(148, 94, 58), Color3.fromRGB(206, 130, 64)},
-}
-local IMAGES = {
-	sac = "rbxassetid://97951001415611",          -- icône du HUD
-	etoile4 = "rbxassetid://73972245179955",   -- petite étoile unie à quatre branches (ui/inventaire_v01/icones.py)
-	lueur = "rbxassetid://91456071127279",
-	etoile = "rbxassetid://86250761898445",
-	piece = "rbxassetid://134775045623355",
-	epingle = "rbxassetid://99198141695774",
-	bandeau = "rbxassetid://124393149078149",
-	fanion = "rbxassetid://114982685153407",
-}
-
--- ---------------------------------------------------------------- briques
-local function cree(classe: string, proprietes, parent: Instance?)
-	local i = Instance.new(classe)
-	for k, v in proprietes do (i :: any)[k] = v end
-	if parent then i.Parent = parent end
-	return i
-end
-
-local function arrondi(parent, rayon: number?)
-	return cree("UICorner", {CornerRadius = if rayon then UDim.new(0, rayon) else UDim.new(1, 0)}, parent)
-end
-
-local function filet(parent, couleur: Color3, epaisseur: number, transparence: number?)
-	return cree("UIStroke", {Color = couleur, Thickness = epaisseur, Transparency = transparence or 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border}, parent)
-end
-
-local function texte(parent, contenu: string, taille: number, couleur: Color3, proprietes)
-	local t = cree("TextLabel", {BackgroundTransparency = 1, FontFace = POLICE, Text = contenu, TextSize = taille,
-		TextColor3 = couleur}, parent)
-	if proprietes then
-		for k, v in proprietes do (t :: any)[k] = v end
-	end
-	return t
-end
-
-local function cadre(parent, taille: UDim2, position: UDim2, couleur: Color3?, transparence: number?)
-	return cree("Frame", {Size = taille, Position = position, BackgroundColor3 = couleur or BLANC,
-		BackgroundTransparency = transparence or (if couleur then 0 else 1), BorderSizePixel = 0}, parent)
-end
+local cree, arrondi, filet, texte, cadre = Style.cree, Style.arrondi, Style.filet, Style.texte, Style.cadre
+local CREME, OR_PALE, ARDOISE, BLANC = Style.CREME, Style.OR_PALE, Style.ARDOISE, Style.BLANC
+local TEXTE_FONCE, TEXTE_DESC = Style.TEXTE_FONCE, Style.TEXTE_DESC
+local IMAGES = Style.IMAGES
 
 -- ---------------------------------------------------------------- écran
-local ecran = cree("ScreenGui", {Name = "Inventaire", ResetOnSpawn = false, IgnoreGuiInset = true, DisplayOrder = 20,
-	Enabled = false, ZIndexBehavior = Enum.ZIndexBehavior.Sibling}, playerGui)
+local ecran, racine = Style.ecran("Inventaire", 20)
 local voile = cadre(ecran, UDim2.fromScale(1, 1), UDim2.new(), Color3.fromRGB(24, 32, 48), 0.4)
--- libère la souris (mode visée) tant que l'inventaire est ouvert
-cree("TextButton", {Modal = true, Text = "", BackgroundTransparency = 1, Size = UDim2.fromOffset(1, 1)}, ecran)
-
-local racine = cadre(ecran, UDim2.fromOffset(1920, 1080), UDim2.fromScale(0.5, 0.5))
-racine.AnchorPoint = Vector2.new(0.5, 0.5)
-local echelle = cree("UIScale", {}, racine)
-local function ajuster()
-	local vue = workspace.CurrentCamera.ViewportSize
-	local s = math.min(vue.Y / 1080, vue.X / 1500)
-	echelle.Scale = s
-	racine.Size = UDim2.fromOffset(vue.X / s, vue.Y / s)   -- pleine largeur : le bandeau colle au bord gauche
-end
-ajuster()
-workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(ajuster)
 
 -- ---------------------------------------------------------------- bandeau des catégories (à gauche)
 -- bannière translucide (double filet, motifs, pointe en bas) dessinée par ui/inventaire_v01/bandeau.py
@@ -130,27 +61,9 @@ for i, cat in Objets.CATEGORIES do
 end
 
 -- ---------------------------------------------------------------- haut de l'écran
-local titre = texte(racine, "Inventory", 34, OR_PALE, {AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromOffset(180, 60),
-	Size = UDim2.fromOffset(700, 44), TextXAlignment = Enum.TextXAlignment.Left})
-
-local bourse = cadre(racine, UDim2.fromOffset(200, 54), UDim2.new(1, -150, 0, 60), Color3.fromRGB(26, 32, 46), 0.35)
-bourse.AnchorPoint = Vector2.new(1, 0.5)
-arrondi(bourse)
-filet(bourse, BLANC, 1.5, 0.85)
-cree("ImageLabel", {Image = IMAGES.piece, BackgroundTransparency = 1, Size = UDim2.fromOffset(40, 40),
-	AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new(0, 8, 0.5, 0)}, bourse)
-local montantOr = texte(bourse, "0", 32, BLANC, {Size = UDim2.new(1, -66, 1, 0), Position = UDim2.fromOffset(54, 0),
-	TextXAlignment = Enum.TextXAlignment.Center})
-
-local fermer = cree("TextButton", {Text = "", AutoButtonColor = false, BackgroundColor3 = CREME, Size = UDim2.fromOffset(72, 72),
-	AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(1, -96, 0, 60)}, racine)
-arrondi(fermer)
-filet(fermer, BLANC, 5, 0.55)
-for _, angle in {45, -45} do
-	local barre = cadre(fermer, UDim2.fromOffset(36, 6), UDim2.fromScale(0.5, 0.5), ARDOISE)
-	barre.AnchorPoint, barre.Rotation = Vector2.new(0.5, 0.5), angle
-	arrondi(barre, 3)
-end
+local titre = Style.titre(racine, "Inventory")
+local montantOr = Style.bourse(racine)
+local fermer = Style.boutonFermer(racine)
 
 -- ---------------------------------------------------------------- grille
 local grille = cree("ScrollingFrame", {BackgroundTransparency = 1, BorderSizePixel = 0, Position = UDim2.fromOffset(240, 128),
@@ -165,18 +78,7 @@ local vide = texte(racine, "No items yet", 30, CREME, {Position = UDim2.fromOffs
 -- ---------------------------------------------------------------- fiche de l'objet (à droite)
 local fiche = cadre(racine, UDim2.fromOffset(615, 780), UDim2.new(1, -60, 0, 150))
 fiche.AnchorPoint = Vector2.new(1, 0)
-local FOND_ENTETE = Color3.fromRGB(92, 100, 128)
-local entete = cadre(fiche, UDim2.new(1, 0, 0, 72), UDim2.new(), FOND_ENTETE)
-local filetEntete = cadre(entete, UDim2.new(1, -16, 1, -12), UDim2.fromOffset(8, 6))
-filet(filetEntete, Color3.fromRGB(198, 204, 220), 1.5, 0.2)
-for _, x in {0, 1} do
-	local losange = cadre(entete, UDim2.fromOffset(13, 13), UDim2.new(x, if x == 0 then 8 else -8, 0.5, 0), FOND_ENTETE)
-	losange.AnchorPoint, losange.Rotation, losange.ZIndex = Vector2.new(0.5, 0.5), 45, 2
-	filet(losange, Color3.fromRGB(198, 204, 220), 1.5, 0.2)
-end
-local nomObjet = texte(entete, "", 46, BLANC, {FontFace = POLICE_TITRE, Position = UDim2.fromOffset(36, 0),
-	Size = UDim2.new(1, -72, 1, 0), TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 3})
-cree("UIStroke", {Color = Color3.fromRGB(40, 46, 64), Thickness = 1, Transparency = 0.6}, nomObjet)
+local nomObjet = Style.entete(fiche)
 
 local illustration = cadre(fiche, UDim2.new(1, 0, 0, 284), UDim2.fromOffset(0, 72), BLANC)
 cree("UIGradient", {Rotation = 90, Color = ColorSequence.new(Color3.fromRGB(80, 88, 114), Color3.fromRGB(62, 68, 90))}, illustration)
@@ -213,17 +115,8 @@ local source = texte(boiteSource, "", 27, TEXTE_FONCE, {Position = UDim2.fromOff
 	TextXAlignment = Enum.TextXAlignment.Left, TextTruncate = Enum.TextTruncate.AtEnd})
 
 -- bouton d'action en bas à droite (pilule claire) : seulement pour un objet qui a une action
-local action = cree("TextButton", {Text = "", AutoButtonColor = false, BackgroundColor3 = CREME, Size = UDim2.fromOffset(280, 80),
-	AnchorPoint = Vector2.new(1, 1), Position = UDim2.new(1, -70, 1, -40), Visible = false}, racine)
-arrondi(action)
-local puce = cadre(action, UDim2.fromOffset(58, 58), UDim2.new(0, 12, 0.5, 0), ARDOISE)
-puce.AnchorPoint = Vector2.new(0, 0.5)
-arrondi(puce)
-local anneau = cadre(puce, UDim2.fromOffset(26, 26), UDim2.fromScale(0.5, 0.5))
-anneau.AnchorPoint = Vector2.new(0.5, 0.5)
-arrondi(anneau)
-filet(anneau, Color3.fromRGB(255, 204, 50), 4)
-local actionTexte = texte(action, "Use", 40, ARDOISE, {Position = UDim2.fromOffset(70, 0), Size = UDim2.new(1, -80, 1, 0)})
+local action = Style.boutonAction(racine, "Use")
+action.bouton.Visible = false
 
 -- ---------------------------------------------------------------- état
 local inventaire = {Or = 0, Objets = {}}
@@ -233,7 +126,7 @@ local cartes = {}          -- id -> {contour, lueur, badge}
 local vus = nil            -- quantités à la dernière fermeture (nil : jamais ouvert)
 local nouveaux = {}        -- id -> true : quantité en hausse depuis la dernière visite
 local ouvert = false
-local caches = {}          -- autres interfaces masquées pendant l'ouverture
+local reafficher = nil     -- réaffiche les interfaces masquées pendant l'ouverture
 local flou: BlurEffect? = nil
 
 local function idsDe(cat: string): {string}
@@ -262,7 +155,7 @@ end
 local function majFiche()
 	local f = selection and Objets.LISTE[selection]
 	fiche.Visible = f ~= nil
-	action.Visible = f ~= nil and f.action ~= nil
+	action.bouton.Visible = f ~= nil and f.action ~= nil
 	if not f then return end
 	nomObjet.Text = f.nom
 	typeObjet.Text = f.type
@@ -278,7 +171,7 @@ local function majFiche()
 	end
 	description.Text = f.description
 	source.Text = f.source
-	if f.action then actionTexte.Text = f.action end
+	if f.action then action.texte.Text = f.action end
 	corpsFiche.CanvasPosition = Vector2.zero
 end
 
@@ -300,43 +193,11 @@ end
 
 local function carte(id: string, quantite: number, ordre: number)
 	local f = Objets.LISTE[id]
-	local degrade = RARETES[math.clamp(f.rarete or 1, 1, 5)]
-	local case = cadre(grille, UDim2.new(), UDim2.new())
-	case.LayoutOrder = ordre
-	arrondi(case, 8)   -- arrondit aussi le contour de sélection
-	local lueur = cree("ImageLabel", {Image = IMAGES.lueur, ImageColor3 = BLANC, ImageTransparency = 0.45, BackgroundTransparency = 1,
-		Size = UDim2.fromScale(1.45, 1.35), AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Visible = false}, case)
-	local corps = cree("CanvasGroup", {BackgroundColor3 = CREME, Size = UDim2.fromScale(1, 1), BorderSizePixel = 0, ZIndex = 2}, case)
-	arrondi(corps, 8)
-	-- zone de couleur : coin bas droit largement arrondi (le haut dépasse et le bas gauche est comblé)
-	local couleur = cadre(corps, UDim2.new(1, 0, 0, 192), UDim2.fromOffset(0, -40), BLANC)
-	arrondi(couleur, 26)
-	cree("UIGradient", {Rotation = 90, Color = ColorSequence.new(degrade[1], degrade[2])}, couleur)
-	cadre(corps, UDim2.fromOffset(30, 30), UDim2.fromOffset(0, 122), degrade[2])
-	cree("ImageLabel", {Image = f.image, BackgroundTransparency = 1, Size = UDim2.fromOffset(124, 124),
-		AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromOffset(77, 72)}, corps)
-	local etoiles = cadre(corps, UDim2.fromOffset((f.rarete or 1) * 25, 26), UDim2.fromOffset(77, 142))
-	etoiles.AnchorPoint = Vector2.new(0.5, 0.5)
-	cree("UIListLayout", {FillDirection = Enum.FillDirection.Horizontal, HorizontalAlignment = Enum.HorizontalAlignment.Center,
-		Padding = UDim.new(0, -1)}, etoiles)
-	for _ = 1, f.rarete or 1 do
-		cree("ImageLabel", {Image = IMAGES.etoile, BackgroundTransparency = 1, Size = UDim2.fromOffset(26, 26)}, etoiles)
-	end
-	texte(corps, tostring(quantite), 28, TEXTE_FONCE, {Position = UDim2.fromOffset(0, 154), Size = UDim2.new(1, 0, 0, 36)})
-	local contour = filet(case, BLANC, 3)
-	contour.Enabled = false
-	-- badge « New » en haut à droite, avec son étincelle
-	local badge = cadre(case, UDim2.fromOffset(84, 38), UDim2.new(1, 8, 0, -10), BLANC)
-	badge.AnchorPoint, badge.ZIndex = Vector2.new(1, 0), 4
-	arrondi(badge, 5)
-	filet(badge, Color3.fromRGB(255, 248, 214), 2)
-	cree("UIGradient", {Rotation = 90, Color = ColorSequence.new(Color3.fromRGB(255, 236, 150), Color3.fromRGB(250, 196, 72))}, badge)
-	texte(badge, "New", 28, Color3.fromRGB(204, 110, 14), {Size = UDim2.fromScale(1, 1), ZIndex = 5})
-	cree("ImageLabel", {Image = IMAGES.etoile4, ImageColor3 = Color3.fromRGB(255, 240, 180), BackgroundTransparency = 1,
-		Size = UDim2.fromOffset(24, 24), AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(1, 0), ZIndex = 6}, badge)
-	local bouton = cree("TextButton", {Text = "", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 7}, case)
+	local c = Style.carte(grille, {image = f.image, rarete = f.rarete, texte = tostring(quantite)})
+	c.case.LayoutOrder = ordre
+	local bouton = cree("TextButton", {Text = "", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 7}, c.case)
 	bouton.Activated:Connect(function() choisir(id) end)
-	cartes[id] = {contour = contour, lueur = lueur, badge = badge}
+	cartes[id] = c
 end
 
 local function remplir()
@@ -380,13 +241,7 @@ local function ouvrir()
 			if n > (vus[id] or 0) then nouveaux[id] = true end
 		end
 	end
-	table.clear(caches)
-	for _, g in playerGui:GetChildren() do
-		if g:IsA("ScreenGui") and g ~= ecran and g.Enabled then
-			g.Enabled = false
-			table.insert(caches, g)
-		end
-	end
+	reafficher = Style.masquerAutres(ecran)
 	flou = cree("BlurEffect", {Name = "FlouInventaire", Size = 0}, Lighting)
 	TweenService:Create(flou :: BlurEffect, TweenInfo.new(0.2), {Size = 18}):Play()
 	voile.BackgroundTransparency = 1
@@ -399,10 +254,8 @@ local function fermerInventaire()
 	if not ouvert then return end
 	ouvert = false
 	ecran.Enabled = false
-	for _, g in caches do
-		if g.Parent then g.Enabled = true end
-	end
-	table.clear(caches)
+	if reafficher then reafficher() end
+	reafficher = nil
 	if flou then flou:Destroy() end
 	flou = nil
 	vus = table.clone(inventaire.Objets)

@@ -150,3 +150,22 @@ for i in range(360):
     pts.append((128 + 116 * x, 128 + 116 * y))
 d.polygon(p(*pts), fill=BLANC)
 sauver(im, "etoile4")
+
+# ---------------------------------------------------------------- pastille du bouton d'action (fond du rond)
+# disque ardoise en dégradé, filet doré extérieur, filet clair intérieur ; l'icône (flèche, étoile) se pose dessus
+im, d = nouvelle()
+for r in range(120, 0, -1):
+    t = r / 120
+    c = tuple(int(a + (b - a) * t) for a, b in zip((86, 96, 124), (52, 58, 78)))
+    d.ellipse(p((128 - r, 128 - r), (128 + r, 128 + r)), fill=c + (255,))
+d.ellipse(p((10, 10), (246, 246)), outline=(226, 201, 138, 255), width=7 * F)
+d.ellipse(p((24, 24), (232, 232)), outline=(236, 229, 216, 90), width=2 * F)
+sauver(im, "pastille")
+
+# double chevron vers le haut (amélioration), blanc uni, teinté en jeu
+im, d = nouvelle()
+for y0 in (70, 132):
+    d.line(p((62, y0 + 52), (128, y0 - 6), (194, y0 + 52)), fill=BLANC, width=26 * F, joint="curve")
+    for x, y in ((62, y0 + 52), (128, y0 - 6), (194, y0 + 52)):
+        d.ellipse(p((x - 13, y - 13), (x + 13, y + 13)), fill=BLANC)
+sauver(im, "fleche_haut")
