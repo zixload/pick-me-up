@@ -39,6 +39,39 @@ Mobs.MODELES = {
 		cadenceMarche = 9,
 		cadenceCourse = 17,
 	},
+	Gobelin_Sarbacanier = {
+		nom = "Goblin Blowgunner",
+		echelle = 0.65,
+		niveau = 3,
+		pv = 90,
+		degats = 4,
+		distance = true,          -- tireur : garde ses distances et souffle des dards à la sarbacane (Tir)
+		portee = 40,              -- studs : tire à cette distance (taille 1)
+		ideal = 30,               -- distance qu'il cherche à garder
+		fuite = 12,               -- en deçà, il fait demi-tour et s'éloigne
+		vitesseDard = 110,        -- studs/s
+		cadence = 2.8,
+		cadenceHasard = 1.0,
+		moment = 0.8,             -- s : souffle de l'animation Tir faite à la main (image 25 sur 48)
+		detection = 75,
+		aggroGroupe = 30,
+		vitesseMarche = 9,
+		vitesseCourse = 17,
+		distanceCourse = 18,
+		espace = 7,
+		animations = {            -- publiées le 03/10/2026 (Tir fait main, le reste repris du guerrier)
+			Course = "rbxassetid://115229906071690",
+			Marche = "rbxassetid://113816413081790",
+			Mort = "rbxassetid://140386629487257",
+			Relever = "rbxassetid://97716306443120",
+			Repos = "rbxassetid://81801909120247",
+			Tir = "rbxassetid://132367678086841",
+			Touche = "rbxassetid://99663664863564",
+		},
+		vitesseAnimations = {Touche = 2.0, Tir = 1.0, Relever = 2.4, Mort = 1.3},
+		cadenceMarche = 9,
+		cadenceCourse = 17,
+	},
 }
 
 return Mobs

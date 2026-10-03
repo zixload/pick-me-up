@@ -79,22 +79,25 @@ end
 
 local function charger(e, animateur: Animator)
 	for nom, id in e.stats.animations do
+		local aid = identifiant(e.nom, nom, id)
+		if aid == "" then continue end   -- ni publiée ni construite : pas de piste
 		local a = Instance.new("Animation")
-		a.AnimationId = identifiant(e.nom, nom, id)
+		a.AnimationId = aid
 		local piste = animateur:LoadAnimation(a)
 		piste.Looped = nom == "Repos" or nom == "Marche" or nom == "Course"
 		piste.Priority = if nom == "Mort" then Enum.AnimationPriority.Action4
 			elseif nom == "Touche" then Enum.AnimationPriority.Action3
-			elseif nom == "Attaque" or nom == "Relever" then Enum.AnimationPriority.Action2
+			elseif nom == "Attaque" or nom == "Tir" or nom == "Relever" then Enum.AnimationPriority.Action2
 			else Enum.AnimationPriority.Core
 		e.pistes[nom] = piste
 	end
-	e.pistes.Repos:Play(0.3)
+	if e.pistes.Repos then e.pistes.Repos:Play(0.3) end
 end
 
 -- joue une animation d'action à la vitesse réglée dans la config (vitesseAnimations)
 local function jouer(e, nom: string, fondu: number)
 	local piste = e.pistes[nom]
+	if not piste then return nil end
 	piste:Play(fondu)
 	piste:AdjustSpeed((e.stats.vitesseAnimations or {})[nom] or 1)
 	return piste
@@ -106,14 +109,17 @@ local function locomotion(e)
 	local v = plat(e.r.AssemblyLinearVelocity).Magnitude
 	local s = e.stats
 	local voulue = if v < 0.8 then p.Repos elseif v > (s.vitesseMarche + s.vitesseCourse) / 2 then p.Course else p.Marche
+	voulue = voulue or p.Marche or p.Repos
 	for _, nom in {"Repos", "Marche", "Course"} do
 		local piste = p[nom]
+		if not piste then continue end
 		if piste == voulue then
 			if not piste.IsPlaying then piste:Play(0.25) end
 		elseif piste.IsPlaying then
 			piste:Stop(0.25)
 		end
 	end
+	if not voulue then return end
 	if voulue == p.Marche then voulue:AdjustSpeed(math.max(0.5, v / s.cadenceMarche))
 	elseif voulue == p.Course then voulue:AdjustSpeed(math.max(0.6, v / s.cadenceCourse)) end
 end
@@ -143,6 +149,84 @@ local function choisirCible(e): Model?
 	return meilleure
 end
 
+-- ---------------------------------------------------------------- dards des tireurs
+-- Visés sur la position de la cible au moment du tir, ils filent tout droit : la cible qui se décale l'esquive.
+-- Une sphère balayée image par image touche le premier personnage rencontré ; un mur ou le sol les arrête.
+local dards = {}
+
+local function personnageDe(inst: Instance): Model?
+	local m = inst:FindFirstAncestorWhichIsA("Model")
+	while m and not m:FindFirstChildOfClass("Humanoid") do
+		m = m.Parent and m.Parent:FindFirstAncestorWhichIsA("Model")
+	end
+	return m
+end
+
+local function tirerDard(e, cible: Model)
+	local s, rc = e.stats, racineDe(cible)
+	if not rc then return end
+	-- part du bout de la sarbacane tenue en main (bague « Sarbacane_Fer »), sinon de la tête
+	local bout = e.modele:FindFirstChild("Sarbacane_Fer", true)
+	local tete = e.modele:FindFirstChild("Head", true)
+	local depart = if bout and bout:IsA("BasePart") then bout.Position
+		elseif tete and tete:IsA("Bone") then tete.WorldPosition + plat(e.r.CFrame.LookVector) * 1.2
+		else e.r.Position
+	local arrivee = rc.Position + Vector3.new(0, 0.6, 0)
+	local dir = (arrivee - depart)
+	dir = if dir.Magnitude > 0.01 then dir.Unit else e.r.CFrame.LookVector
+	local dard = Instance.new("Part")
+	dard.Name, dard.Size = "Dard", Vector3.new(0.09, 0.09, 1.1)
+	dard.Color, dard.Material = Color3.fromRGB(96, 74, 52), Enum.Material.Wood
+	dard.Anchored, dard.CanCollide, dard.CanQuery, dard.CanTouch, dard.CastShadow = true, false, false, false, false
+	dard.CFrame = CFrame.lookAt(depart, depart + dir)
+	local plume = Instance.new("Part")
+	plume.Size, plume.Color, plume.Material = Vector3.new(0.22, 0.22, 0.3), Color3.fromRGB(176, 52, 46), Enum.Material.SmoothPlastic
+	plume.CanCollide, plume.CanQuery, plume.CanTouch, plume.Massless = false, false, false, true
+	plume.CFrame = dard.CFrame * CFrame.new(0, 0, 0.5)
+	local soudure = Instance.new("WeldConstraint")
+	soudure.Part0, soudure.Part1 = dard, plume
+	soudure.Parent = plume
+	plume.Parent = dard
+	dard.Parent = workspace
+	table.insert(dards, {e = e, piece = dard, pos = depart, dir = dir, vitesse = s.vitesseDard or 110, reste = s.portee + 15})
+end
+
+local function avancerDards(dt: number)
+	if #dards == 0 then return end
+	local params = RaycastParams.new()
+	params.FilterType = Enum.RaycastFilterType.Exclude
+	params.FilterDescendantsInstances = {dossier}
+	for i = #dards, 1, -1 do
+		local d = dards[i]
+		local pas = math.min(d.vitesse * dt, d.reste)
+		local res = workspace:Spherecast(d.pos, 0.35, d.dir * pas, params)
+		if res then
+			table.remove(dards, i)
+			local touche = personnageDe(res.Instance)
+			local valide = false
+			if touche then
+				for _, c in cibles() do if c == touche then valide = true end end
+			end
+			local hc = valide and touche:FindFirstChildOfClass("Humanoid")
+			if hc and hc.Health > 0 then
+				Combat.infliger(hc, d.e.stats.degats, nil, {type = "Dard"})
+				d.piece:Destroy()
+			else
+				d.piece.CFrame = CFrame.lookAt(res.Position, res.Position + d.dir)   -- planté
+				Debris:AddItem(d.piece, 1.5)
+			end
+		else
+			d.pos += d.dir * pas
+			d.reste -= pas
+			d.piece.CFrame = CFrame.lookAt(d.pos, d.pos + d.dir)
+			if d.reste <= 0 then
+				table.remove(dards, i)
+				d.piece:Destroy()
+			end
+		end
+	end
+end
+
 local function frapper(e, cible: Model)
 	local s = e.stats
 	local t = os.clock()
@@ -150,8 +234,26 @@ local function frapper(e, cible: Model)
 	-- un peu de hasard : vingt mobs ne frappent pas tous au même rythme
 	e.prochaineAttaque = t + s.cadence + math.random() * (s.cadenceHasard or 0)
 	e.occupe = true
-	local vitesse = (s.vitesseAnimations or {}).Attaque or 1
-	jouer(e, "Attaque", 0.1)
+	local geste = if s.distance then "Tir" else "Attaque"
+	local vitesse = (s.vitesseAnimations or {})[geste] or 1
+	local piste = jouer(e, geste, 0.1)
+	if s.distance then
+		-- la sarbacane tenue en main (modèle « SarbacaneMain ») n'apparaît que le temps du tir
+		local arme = e.modele:FindFirstChild("SarbacaneMain", true)
+		local function montrer(visible)
+			if not arme then return end
+			for _, p in arme:GetDescendants() do
+				if p:IsA("BasePart") then p.Transparency = if visible then 0 else 1 end
+			end
+		end
+		montrer(true)
+		task.delay(((piste and piste.Length or 1.6) / vitesse) - 0.1, function() montrer(false) end)
+		task.delay(s.moment / vitesse, function()
+			if e.h.Health > 0 and cible.Parent then tirerDard(e, cible) end
+		end)
+		task.delay(math.max(s.moment / vitesse + 0.3, (piste and piste.Length or 1) * 0.8 / vitesse), function() e.occupe = false end)
+		return
+	end
 	task.delay(s.moment / vitesse, function()
 		local rc, hc = racineDe(cible), cible:FindFirstChildOfClass("Humanoid")
 		if e.h.Health > 0 and rc and hc and hc.Health > 0 then
@@ -162,7 +264,7 @@ local function frapper(e, cible: Model)
 			end
 		end
 	end)
-	task.delay(math.max(s.moment / vitesse + 0.3, e.pistes.Attaque.Length * 0.8 / vitesse), function() e.occupe = false end)
+	task.delay(math.max(s.moment / vitesse + 0.3, (piste and piste.Length or 1) * 0.8 / vitesse), function() e.occupe = false end)
 end
 
 -- au plus ATTAQUANTS_MAX mobs frappent la même cible ; les autres attendent en retrait
@@ -208,6 +310,28 @@ local function penser(e)
 	local rc = racineDe(cible)
 	local vers = plat(rc.Position - r.Position)
 	local d = vers.Magnitude
+	if s.distance then
+		-- tireur : garde sa distance, recule (demi-tour) si on l'approche, tire à portée
+		local sens = if d > 0.1 then vers.Unit else plat(r.CFrame.LookVector).Unit
+		if d < s.fuite then
+			e.orientation.Enabled, h.AutoRotate = false, true
+			h.WalkSpeed = s.vitesseCourse
+			h:MoveTo(r.Position - sens * (s.ideal - d + 4) + repousse(e) * 1.5)
+		elseif d > s.portee then
+			e.orientation.Enabled, h.AutoRotate = false, true
+			h.WalkSpeed = if d > s.portee + s.distanceCourse then s.vitesseCourse else s.vitesseMarche
+			h:MoveTo(rc.Position - sens * s.ideal + repousse(e) * 1.5)
+		else
+			local ecart = repousse(e)
+			h.WalkSpeed = s.vitesseMarche
+			h:MoveTo(if ecart.Magnitude > 0.6 then r.Position + ecart * 1.5 else r.Position)
+			h.AutoRotate = false
+			e.orientation.CFrame = CFrame.lookAt(r.Position, Vector3.new(rc.Position.X, r.Position.Y, rc.Position.Z))
+			e.orientation.Enabled = true
+			frapper(e, cible)
+		end
+		return
+	end
 	-- une place d'attaquant se libère dès qu'il s'éloigne de sa cible
 	if e.attaquant and d > s.portee + 4 then e.attaquant = false end
 	if d <= s.portee + 4 and not peutAttaquer(e, cible) then
@@ -251,7 +375,7 @@ local function aLEchelle(nom: string)
 	if reglages[nom] then return reglages[nom] end
 	local s = table.clone(Config.MODELES[nom])
 	local k = s.echelle or 1
-	for _, cle in {"portee", "vitesseMarche", "vitesseCourse", "distanceCourse", "cadenceMarche", "cadenceCourse", "espace"} do
+	for _, cle in {"portee", "vitesseMarche", "vitesseCourse", "distanceCourse", "cadenceMarche", "cadenceCourse", "espace", "fuite", "ideal"} do
 		if s[cle] then s[cle] *= k end
 	end
 	reglages[nom] = s
@@ -302,6 +426,11 @@ function Mobs.apparaitre(nom: string, cadre: CFrame): Model?
 	local relever = jouer(e, "Relever", 0)
 	local vitesseRelever = (stats.vitesseAnimations or {}).Relever or 1
 	task.spawn(function()
+		if not relever then   -- pas d'animation pour se relever : libre après un court instant
+			task.wait(0.4)
+			if m.Parent and h.Health > 0 then r.Anchored, e.fige = false, false end
+			return
+		end
 		local debut = os.clock()
 		while relever.Length == 0 and os.clock() - debut < 3 do task.wait(0.1) end
 		-- libéré à la fin du geste ; celui-ci s'efface en douceur pendant que le repos ou la marche prend le relais
@@ -343,11 +472,15 @@ end
 
 function Mobs.demarrer()
 	-- commande de test : /goblins [nombre], une troupe devant le joueur, tournée vers lui, posée sur le sol
-	local gabarit = ServerStorage:FindFirstChild("Mobs") and ServerStorage.Mobs:FindFirstChild("Gobelin_Guerrier")
-	local hauteurRacine = 4.4   -- du sol au centre de la racine (hanches + demi-racine)
-	if gabarit then
+	-- du sol au centre de la racine (hanches + demi-racine), à la taille du mob
+	local function hauteurRacine(nom: string): number
+		local gabarit = ServerStorage:FindFirstChild("Mobs") and ServerStorage.Mobs:FindFirstChild(nom)
+		if not gabarit then return 4.4 end
 		local hg, rg = gabarit:FindFirstChildOfClass("Humanoid"), racineDe(gabarit)
-		hauteurRacine = (hg.HipHeight + rg.Size.Y / 2) * (Config.MODELES.Gobelin_Guerrier.echelle or 1)
+		return (hg.HipHeight + rg.Size.Y / 2) * (Config.MODELES[nom].echelle or 1)
+	end
+	local function existe(nom: string): boolean
+		return ServerStorage:FindFirstChild("Mobs") ~= nil and ServerStorage.Mobs:FindFirstChild(nom) ~= nil
 	end
 	local params = RaycastParams.new()
 	params.FilterType = Enum.RaycastFilterType.Exclude
@@ -377,15 +510,18 @@ function Mobs.demarrer()
 			local rang, place = (i - 1) // parRang, (i - 1) % parRang
 			local pos = centre + cote * ((place - (parRang - 1) / 2) * pas + (math.random() - 0.5) * pas * 0.35)
 				+ devant * (rang * pas + (math.random() - 0.5) * pas * 0.35)
+			-- environ un sur quatre en sarbacanier, dans les derniers rangs (les plus loin du joueur)
+			local nom = if existe("Gobelin_Sarbacanier") and i > math.ceil(n * 0.75) then "Gobelin_Sarbacanier" else "Gobelin_Guerrier"
 			local sol = workspace:Raycast(pos + Vector3.new(0, 30, 0), Vector3.new(0, -80, 0), params)
-			local y = (if sol then sol.Position.Y else rc.Position.Y - 3) + hauteurRacine
+			local y = (if sol then sol.Position.Y else rc.Position.Y - 3) + hauteurRacine(nom)
 			pos = Vector3.new(pos.X, y, pos.Z)
-			Mobs.apparaitre("Gobelin_Guerrier", CFrame.lookAt(pos, Vector3.new(rc.Position.X, y, rc.Position.Z)))
+			Mobs.apparaitre(nom, CFrame.lookAt(pos, Vector3.new(rc.Position.X, y, rc.Position.Z)))
 		end
 	end)
 
 	local cumul = 0
 	RunService.Heartbeat:Connect(function(dt)
+		avancerDards(dt)
 		cumul += dt
 		if cumul < 0.15 then return end
 		cumul = 0
