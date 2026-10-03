@@ -247,14 +247,14 @@ local function avancerProjectiles(dt: number)
 			local touche = personnageDe(res.Instance)
 			if touche and not table.find(ennemisDe(p.e), touche) then touche = nil end
 			p.piece.CFrame = CFrame.lookAt(res.Position, res.Position + p.dir)
-			task.spawn(p.contact, touche, res.Position)   -- une erreur dans un effet ne bloque pas les autres projectiles
+			task.spawn(p.contact, touche, res.Position, true) -- une erreur dans un effet ne bloque pas les autres projectiles
 		else
 			p.pos += p.dir * pas
 			p.reste -= pas
 			p.piece.CFrame = CFrame.lookAt(p.pos, p.pos + p.dir)
 			if p.reste <= 0 then
 				table.remove(projectiles, i)
-				task.spawn(p.contact, nil, p.pos)
+				task.spawn(p.contact, nil, p.pos, false)
 			end
 		end
 	end
@@ -262,9 +262,11 @@ end
 
 local function tirer(e, cible: Model)
 	local m, stats = e.modele, e.stats
-	local arc = m:FindFirstChild("Arc")
-	local depart = (arc and arc:GetPivot().Position) or racineDe(m).Position
+	-- part de la main qui tient l'arc (le pivot du modèle Arc ne suit pas la main pendant les animations)
+	local main = m:FindFirstChild("LeftHand")
 	local arrivee = racineDe(cible).Position + Vector3.new(0, 1, 0)
+	local depart = if main then main.Position else racineDe(m).Position + Vector3.new(0, 1, 0)
+	depart += plat(arrivee - depart).Unit * 0.8   -- devant l'arc, pas dans la main
 	local fut = Instance.new("Part")
 	fut.Name = "Fleche"
 	fut.Size = Vector3.new(0.08, 0.08, 2.2)
@@ -289,14 +291,16 @@ local function tirer(e, cible: Model)
 	trainee.Color = ColorSequence.new(Color3.fromRGB(235, 235, 220))
 	trainee.Parent = fut
 	fut.Parent = workspace
-	lancer(e, fut, depart, arrivee, stats.vitesseFleche, 0.3, function(touche: Model?, _point)
+	lancer(e, fut, depart, arrivee, stats.vitesseFleche, 0.3, function(touche: Model?, _point, heurte: boolean)
 		local hc = touche and touche:FindFirstChildOfClass("Humanoid")
 		if hc and hc.Health > 0 then
-			Combat.infliger(hc, stats.degats, nil)
+			Combat.infliger(hc, stats.degats, nil, {type = "Fleche"})
 			fut:Destroy()
-		else
-			trainee.Enabled = false   -- plantée dans le mur ou le sol, ou partie dans le vide
+		elseif heurte then
+			trainee.Enabled = false   -- plantée dans le mur ou le sol
 			Debris:AddItem(fut, 1.5)
+		else
+			fut:Destroy()             -- au bout de sa portée sans rien toucher : disparaît
 		end
 	end)
 end
@@ -341,7 +345,7 @@ local function lancerOrbe(m: Model, e, cible: Model)
 		orbe:Destroy()
 		for _, c in ennemisDe(e) do
 			if c == touche or (racineDe(c).Position - point).Magnitude <= stats.zone then
-				Combat.infliger(c:FindFirstChildOfClass("Humanoid"), stats.degats, nil)
+				Combat.infliger(c:FindFirstChildOfClass("Humanoid"), stats.degats, nil, {type = "Orbe"})
 			end
 		end
 	end)
@@ -376,7 +380,8 @@ local function soigner(hc: Humanoid, quantite: number)
 	affiche.Adornee, affiche.Parent = point, point
 	local texte = Instance.new("TextLabel")
 	texte.BackgroundTransparency, texte.Size = 1, UDim2.fromScale(1, 1)
-	texte.Font, texte.TextSize, texte.Text = Enum.Font.GothamBlack, 24, "+" .. rendu
+	texte.FontFace = Font.new("rbxasset://fonts/families/Merriweather.json", Enum.FontWeight.Bold)   -- police du HUD
+	texte.TextSize, texte.Text = 24, "+" .. rendu
 	texte.TextColor3, texte.TextStrokeTransparency = Color3.fromRGB(140, 240, 150), 0.3
 	texte.Parent = affiche
 	TweenService:Create(affiche, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
@@ -440,7 +445,7 @@ local function agir(e, cible: Model)
 		elseif stats.classe == "Archer" then
 			tirer(e, cible)
 		elseif (racineDe(cible).Position - r.Position).Magnitude <= stats.portee + 1.5 then
-			Combat.infliger(hc, stats.degats, nil)
+			Combat.infliger(hc, stats.degats, nil, {type = "Gourdin"})
 		end
 	end)
 end

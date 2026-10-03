@@ -9,7 +9,7 @@ Invocations.MODELES = {
 		degats = 7,
 		portee = 38,          -- studs : distance de tir
 		cadence = 1.6,        -- s entre deux flèches
-		vitesseFleche = 75,   -- studs/s
+		vitesseFleche = 150,  -- studs/s : part sec, presque tendue
 		vitesse = 15,
 	},
 	Mage_P1 = {
@@ -19,7 +19,7 @@ Invocations.MODELES = {
 		zone = 3,             -- studs : rayon de l'éclat de l'orbe (autour du point où elle éclate)
 		portee = 30,
 		cadence = 2.4,
-		vitesseOrbe = 40,
+		vitesseOrbe = 90,     -- studs/s
 		vitesse = 14,
 	},
 	Soigneuse_P1 = {
