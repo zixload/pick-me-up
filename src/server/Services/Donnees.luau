@@ -22,6 +22,16 @@ local MODELE = {
 	Formation = {},       -- invocation -> {colonne, rangée} dans la grille autour du héros
 	Materiaux = {},
 	Batiments = {},
+	-- quêtes (Services/Quetes) : jour et semaine de jeu en cours, quêtes tirées et leur avancement,
+	-- étape de l'histoire ; les listes se remplissent au premier passage d'un nouveau jour
+	Quetes = {
+		Jour = "", Quotidiennes = {}, BonusPris = false,
+		Semaine = "", Hebdo = {},
+		Histoire = 1, HistoireProgres = 0,
+	},
+	-- boutique (Services/Boutique) : articles uniques déjà achetés, derniers reçus traités (pas de double remise)
+	Achats = {},
+	Recus = {},
 }
 for id, lot in Batiments.LOTS do
 	MODELE.Batiments[id] = lot.depart

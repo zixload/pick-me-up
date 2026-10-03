@@ -38,6 +38,10 @@ Style.IMAGES = {
 	fanion = "rbxassetid://114982685153407",
 	pastille = "rbxassetid://95746858867493",      -- fond du rond des boutons d'action
 	fleche_haut = "rbxassetid://116627647332463",
+	quetes = "rbxassetid://122967294472296",          -- icône du HUD
+	onglet_quotidien = "rbxassetid://121228905160706",
+	onglet_hebdo = "rbxassetid://89248754852567",
+	onglet_histoire = "rbxassetid://115097566438449",
 }
 
 -- ---------------------------------------------------------------- briques

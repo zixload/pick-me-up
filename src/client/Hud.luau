@@ -498,16 +498,21 @@ end
 -- Cinq emplacements de gauche à droite, le dernier collé au bord comme la référence ; images générées avec Meshy (fond vert),
 -- détourées par ui/hud_v01/detourer.py.
 -- Emplacements : 1 carte, 2 événement, 3 offres du jour, 4 quêtes quotidiennes, 5 inventaire.
+-- cache : icône pas encore utile (aucun événement pour l'instant) ; les autres se resserrent vers la droite.
 local ICONES = {
 	{id = "Carte", emplacement = 1, image = "rbxassetid://96444988812766"},
-	{id = "Evenement", emplacement = 2, image = "rbxassetid://109209037564164"},
+	{id = "Evenement", emplacement = 2, image = "rbxassetid://109209037564164", cache = true},
 	{id = "Offres", emplacement = 3, image = "rbxassetid://120810365077873"},
 	{id = "Quetes", emplacement = 4, image = "rbxassetid://122967294472296"},
 	{id = "Inventaire", emplacement = 5, image = "rbxassetid://97951001415611"},
 }
 local TAILLE_ICONE, PAS_ICONES = 50, 72
+local visibles = {}
 for _, icone in ICONES do
-	local position = UDim2.new(1, -40 - (#ICONES - icone.emplacement) * PAS_ICONES, 0, 18)
+	if not icone.cache then table.insert(visibles, icone) end
+end
+for rang, icone in visibles do
+	local position = UDim2.new(1, -40 - (#visibles - rang) * PAS_ICONES, 0, 18)
 	local b = Instance.new("ImageButton")
 	b.Name, b.Image, b.BackgroundTransparency = icone.id, icone.image, 1
 	b.Size, b.AnchorPoint = UDim2.fromOffset(TAILLE_ICONE, TAILLE_ICONE), Vector2.new(1, 0)
@@ -522,6 +527,42 @@ for _, icone in ICONES do
 		TweenService:Create(grossir, TweenInfo.new(0.12), {Scale = 1}):Play()
 	end)
 end
+
+-- Boutique : coffre doré en couleurs (Meshy, détouré par detourer.py), à gauche des icônes et un peu plus grand.
+-- Pour attirer l'œil : halo qui respire et étincelles qui tournent (comme les techniques), petit balancement régulier.
+-- Le clic est pris par Boutique.client.luau (bouton « Boutique » de ce ScreenGui).
+local TAILLE_BOUTIQUE = 66
+local STYLE_BOUTIQUE = {image = ETINCELLE, nb = 9, taille = {6, 12}, duree = {1.2, 2.2}, vitesse = {0.3, 0.7},
+	opacite = 1, ecart = 0.35, montee = 8, halo = true, eclaircir = 0.35}
+local positionBoutique = UDim2.new(1, -40 - #visibles * PAS_ICONES + 4, 0, 10)
+local effetBoutique = effetLumineux(TAILLE_BOUTIQUE, positionBoutique, Vector2.new(1, 0), Color3.fromRGB(255, 196, 70), STYLE_BOUTIQUE)
+local boutique = Instance.new("ImageButton")
+boutique.Name, boutique.Image, boutique.BackgroundTransparency = "Boutique", "rbxassetid://76413057251104", 1
+boutique.Size, boutique.AnchorPoint, boutique.Position = UDim2.fromOffset(TAILLE_BOUTIQUE, TAILLE_BOUTIQUE), Vector2.new(1, 0), positionBoutique
+boutique.ZIndex = 2
+boutique.Parent = ecran
+local grossirBoutique = Instance.new("UIScale")
+grossirBoutique.Parent = boutique
+boutique.MouseEnter:Connect(function()
+	TweenService:Create(grossirBoutique, TweenInfo.new(0.12), {Scale = 1.12}):Play()
+end)
+boutique.MouseLeave:Connect(function()
+	TweenService:Create(grossirBoutique, TweenInfo.new(0.12), {Scale = 1}):Play()
+end)
+RunService.RenderStepped:Connect(function(dt)
+	animerEffet(effetBoutique, true, dt)
+end)
+task.spawn(function()
+	local balance = TweenInfo.new(0.12, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
+	while boutique.Parent do
+		task.wait(4)
+		for _, angle in {-12, 10, -7, 4, 0} do
+			local t = TweenService:Create(boutique, balance, {Rotation = angle})
+			t:Play()
+			t.Completed:Wait()
+		end
+	end
+end)
 
 -- ---------------------------------------------------------------- techniques, en bas à droite (étape 4)
 -- Bouton moyen puis grand bouton à droite, comme la référence ; la touche dans une petite case dessous.

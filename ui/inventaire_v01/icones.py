@@ -169,3 +169,32 @@ for y0 in (70, 132):
     for x, y in ((62, y0 + 52), (128, y0 - 6), (194, y0 + 52)):
         d.ellipse(p((x - 13, y - 13), (x + 13, y + 13)), fill=BLANC)
 sauver(im, "fleche_haut")
+
+# ---------------------------------------------------------------- onglets des quêtes (blanc, teintés en jeu)
+im, d = nouvelle()   # quotidiennes : soleil
+d.ellipse(p((80, 80), (176, 176)), fill=BLANC)
+for i in range(8):
+    a = math.radians(i * 45)
+    x0, y0 = 128 + 70 * math.cos(a), 128 + 70 * math.sin(a)
+    x1, y1 = 128 + 108 * math.cos(a), 128 + 108 * math.sin(a)
+    d.line(p((x0, y0), (x1, y1)), fill=BLANC, width=18 * F)
+    d.ellipse(p((x1 - 9, y1 - 9), (x1 + 9, y1 + 9)), fill=BLANC)
+sauver(im, "onglet_quotidien")
+
+im, d = nouvelle()   # hebdomadaires : calendrier
+d.rounded_rectangle(p((34, 52), (222, 222)), radius=22 * F, fill=BLANC)
+d.rectangle(p((34, 100), (222, 108)), fill=(0, 0, 0, 0))
+for x in (80, 176):
+    d.rounded_rectangle(p((x - 9, 28), (x + 9, 76)), radius=9 * F, fill=BLANC)
+for i in range(3):
+    for j in range(3):
+        if (i, j) != (2, 2):
+            d.rounded_rectangle(p((62 + i * 46, 124 + j * 30), (90 + i * 46, 142 + j * 30)), radius=4 * F, fill=(0, 0, 0, 0))
+sauver(im, "onglet_hebdo")
+
+im, d = nouvelle()   # histoire : livre ouvert
+for s in (-1, 1):
+    pts = [(128, 70), (128 + s * 30, 50), (128 + s * 104, 52), (128 + s * 104, 206), (128 + s * 30, 204), (128, 222)]
+    d.polygon(p(*pts), fill=BLANC)
+d.line(p((128, 70), (128, 222)), fill=(0, 0, 0, 0), width=8 * F)
+sauver(im, "onglet_histoire")

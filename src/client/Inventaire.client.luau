@@ -15,6 +15,7 @@ local Objets = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Co
 local reseau = ReplicatedStorage:WaitForChild("Reseau")
 local LireInventaire = reseau:WaitForChild("LireInventaire")
 local InventaireChange = reseau:WaitForChild("InventaireChange")
+local SignalQuete = reseau:WaitForChild("SignalQuete", 10)   -- étape « ouvrir l'inventaire » de l'histoire
 
 local joueur = Players.LocalPlayer
 local playerGui = joueur:WaitForChild("PlayerGui")
@@ -248,6 +249,7 @@ local function ouvrir()
 	TweenService:Create(voile, TweenInfo.new(0.2), {BackgroundTransparency = 0.4}):Play()
 	remplir()
 	ecran.Enabled = true
+	if SignalQuete then SignalQuete:FireServer("Inventaire") end
 end
 
 local function fermerInventaire()
