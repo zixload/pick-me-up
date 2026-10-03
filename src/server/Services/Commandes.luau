@@ -29,6 +29,7 @@ local Commandes = {}
 local function autorise(joueur: Player): boolean
 	return RunService:IsStudio() or DEVELOPPEURS[joueur.UserId] == true
 end
+Commandes.autorise = autorise   -- utilisé par les autres commandes de test (/goblins dans Mobs)
 
 local function nombre(texte: string): number?
 	local n = tonumber(string.match(texte, "%s(-?%d+)"))
