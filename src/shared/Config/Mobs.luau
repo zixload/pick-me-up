@@ -24,14 +24,14 @@ Mobs.MODELES = {
 		vitesseCourse = 17,
 		distanceCourse = 18,      -- au-delà, il court vers sa cible
 		espace = 7,               -- studs gardés entre deux mobs (et entre les rangs de la troupe)
-		animations = {            -- publiées le 03/10/2026
-			Attaque = "rbxassetid://116574859788404",
-			Course = "rbxassetid://102779780217907",
-			Marche = "rbxassetid://74229965396723",
-			Mort = "rbxassetid://136720342724782",
-			Relever = "rbxassetid://110838832175833",
-			Repos = "rbxassetid://125781103878170",
-			Touche = "rbxassetid://101962162187108",
+		animations = {            -- republiées le 03/10/2026 (bras retransférés, repos Orc Idle)
+			Attaque = "rbxassetid://74185717401487",
+			Course = "rbxassetid://131891974320320",
+			Marche = "rbxassetid://113810250347304",
+			Mort = "rbxassetid://132952590478539",
+			Relever = "rbxassetid://86250175446197",
+			Repos = "rbxassetid://139249373417812",
+			Touche = "rbxassetid://84642480322422",
 		},
 		-- vitesse de lecture des animations d'action (1 = celle de Mixamo) ; le moment du coup suit l'Attaque
 		vitesseAnimations = {Touche = 2.0, Attaque = 1.35, Relever = 2.4, Mort = 1.3},
